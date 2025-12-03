@@ -421,23 +421,23 @@ const PlantVisual = ({
                 x="0"
                 y={-SIGNBOARD_HEIGHT + 7}
                 textAnchor="middle"
-                fontSize="4"
-                fill="#3E2723"
-                fontWeight="bold"
-                style={{ fontFamily: 'sans-serif' }}
-              >
-                GARDEN
-              </text>
-              <text
-                x="0"
-                y={-SIGNBOARD_HEIGHT + 13}
-                textAnchor="middle"
                 fontSize="3"
                 fill="#5D4037"
                 fontWeight="bold"
                 style={{ fontFamily: 'sans-serif' }}
               >
                 はなたね
+              </text>
+              <text
+                x="0"
+                y={-SIGNBOARD_HEIGHT + 12}
+                textAnchor="middle"
+                fontSize="4"
+                fill="#3E2723"
+                fontWeight="bold"
+                style={{ fontFamily: 'sans-serif' }}
+              >
+                GARDEN
               </text>
 
               {/* 比較用の目盛り */}
