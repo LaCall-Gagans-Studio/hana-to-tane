@@ -311,9 +311,9 @@ const PlantVisual = ({
   }, [isWatering, controls])
 
   return (
-    <div className="relative w-full h-full flex items-end justify-center pb-8">
+    <div className="relative w-full h-full flex items-end justify-center overflow-visible pb-8">
       <motion.svg
-        width="300"
+        width="600"
         height="400"
         viewBox={`0 0 100 ${GROUND_Y}`}
         className="overflow-visible"
@@ -456,12 +456,17 @@ const PlantVisual = ({
           </g>
 
           {/* 水やりバウンス用グループ（植物のみに適用） */}
-          <motion.g animate={controls} style={{ originX: 0.5, originY: 1 }}>
+          <motion.g
+            animate={controls}
+            style={{ originX: 0.5, originY: 1 }}
+            className={'overflow-visible'}
+          >
             {/* 植物オブジェクト（風で常時揺れる） */}
             <motion.g
               animate={{ rotate: [0, 2, 0, -1, 0] }}
               transition={{ rotate: { duration: 5, repeat: Infinity, ease: 'easeInOut' } }}
               style={{ originX: 0.5, originY: 1 }}
+              className={'overflow-visible'}
             >
               <g filter="url(#paper-texture)">
                 <AnimatePresence>
@@ -478,6 +483,7 @@ const PlantVisual = ({
                         stroke="#5D4037"
                         strokeWidth="2"
                         filter="url(#watercolor)"
+                        className="overflow-visible"
                       />
                     </motion.g>
                   )}
@@ -492,6 +498,7 @@ const PlantVisual = ({
                       rotate: { duration: 5 + (data.dna % 3), repeat: Infinity, ease: 'easeInOut' },
                     }}
                     style={{ originX: 0.5, originY: 1 }}
+                    className={'overflow-visible'}
                   >
                     <motion.path
                       d={pathD}
@@ -504,6 +511,7 @@ const PlantVisual = ({
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ duration: 1.5 }}
+                      className="overflow-visible"
                     />
                     {leaves.map((leaf, i) => (
                       <motion.path
@@ -527,6 +535,7 @@ const PlantVisual = ({
                         }}
                         style={{ originX: 0, originY: 0, x: leaf.x, y: leaf.y }}
                         filter="url(#watercolor)"
+                        className="overflow-visible"
                       />
                     ))}
                     {(data.state === 'bud' || data.state === 'flower') &&
@@ -539,6 +548,7 @@ const PlantVisual = ({
                           }}
                           transition={{ delay: 1 + i * 0.05, type: 'spring' }}
                           style={{ originX: 0.5, originY: 0.5, x: flower.x, y: flower.y }}
+                          className="overflow-visible"
                         >
                           <circle r="3" fill={preset.colors.flower} filter="url(#watercolor)" />
                           {data.state === 'flower' && <circle r="1.5" fill="#FFF" opacity="0.5" />}

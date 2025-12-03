@@ -43,7 +43,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
               ABOUT US
               <span className="absolute -bottom-2 left-0 w-full h-4 bg-lime/50 -z-10 rounded-full"></span>
             </h2>
-            <p className="text-xl font-bold text-gray-600 max-w-xl leading-relaxed">
+            <p className="text-xl font-semibold text-gray-600 max-w-xl leading-relaxed">
               「自分らしく」いられる場所。
               <br />
               私たちは、誰もが安心して過ごせる居場所を作っています。
@@ -95,7 +95,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
             <span className="text-6xl font-black text-text mb-2 group-hover:scale-110 transition-transform duration-300">
               {historyYears}+
             </span>
-            <span className="font-bold text-lg border-t-2 border-text pt-2 w-full max-w-[120px]">
+            <span className="font-semibold text-lg border-t-2 border-text pt-2 w-full max-w-[120px]">
               YEARS
             </span>
           </div>
@@ -108,7 +108,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                 <h3 className="text-3xl font-black mb-2 text-surface drop-shadow-md">
                   FREE SCHOOL
                 </h3>
-                <p className="font-bold text-surface/90 mb-4">フリースクール</p>
+                <p className="font-semibold text-surface/90 mb-4">フリースクール</p>
                 <p className="text-surface font-medium leading-relaxed">
                   {freeSchoolDesc ||
                     '学校に行かない選択をした子どもたちのための、学びと交流の場です。学習支援や体験活動を通じて、自立をサポートします。'}
@@ -131,7 +131,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div>
                 <h3 className="text-3xl font-black mb-2 text-text">PLAY PARK</h3>
-                <p className="font-bold text-text/80 mb-4">プレーパーク</p>
+                <p className="font-semibold text-text/80 mb-4">プレーパーク</p>
                 <p className="text-text font-medium leading-relaxed">
                   {playParkDesc ||
                     '「自分の責任で自由に遊ぶ」をモットーに、屋外で思いっきり遊べる場です。禁止事項を極力減らし、子どもの自主性を尊重します。'}
@@ -155,7 +155,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
             <h3 className="text-4xl font-black text-text inline-block border-b-4 border-yellow pb-2">
               STAFF
             </h3>
-            <p className="mt-4 font-bold text-gray-500">スタッフ紹介</p>
+            <p className="mt-4 font-semibold text-gray-500">スタッフ紹介</p>
           </div>
 
           {/* Representatives */}
@@ -176,14 +176,14 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                   )}
                 </div>
                 <h4 className="text-2xl font-black text-center mb-2 text-text">{s.name}</h4>
-                <p className="text-sm font-bold text-center text-gray-500 mb-4 bg-gray-100 inline-block px-4 py-1 rounded-full mx-auto block w-fit">
+                <p className="text-sm mx-auto font-semibold text-center text-gray-500 mb-4 bg-gray-100 px-4 py-1 rounded-full block w-fit">
                   {s.role}
                 </p>
-                <p className="text-base font-medium text-gray-600 text-center leading-relaxed whitespace-pre-wrap">
+                <p className="text-base text-left font-medium text-gray-600 leading-relaxed whitespace-pre-wrap">
                   {s.description}
                 </p>
                 <div className="text-center mt-4">
-                  <span className="text-blue font-bold text-sm border-b border-blue">
+                  <span className="text-blue font-semibold text-sm border-b border-blue">
                     もっと見る
                   </span>
                 </div>
@@ -210,11 +210,11 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                 </div>
                 <div>
                   <h4 className="text-lg font-black text-text">{s.name}</h4>
-                  <p className="text-xs font-bold text-gray-500 mb-1">{s.role}</p>
+                  <p className="text-xs font-semibold text-gray-500 mb-1">{s.role}</p>
                   <p className="text-sm text-gray-600 line-clamp-1 whitespace-pre-wrap">
                     {s.description}
                   </p>
-                  <span className="text-xs font-bold text-blue flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">
+                  <span className="text-xs font-semibold text-blue flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">
                     VIEW PROFILE →
                   </span>
                 </div>
@@ -230,7 +230,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
               <h3 className="text-3xl font-black text-text inline-block border-b-4 border-blue pb-2">
                 COLLABORATORS
               </h3>
-              <p className="mt-4 font-bold text-gray-500">協力者・パートナー</p>
+              <p className="mt-4 font-semibold text-gray-500">協力者・パートナー</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -251,7 +251,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                   </div>
                   <div>
                     <h4 className="text-lg font-black text-text">{s.name}</h4>
-                    <p className="text-xs font-bold text-gray-500 mb-1">{s.role}</p>
+                    <p className="text-xs font-semibold text-gray-500 mb-1">{s.role}</p>
                     <p className="text-sm text-gray-600 line-clamp-1 whitespace-pre-wrap">
                       {s.description}
                     </p>
@@ -266,7 +266,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
         <div>
           <div className="text-center mb-10">
             <span className="inline-block px-6 py-2 bg-gray-100 border-2 border-border rounded-full text-sm font-black text-gray-600 shadow-sm">
-              SUPPORTING ORGANIZATIONS
+              賛助団体一覧
             </span>
           </div>
 
@@ -277,7 +277,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                 href={sponsor.url || '#'}
                 target={sponsor.url ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="w-40 h-20 bg-white border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer overflow-hidden relative"
+                className="w-64 h-24 bg-white border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer overflow-hidden relative"
               >
                 {sponsor.logo && typeof sponsor.logo === 'object' && sponsor.logo.url ? (
                   <Image
@@ -332,14 +332,14 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                 )}
               </div>
               <h3 className="text-3xl font-black text-text mb-2">{selectedStaff.name}</h3>
-              <p className="text-sm font-bold text-gray-500 bg-gray-100 inline-block px-4 py-1 rounded-full mb-4">
+              <p className="text-sm font-semibold text-gray-500 bg-gray-100 inline-block px-4 py-1 rounded-full mb-4">
                 {selectedStaff.role}
               </p>
 
               {/* Favorite Words */}
               {selectedStaff.favoriteWords && (
                 <div className="mb-4">
-                  <p className="text-sm font-bold text-pink mb-1">好きな言葉</p>
+                  <p className="text-sm font-semibold text-pink mb-1">好きな言葉</p>
                   <p className="text-lg font-black text-text">{selectedStaff.favoriteWords}</p>
                 </div>
               )}
@@ -347,7 +347,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
               {/* Hobbies - Added */}
               {(selectedStaff as any).hobbies && (
                 <div className="mb-4">
-                  <p className="text-sm font-bold text-lime mb-1">趣味</p>
+                  <p className="text-sm font-semibold text-lime mb-1">趣味</p>
                   <p className="text-lg font-black text-text">{(selectedStaff as any).hobbies}</p>
                 </div>
               )}
@@ -387,7 +387,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                     {selectedStaff.qualifications.map((q, i) => (
                       <li
                         key={i}
-                        className="text-xs font-bold text-gray-600 bg-white border border-border px-3 py-1 rounded-full"
+                        className="text-xs font-semibold text-gray-600 bg-white border border-border px-3 py-1 rounded-full"
                       >
                         {q.name}
                       </li>
@@ -407,7 +407,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                     {selectedStaff.pastQualifications.map((q, i) => (
                       <li
                         key={i}
-                        className="text-xs font-bold text-gray-500 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full"
+                        className="text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-200 px-3 py-1 rounded-full"
                       >
                         {q.name}
                       </li>
@@ -427,7 +427,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                         href={link.url || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-border rounded-full text-sm font-bold text-blue hover:bg-blue hover:text-white transition-colors shadow-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-border rounded-full text-sm font-semibold text-blue hover:bg-blue hover:text-white transition-colors shadow-sm"
                       >
                         {link.label}
                         <span className="text-xs">↗</span>
