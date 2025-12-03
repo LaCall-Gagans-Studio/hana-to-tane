@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -7,6 +8,8 @@
   --color-green: #23af4e;
   --color-pink: #fdadc8;
   --color-purple: #a349a3;
+
+  --font-zenMaruGothic: 'Zen Maru Gothic', serif;
 
   /* Semantic aliases */
   --color-primary: var(--color-green);

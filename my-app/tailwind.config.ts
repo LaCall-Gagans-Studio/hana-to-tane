@@ -34,11 +34,15 @@ const config: Config = {
       },
       animation: {
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
+        highlight: 'highlight 1s ease-out forwards',
       },
       keyframes: {
         'infinite-scroll': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
+        },
+        highlight: {
+          to: { 'background-size': '100% 100%' },
         },
       },
     },

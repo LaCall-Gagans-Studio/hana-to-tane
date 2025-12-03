@@ -14,6 +14,7 @@ import { Column } from './collections/Column'
 import { Member } from './collections/Member'
 import { Sponsor } from './collections/Sponsor'
 import { About } from './collections/About'
+import { Event } from './collections/Event'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Column, Member, Sponsor],
+  collections: [Users, Media, Column, Member, Sponsor, Event],
   globals: [About],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

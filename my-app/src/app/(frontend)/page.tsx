@@ -27,14 +27,20 @@ export default async function Page() {
     limit: 100,
   })
 
+  const events = await payload.find({
+    collection: 'events',
+    limit: 100,
+    sort: 'date',
+  })
+
   return (
-    <>
+    <div className="font-zenMaruGothic">
       <Hero />
       <News />
-      <Calendar />
+      <Calendar events={events.docs} />
       <About aboutData={aboutData} members={members.docs} sponsors={sponsors.docs} />
       <Support />
       <Column />
-    </>
+    </div>
   )
 }

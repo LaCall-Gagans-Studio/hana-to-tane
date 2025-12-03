@@ -15,10 +15,19 @@ export default async function AboutPage() {
     slug: 'about',
   })
 
+  const representatives = await payload.find({
+    collection: 'members',
+    where: {
+      isRepresentative: {
+        equals: true,
+      },
+    },
+  })
+
   return (
     <>
-      <Intro message={aboutData.intro_message} />
-      <Concept />
+      <Intro message={aboutData.intro_message} representatives={representatives.docs} />
+      <Concept data={aboutData.concept} />
       <FreeSchoolSummary description={aboutData.free_school_desc} />
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <PlayPark description={aboutData.play_park_desc} />

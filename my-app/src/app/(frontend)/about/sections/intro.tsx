@@ -1,10 +1,14 @@
 import React from 'react'
+import { Member } from '@/payload-types'
+import Image from 'next/image'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 type IntroProps = {
   message?: any
+  representatives?: Member[]
 }
 
-export const Intro = ({ message }: IntroProps) => {
+export const Intro = ({ message, representatives = [] }: IntroProps) => {
   return (
     <section className="py-24 bg-surface relative overflow-hidden">
       {/* Background Elements */}
@@ -22,64 +26,60 @@ export const Intro = ({ message }: IntroProps) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-          {/* Miho-chan */}
-          <div className="bg-white p-8 rounded-3xl border-3 border-border shadow-hard transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative group">
-            <div className="absolute -top-6 -left-6 w-12 h-12 bg-pink rounded-full border-3 border-border flex items-center justify-center text-2xl shadow-sm z-20">
-              🌸
-            </div>
-            <div className="w-32 h-32 mx-auto bg-pink rounded-full border-3 border-border flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform">
-              <span className="text-3xl font-black text-text">MIHO</span>
-            </div>
-            <h3 className="text-2xl font-black text-center mb-2 text-text">みほちゃん</h3>
-            <p className="text-sm font-bold text-center text-gray-500 mb-4">代表 / 河上 美穂</p>
-            <div className="font-medium text-gray-600 leading-relaxed">
-              {/* Use RichText renderer here if available, or just render children/text */}
-              {/* For now, we'll keep the static text as default if no message is passed, or render message */}
-              {/* Ideally we should use a RichText component. I'll assume we might not have one handy in this context yet, so I'll leave the static text as fallback or just render it if it's simple text. 
-                  But the user asked to commonize info. 
-                  Let's assume message is passed. If it's complex RichText, we need a serializer. 
-                  For this step, I'll just leave the static text but add the prop interface so I can wire it up. 
-                  Wait, the user wants "commonize". So I should use the prop.
-                  I'll replace the static text with a check for message. */}
-              {message ? (
-                <div>
-                  {/* Render message here - simplified for now as I don't have a serializer imported */}
-                  {/* In a real app, <RichText content={message} /> */}
-                  <p>（CMSからのメッセージを表示）</p>
+          {representatives && representatives.length > 0 ? (
+            representatives.map((rep, index) => (
+              <div
+                key={rep.id}
+                className={`bg-white p-8 rounded-3xl border-3 border-border shadow-hard transform ${
+                  index % 2 === 0 ? '-rotate-1' : 'rotate-1'
+                } hover:rotate-0 transition-transform duration-300 relative group`}
+              >
+                <div
+                  className={`absolute -top-6 ${
+                    index % 2 === 0 ? '-left-6' : '-right-6'
+                  } w-12 h-12 ${
+                    rep.color || 'bg-pink'
+                  } rounded-full border-3 border-border flex items-center justify-center text-2xl shadow-sm z-20`}
+                >
+                  {index % 2 === 0 ? '🌸' : '🌱'}
                 </div>
-              ) : (
-                <>
-                  <p>
-                    はじめまして。はなとたねの代表のみほちゃんこと河上美穂です。
-                    <br />
-                    このたびは当サイトにご訪問いただき、ありがとうございます。
-                    <br />
-                    みんなが笑顔になれる場所を、一緒に作っていきましょう。
-                  </p>
-                </>
-              )}
+                <div
+                  className={`w-32 h-32 mx-auto ${
+                    rep.color || 'bg-pink'
+                  } rounded-full border-3 border-border flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform overflow-hidden relative`}
+                >
+                  {rep.image && typeof rep.image === 'object' && rep.image.url ? (
+                    <Image src={rep.image.url} alt={rep.name} fill className="object-cover" />
+                  ) : (
+                    <span className="text-3xl font-black text-text">
+                      {rep.name.substring(0, 2).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-2xl font-black text-center mb-2 text-text">{rep.name}</h3>
+                <p className="text-sm font-bold text-center text-gray-500 mb-4">{rep.role}</p>
+                <div className="font-medium text-gray-600 leading-relaxed whitespace-pre-wrap">
+                  {rep.description}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-2 text-center text-gray-500">
+              代表者情報が見つかりませんでした。
             </div>
-          </div>
-
-          {/* Kei-chan */}
-          <div className="bg-white p-8 rounded-3xl border-3 border-border shadow-hard transform rotate-1 hover:rotate-0 transition-transform duration-300 relative group">
-            <div className="absolute -top-6 -right-6 w-12 h-12 bg-blue rounded-full border-3 border-border flex items-center justify-center text-2xl shadow-sm z-20">
-              🌱
-            </div>
-            <div className="w-32 h-32 mx-auto bg-blue rounded-full border-3 border-border flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 transition-transform">
-              <span className="text-3xl font-black text-text">KEI</span>
-            </div>
-            <h3 className="text-2xl font-black text-center mb-2 text-text">けいちゃん</h3>
-            <p className="text-sm font-bold text-center text-gray-500 mb-4">副代表 / 河上 啓子</p>
-            <p className="font-medium text-gray-600 leading-relaxed">
-              はなとたね副代表のけいちゃんこと河上啓子です。
-              <br />
-              はなとたねは「みほちゃん」と「けいちゃん」で運営しています。
-              <br />
-              いつでも気軽に遊びに来てくださいね。
-            </p>
-          </div>
+          )}
         </div>
+
+        {/* Message Section */}
+        {message && (
+          <div className="mt-20 max-w-3xl mx-auto text-center">
+            <div className="bg-white/50 backdrop-blur-sm p-8 rounded-3xl border-2 border-border/50">
+              <div className="text-lg font-medium text-gray-700 leading-relaxed">
+                <RichText data={message} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

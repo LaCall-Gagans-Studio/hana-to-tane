@@ -72,6 +72,7 @@ export interface Config {
     column: Column;
     members: Member;
     sponsors: Sponsor;
+    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     column: ColumnSelect<false> | ColumnSelect<true>;
     members: MembersSelect<false> | MembersSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -264,6 +266,38 @@ export interface Sponsor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  type: 'event' | 'free_school' | 'other';
+  date?: string | null;
+  endDate?: string | null;
+  isAllDay?: boolean | null;
+  recurringDays?: ('sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat')[] | null;
+  link?: string | null;
+  isHighlight?: boolean | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -305,6 +339,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sponsors';
         value: number | Sponsor;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -461,6 +499,23 @@ export interface SponsorsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  date?: T;
+  endDate?: T;
+  isAllDay?: T;
+  recurringDays?: T;
+  link?: T;
+  isHighlight?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -538,6 +593,19 @@ export interface About {
   history_years?: number | null;
   free_school_desc?: string | null;
   play_park_desc?: string | null;
+  concept?: {
+    title?: string | null;
+    subtitle?: string | null;
+    description_1?: string | null;
+    description_2?: string | null;
+    activities?:
+      | {
+          text?: string | null;
+          color?: ('bg-lime' | 'bg-yellow' | 'bg-blue' | 'bg-pink' | 'bg-purple') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   overview?: {
     org_name?: string | null;
     address?: string | null;
@@ -574,6 +642,21 @@ export interface AboutSelect<T extends boolean = true> {
   history_years?: T;
   free_school_desc?: T;
   play_park_desc?: T;
+  concept?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        description_1?: T;
+        description_2?: T;
+        activities?:
+          | T
+          | {
+              text?: T;
+              color?: T;
+              id?: T;
+            };
+      };
   overview?:
     | T
     | {

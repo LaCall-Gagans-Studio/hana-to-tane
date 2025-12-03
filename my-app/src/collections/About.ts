@@ -34,6 +34,61 @@ export const About: GlobalConfig = {
       type: 'textarea',
     },
     {
+      name: 'concept',
+      label: 'コンセプト',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          label: 'タイトル',
+          type: 'text',
+          defaultValue: 'はなとたねってどんなところ？',
+        },
+        {
+          name: 'subtitle',
+          label: 'サブタイトル',
+          type: 'text',
+          defaultValue: '子どもも大人も心地よく居られる場所',
+        },
+        {
+          name: 'description_1',
+          label: '説明文1 (左側)',
+          type: 'textarea',
+          defaultValue: 'やりたいことがなんでもできる場所。\nそれが「はなとたね」です。',
+        },
+        {
+          name: 'description_2',
+          label: '説明文2 (右側)',
+          type: 'textarea',
+          defaultValue: '子どもだけじゃなく、大人も楽しめる場所。\nそんな居場所を作っていきます。',
+        },
+        {
+          name: 'activities',
+          label: '活動キーワード',
+          type: 'array',
+          fields: [
+            {
+              name: 'text',
+              label: 'テキスト',
+              type: 'text',
+            },
+            {
+              name: 'color',
+              label: '色',
+              type: 'select',
+              options: [
+                { label: 'ライム', value: 'bg-lime' },
+                { label: 'イエロー', value: 'bg-yellow' },
+                { label: 'ブルー', value: 'bg-blue' },
+                { label: 'ピンク', value: 'bg-pink' },
+                { label: 'パープル', value: 'bg-purple' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'overview',
       label: '団体概要',
       type: 'group',
