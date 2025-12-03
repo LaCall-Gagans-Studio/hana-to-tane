@@ -71,7 +71,7 @@ export const Hero = () => {
               className="text-[4rem] md:text-[6rem] lg:text-[7rem] font-black text-text mb-8 leading-[0.9] tracking-wide drop-shadow-xl"
             >
               <span className="block hover:scale-105 transition-transform duration-500 cursor-default">
-                <h1 className="text-lg text-surface mb-1">
+                <h1 className="text-2xl ml-2 text-surface mb-1">
                   NPO法人
                   <br />
                 </h1>

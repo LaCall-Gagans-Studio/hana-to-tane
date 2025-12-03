@@ -18,7 +18,8 @@ export const Header = () => {
               { label: 'はなとたねとは？', href: '/about' },
               { label: 'ニュース', href: '/#news' },
               { label: 'イベントカレンダー', href: '/#calendar' },
-              { label: 'フリースクールいっぽ', href: '/freeschool' },
+              { label: '認定フリースクールいっぽ', href: '/freeschool' },
+              { label: 'はなたね図書館', href: '/column' },
             ].map((item) => (
               <li key={item.label} className="hidden md:block">
                 <Link

@@ -249,7 +249,16 @@ const PlantVisual = ({
   const { pathD, leaves, flowers, seedShape, preset, scale, visualHeight } = useMemo(() => {
     const rng = seededRandom(data.dna)
     const presetKey = data.type || 'Classic'
-    const preset = PRESETS[presetKey] || PRESETS['Classic']
+    const originalPreset = PRESETS[presetKey] || PRESETS['Classic']
+    const variance = (rng() - 0.5) * 2
+
+    const preset = {
+      ...originalPreset,
+      // 角度を ±10度 ずらす（これで木の太り方が変わる）
+      angle: originalPreset.angle + variance * 10,
+      // 枝の基本長さを ±30% 変える（これで背の高さが変わる）
+      baseLength: originalPreset.baseLength * (1 + variance * 0.3),
+    }
 
     const seedD = `M50,${GROUND_Y - 25} C60,${GROUND_Y - 25} 65,${GROUND_Y - 20} 65,${GROUND_Y - 10} C65,${GROUND_Y} 55,${GROUND_Y} 50,${GROUND_Y} C45,${GROUND_Y} 35,${GROUND_Y} 35,${GROUND_Y - 10} 35,${GROUND_Y - 20} 40,${GROUND_Y - 25} 50,${GROUND_Y - 25} Z`
 
@@ -320,7 +329,14 @@ const PlantVisual = ({
         style={{ filter: hueRotate }}
       >
         <defs>
-          <filter id="paper-texture">
+          <filter
+            id="paper-texture"
+            x="-30%"
+            y="-30%"
+            width="160%"
+            height="160%"
+            filterUnits="objectBoundingBox"
+          >
             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
             <feDiffuseLighting in="noise" lightingColor="white" surfaceScale="1">
               <feDistantLight azimuth="45" elevation="60" />
@@ -329,7 +345,14 @@ const PlantVisual = ({
             <feBlend mode="multiply" in2="SourceGraphic" />
           </filter>
 
-          <filter id="watercolor">
+          <filter
+            id="watercolor"
+            x="-30%"
+            y="-30%"
+            width="160%"
+            height="160%"
+            filterUnits="objectBoundingBox"
+          >
             <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
           </filter>
@@ -513,31 +536,44 @@ const PlantVisual = ({
                       transition={{ duration: 1.5 }}
                       className="overflow-visible"
                     />
-                    {leaves.map((leaf, i) => (
-                      <motion.path
-                        key={`leaf-${i}`}
-                        d={`M0,0 Q5,-5 10,0 Q5,5 0,0`}
-                        fill={preset.colors.leaf}
-                        stroke="none"
-                        initial={{ scale: 0 }}
-                        animate={{
-                          scale: leaf.scale,
-                          rotate: [leaf.angle, leaf.angle + 5, leaf.angle],
-                        }}
-                        transition={{
-                          scale: { delay: 0.5 + i * 0.05, type: 'spring' },
-                          rotate: {
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                            delay: i * 0.1,
-                          },
-                        }}
-                        style={{ originX: 0, originY: 0, x: leaf.x, y: leaf.y }}
-                        filter="url(#watercolor)"
-                        className="overflow-visible"
-                      />
-                    ))}
+                    {leaves.map((leaf, i) => {
+                      // タイプによってパスを切り替え
+                      let leafPath = 'M0,0 Q5,-5 10,0 Q5,5 0,0' // デフォルト（丸い葉）
+
+                      if (data.type === 'Fern') {
+                        // シダ植物ならギザギザに
+                        leafPath = 'M0,0 L5,-2 L10,0 L5,2 Z'
+                      } else if (data.type === 'Sakura') {
+                        // 桜なら少し細長く
+                        leafPath = 'M0,0 Q5,-8 12,0 Q5,8 0,0'
+                      }
+
+                      return (
+                        <motion.path
+                          key={`leaf-${i}`}
+                          d={leafPath}
+                          fill={preset.colors.leaf}
+                          stroke="none"
+                          initial={{ scale: 0 }}
+                          animate={{
+                            scale: leaf.scale,
+                            rotate: [leaf.angle, leaf.angle + 5, leaf.angle],
+                          }}
+                          transition={{
+                            scale: { delay: 0.5 + i * 0.05, type: 'spring' },
+                            rotate: {
+                              duration: 4,
+                              repeat: Infinity,
+                              ease: 'easeInOut',
+                              delay: i * 0.1,
+                            },
+                          }}
+                          style={{ originX: 0, originY: 0, x: leaf.x, y: leaf.y }}
+                          filter="url(#watercolor)"
+                          className="overflow-visible"
+                        />
+                      )
+                    })}
                     {(data.state === 'bud' || data.state === 'flower') &&
                       flowers.map((flower, i) => (
                         <motion.g
@@ -611,6 +647,12 @@ export const HeroFlower = () => {
       setPlant(JSON.parse(savedData))
       addMessage('データ を ロード しました！')
     } else {
+      const randomHue = () => {
+        const r = Math.random()
+        if (r > 0.95) return 180 // 5%の確率で青/紫系のレアカラー (補色)
+        if (r > 0.8) return 60 // 15%の確率で紅葉/枯れ色系
+        return Math.random() * 60 - 30 // 通常は ±30度
+      }
       const newId = crypto.randomUUID()
       const newPlant: PlantData = {
         id: newId,
@@ -619,7 +661,7 @@ export const HeroFlower = () => {
         state: 'seed',
         growthProgress: 0,
         streak: 0,
-        hueShift: Math.floor(Math.random() * 40) - 20,
+        hueShift: randomHue(),
         maxHeight: 0,
         lastWatered: null,
         waterCount: 0,
@@ -696,7 +738,15 @@ export const HeroFlower = () => {
         if (nextState) {
           newGrowthProgress -= 1.0
           newState = nextState
-          addMessage(`おや...？ たねの ようすが...！ -> ${newState.toUpperCase()} になった！`)
+          const stateLabels: { [key: string]: string } = {
+            seed: 'たね',
+            sprout: 'め',
+            growing: 'くき',
+            bud: 'つぼみ',
+            flower: 'はな',
+          }
+          const label = stateLabels[newState] || newState
+          addMessage(`おや...？ たねの ようすが...！ -> ${label} になった！`)
         } else {
           // 次がない（最終形態）場合、Progressはそのまま維持（増やし続ける）
           // これにより植物は縮まず、無限に大きくなり続ける
@@ -808,9 +858,9 @@ export const HeroFlower = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto flex flex-col gap-4">
-      <motion.div className="bg-white border-4 border-slate-800 rounded-xl shadow-lg overflow-hidden relative h-[500px] w-full perspective-1000">
+      <motion.div className="bg-white border-4 border-slate-800 rounded-xl shadow-lg overflow-visible relative h-[500px] w-full perspective-1000">
         <div
-          className="w-full h-full relative flex items-end justify-center overflow-hidden p-8 transition-colors duration-1000"
+          className="w-full h-full relative flex items-end justify-center overflow-visible p-8 transition-colors duration-1000"
           style={{
             background:
               environment === 'day'
@@ -889,7 +939,7 @@ export const HeroFlower = () => {
           </AnimatePresence>
 
           {environment !== 'night' && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-visible">
               {Array.from({ length: 10 }).map((_, i) => (
                 <motion.div
                   key={i}
@@ -1009,7 +1059,7 @@ export const HeroFlower = () => {
       </motion.div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2 bg-slate-800 border-4 border-slate-800 rounded-xl p-1 relative overflow-hidden shadow-lg min-h-[120px]">
+        <div className="md:col-span-2 bg-slate-800 border-4 border-slate-800 rounded-xl p-1 relative overflow-visible shadow-lg min-h-[120px]">
           <div className="absolute inset-0 bg-white translate-x-1 translate-y-1 rounded-lg border-2 border-slate-800"></div>
           <div className="relative z-10 p-4 h-full flex flex-col-reverse justify-end font-mono text-sm md:text-base leading-relaxed text-slate-800">
             {messages.map((msg, i) => (
