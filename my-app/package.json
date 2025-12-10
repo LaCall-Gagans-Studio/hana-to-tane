@@ -29,7 +29,7 @@
     "framer-motion": "^12.23.25",
     "graphql": "^16.8.1",
     "lucide-react": "^0.555.0",
-    "next": "15.4.7",
+    "next": "15.4.8",
     "payload": "3.65.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
