@@ -14,6 +14,7 @@ import { Column } from './collections/Column'
 import { Member } from './collections/Member'
 import { Sponsor } from './collections/Sponsor'
 import { About } from './collections/About'
+import { Freeschool } from './collections/Freeschool'
 import { Event } from './collections/Event'
 
 const filename = fileURLToPath(import.meta.url)
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Column, Member, Sponsor, Event],
-  globals: [About],
+  globals: [About, Freeschool],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

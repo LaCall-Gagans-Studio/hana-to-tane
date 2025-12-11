@@ -1,0 +1,8 @@
+Starting DB Check with FIX attempt...
+Original URL Scheme: postgresql
+NOTE: Removed &channel_binding=require from URL.
+Host (masked): postgresql://neondb_owner:****@ep-sweet-leaf-a11cdi8r-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require
+Successfully connected to the database!
+Current Database Time: {"now":"2025-12-11T09:00:33.458Z"}
+Attempting Schema Introspection Query...
+Introspection Success. Found 21 items.

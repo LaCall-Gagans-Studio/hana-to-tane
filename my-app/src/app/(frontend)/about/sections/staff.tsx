@@ -8,7 +8,7 @@ type StaffSectionProps = {
   members: Member[]
 }
 
-export const FreeSchoolStaff = ({ members }: StaffSectionProps) => {
+export const AboutStaff = ({ members }: StaffSectionProps) => {
   const [selectedStaff, setSelectedStaff] = useState<Member | null>(null)
 
   const staffMembers = members.filter((s) => s.type === 'staff' || !s.type)

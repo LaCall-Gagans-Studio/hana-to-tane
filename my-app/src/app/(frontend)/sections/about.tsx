@@ -109,10 +109,7 @@ export const About = ({ aboutData, members, sponsors }: AboutProps) => {
                   FREE SCHOOL
                 </h3>
                 <p className="font-semibold text-surface/90 mb-4">フリースクール</p>
-                <p className="text-surface font-medium leading-relaxed">
-                  {freeSchoolDesc ||
-                    '学校に行かない選択をした子どもたちのための、学びと交流の場です。学習支援や体験活動を通じて、自立をサポートします。'}
-                </p>
+                <p className="text-surface font-medium leading-relaxed">{freeSchoolDesc || ''}</p>
               </div>
               <div className="mt-8 text-right">
                 <Link

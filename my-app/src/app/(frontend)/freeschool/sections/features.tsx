@@ -1,65 +1,101 @@
+import Image from 'next/image'
 import React from 'react'
+import { Media, Freeschool } from '@/payload-types'
 
-export const Features = () => {
-  const features = [
-    {
-      title: '自然が豊か',
-      desc: '川遊びやスキーなど、四季折々の自然体験',
-      color: 'bg-green',
-      icon: '🌲',
-    },
-    {
-      title: '学校施設を活用',
-      desc: '元小学校の図書室や体育館で広々活動',
-      color: 'bg-blue',
-      icon: '🏫',
-    },
-    {
-      title: '体験学習が豊富',
-      desc: '職業体験、ドローン、プログラミングなど',
-      color: 'bg-pink',
-      icon: '🎨',
-    },
-    { title: '自宅送迎あり', desc: 'スタッフがご自宅まで送迎します', color: 'bg-lime', icon: '🚗' },
-    {
-      title: 'スクールドッグ',
-      desc: '犬やうさぎなど、命との触れ合い',
-      color: 'bg-yellow',
-      icon: '🐶',
-    },
-  ]
+type FeaturesProps = {
+  data?: Freeschool['features']
+}
+
+const ROTATIONS = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-1']
+
+export const Features = ({ data }: FeaturesProps) => {
+  // Use CMS data if available, otherwise fallback (or empty)
+  // Since we want to migrate, we can remove fallback eventually,
+  // but for now let's keep the hardcoded one only if data is absolutely missing.
+  // Actually, standard practice is to just render data. If data is [], render nothing.
+
+  const featuresToRender = data || []
 
   return (
-    <section className="py-24 bg-surface relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_2px,transparent_2px)] bg-size-[20px_20px] pointer-events-none"></div>
+    <section className="py-24 bg-surface relative overflow-visible">
+      {/* Wood Texture Background or Tablecloth Pattern could be nice here, keeping subtle for now but adding texture */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{ backgroundImage: 'url("/images/textures/paper-texture.png")' }}
+      ></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-black text-black mb-2 tracking-tight drop-shadow-[4px_4px_0px_var(--color-primary)]">
+        <div className="text-center mb-20 relative">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl md:text-9xl font-black text-gray-100 -z-10 select-none">
             FEATURES
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-text mb-2 tracking-tight">
+            いっぽの特徴
           </h2>
-          <p className="font-bold text-gray-400">いっぽの特徴</p>
+          <div className="w-24 h-2 bg-yellow mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((f, i) => (
-            <div
-              key={i}
-              className={`p-8 rounded-3xl border-3 border-border shadow-hard transform transition-all hover:-translate-y-2 hover:shadow-hard-lg ${f.color} group relative overflow-hidden`}
-            >
-              <div className="absolute -right-4 -bottom-4 text-8xl opacity-20 group-hover:scale-110 transition-transform">
-                {f.icon}
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto perspective-[1000px]">
+          {featuresToRender.map((f, i) => {
+            const imageUrl =
+              f.image && typeof f.image === 'object' && f.image.url
+                ? f.image.url
+                : typeof f.image === 'string'
+                  ? f.image
+                  : ''
+            const rotation = ROTATIONS[i % ROTATIONS.length]
+            // CMS 'backgroundColor' usually comes as value "bg-lime".
+            // We can use it for the card background or text area.
+            // Let's use it for the text area bg to simulate a colored note part, keeping the photo part white/clean.
+            const bgColorClass = f.backgroundColor || 'bg-white'
 
-              <div className="w-16 h-16 bg-white rounded-2xl border-3 border-border flex items-center justify-center text-4xl shadow-sm mb-6 relative z-10">
-                {f.icon}
-              </div>
+            return (
+              <div
+                key={i}
+                className={`group relative bg-white p-4 rounded-xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:z-20 hover:shadow-2xl ${rotation}`}
+              >
+                {/* Masking Tape (Top Center) */}
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-gray-200/50 backdrop-blur-sm -rotate-1 z-30 shadow-sm border-l border-r border-white/40"></div>
 
-              <h3 className="text-2xl font-black text-text mb-4 relative z-10">{f.title}</h3>
-              <p className="font-bold text-text/80 relative z-10 leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
+                {/* Photo Area */}
+                <div className="relative aspect-4/3 w-full mb-4 overflow-hidden rounded-lg shadow-inner bg-gray-100">
+                  {imageUrl && (
+                    <Image
+                      src={imageUrl}
+                      alt={f.title || 'Feature'}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  )}
+                  {!imageUrl && (
+                    <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold">
+                      No Image
+                    </div>
+                  )}
+
+                  {/* Gloss Overlay */}
+                  <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent pointer-events-none opacity-50"></div>
+                </div>
+
+                {/* Text Area */}
+                <div
+                  className={`text-center px-4 py-4 rounded-lg ${bgColorClass !== 'bg-white' ? bgColorClass + '/20' : ''}`}
+                >
+                  <h3 className="text-xl md:text-2xl font-black text-gray-800 mb-2 font-handwriting">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-bold text-gray-500 leading-snug whitespace-pre-wrap">
+                    {f.description}
+                  </p>
+                </div>
+
+                {/* Handwritten Note Effect (Bottom Right) */}
+                {/* <div className="absolute -bottom-2 -right-2 transform rotate-3">
+                    <span className="text-4xl opacity-10">Use SVG Here?</span>
+                </div> */}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

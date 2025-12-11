@@ -27,7 +27,7 @@ export const Intro = ({ message, representatives = [] }: IntroProps) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           {representatives && representatives.length > 0 ? (
-            representatives.map((rep, index) => (
+            representatives.slice(0, 2).map((rep, index) => (
               <div
                 key={rep.id}
                 className={`bg-white p-8 rounded-3xl border-3 border-border shadow-hard transform ${
@@ -74,7 +74,7 @@ export const Intro = ({ message, representatives = [] }: IntroProps) => {
         {message && (
           <div className="mt-20 max-w-3xl mx-auto text-center">
             <div className="bg-white/50 backdrop-blur-sm p-8 rounded-3xl border-2 border-border/50">
-              <div className="text-lg font-medium text-gray-700 leading-relaxed">
+              <div className="text-3xl font-black text-text leading-relaxed">
                 <RichText data={message} />
               </div>
             </div>

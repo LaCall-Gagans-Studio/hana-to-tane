@@ -97,9 +97,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     about: About;
+    freeschool: Freeschool;
   };
   globalsSelect: {
     about: AboutSelect<false> | AboutSelect<true>;
+    freeschool: FreeschoolSelect<false> | FreeschoolSelect<true>;
   };
   locale: null;
   user: User & {
@@ -596,12 +598,21 @@ export interface About {
   concept?: {
     title?: string | null;
     subtitle?: string | null;
+    main_image?: (number | null) | Media;
     description_1?: string | null;
     description_2?: string | null;
     activities?:
       | {
           text?: string | null;
           color?: ('bg-lime' | 'bg-yellow' | 'bg-blue' | 'bg-pink' | 'bg-purple') | null;
+          id?: string | null;
+        }[]
+      | null;
+    features?:
+      | {
+          image?: (number | null) | Media;
+          title?: string | null;
+          description?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -634,6 +645,232 @@ export interface About {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freeschool".
+ */
+export interface Freeschool {
+  id: number;
+  summary?: {
+    visualImage?: (number | null) | Media;
+    schoolName?: string | null;
+    introTitle?: string | null;
+    description?: string | null;
+    importantPointsTitle?: string | null;
+    importantPoints?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    dialogueLeft?: string | null;
+    dialogueRight?: string | null;
+  };
+  hero?: {
+    catchphrase?: string | null;
+    subcopy?: string | null;
+    mainImage?: (number | null) | Media;
+    decorativeImages?:
+      | {
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  about?: {
+    title?: string | null;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    images?:
+      | {
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+    benefits?:
+      | {
+          text?: string | null;
+          color?: ('bg-pink' | 'bg-blue') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  message?: {
+    title?: string | null;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    image?: (number | null) | Media;
+    repName?: string | null;
+    repRole?: string | null;
+  };
+  merits?: {
+    certificationTitle?: string | null;
+    certificationItems?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    attendingTitle?: string | null;
+    attendingBody?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  support?: {
+    learningSupportTitle?: string | null;
+    learningSupportBody?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    schoolRelationsTitle?: string | null;
+    schoolRelationsBody?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image?: (number | null) | Media;
+        backgroundColor?: ('bg-lime' | 'bg-yellow' | 'bg-blue' | 'bg-pink') | null;
+        id?: string | null;
+      }[]
+    | null;
+  flow?:
+    | {
+        stepNumber?: string | null;
+        title?: string | null;
+        description?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  schedule?: {
+    image?: (number | null) | Media;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    scheduleItems?:
+      | {
+          time?: string | null;
+          label?: string | null;
+          image?: (number | null) | Media;
+          icon?: string | null;
+          rotation?: ('rotate-2' | 'rotate-1' | '-rotate-2' | '-rotate-1') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  price?: {
+    plans?:
+      | {
+          planName?: string | null;
+          price?: string | null;
+          note?: string | null;
+          subtitle?: string | null;
+          features?:
+            | {
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          themeColor?: ('blue' | 'pink') | null;
+          id?: string | null;
+        }[]
+      | null;
+    annotation?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
@@ -647,6 +884,7 @@ export interface AboutSelect<T extends boolean = true> {
     | {
         title?: T;
         subtitle?: T;
+        main_image?: T;
         description_1?: T;
         description_2?: T;
         activities?:
@@ -654,6 +892,14 @@ export interface AboutSelect<T extends boolean = true> {
           | {
               text?: T;
               color?: T;
+              id?: T;
+            };
+        features?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
               id?: T;
             };
       };
@@ -667,6 +913,150 @@ export interface AboutSelect<T extends boolean = true> {
         representative?: T;
         board_members?: T;
         establishment_date?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freeschool_select".
+ */
+export interface FreeschoolSelect<T extends boolean = true> {
+  summary?:
+    | T
+    | {
+        visualImage?: T;
+        schoolName?: T;
+        introTitle?: T;
+        description?: T;
+        importantPointsTitle?: T;
+        importantPoints?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        dialogueLeft?: T;
+        dialogueRight?: T;
+      };
+  hero?:
+    | T
+    | {
+        catchphrase?: T;
+        subcopy?: T;
+        mainImage?: T;
+        decorativeImages?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+      };
+  about?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        benefits?:
+          | T
+          | {
+              text?: T;
+              color?: T;
+              id?: T;
+            };
+      };
+  message?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        repName?: T;
+        repRole?: T;
+      };
+  merits?:
+    | T
+    | {
+        certificationTitle?: T;
+        certificationItems?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        attendingTitle?: T;
+        attendingBody?: T;
+      };
+  support?:
+    | T
+    | {
+        learningSupportTitle?: T;
+        learningSupportBody?: T;
+        schoolRelationsTitle?: T;
+        schoolRelationsBody?: T;
+      };
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        backgroundColor?: T;
+        id?: T;
+      };
+  flow?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  schedule?:
+    | T
+    | {
+        image?: T;
+        body?: T;
+        scheduleItems?:
+          | T
+          | {
+              time?: T;
+              label?: T;
+              image?: T;
+              icon?: T;
+              rotation?: T;
+              id?: T;
+            };
+      };
+  price?:
+    | T
+    | {
+        plans?:
+          | T
+          | {
+              planName?: T;
+              price?: T;
+              note?: T;
+              subtitle?: T;
+              features?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              themeColor?: T;
+              id?: T;
+            };
+        annotation?: T;
       };
   updatedAt?: T;
   createdAt?: T;

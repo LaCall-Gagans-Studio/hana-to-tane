@@ -1,0 +1,67 @@
+
+> my-app@1.0.0 build
+> cross-env NODE_OPTIONS="--no-deprecation --max-old-space-size=8000" next build
+
+   ▲ Next.js 15.4.7
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.0s
+   Linting and checking validity of types ...
+
+./src/app/(frontend)/about/sections/intro.tsx
+7:13  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/(frontend)/about/sections/overview.tsx
+8:20  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/(frontend)/column/page.tsx
+1:17  Warning: 'Suspense' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+6:10  Warning: 'notFound' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+23:16  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+196:37  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+196:42  Warning: 'index' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+246:48  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/(frontend)/column/[slug]/page.tsx
+92:45  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+95:36  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+95:57  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/(frontend)/sections/about.tsx
+196:33  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+237:38  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+348:34  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+351:82  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/(frontend)/sections/column.tsx
+45:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/my-route/route.ts
+4:27  Warning: 'request' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+5:9  Warning: 'payload' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/collections/Users.ts
+36:36  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+54:32  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+66:32  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+72:32  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+84:32  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+93:34  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+99:23  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+99:51  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+Failed to compile.
+
+./src/app/(frontend)/about/sections/concept.tsx:172:10
+Type error: 'activities' is possibly 'null'.
+
+[0m [90m 170 |[39m
+ [90m 171 |[39m         {[90m/* Activities Bubbles */[39m}
+[31m[1m>[22m[39m[90m 172 |[39m         {activities[33m.[39mlength [33m>[39m [35m0[39m [33m&&[39m (
+ [90m     |[39m          [31m[1m^[22m[39m
+ [90m 173 |[39m           [33m<[39m[33mdiv[39m className[33m=[39m[32m"text-center"[39m[33m>[39m
+ [90m 174 |[39m             [33m<[39m[33mh3[39m className[33m=[39m[32m"text-2xl font-black text-text mb-10"[39m[33m>[39mいろいろな活動[33m<[39m[33m/[39m[33mh3[39m[33m>[39m
+ [90m 175 |[39m             [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex flex-wrap justify-center gap-6 max-w-5xl mx-auto"[39m[33m>[39m[0m
+Next.js build worker exited with code: 1 and signal: null
