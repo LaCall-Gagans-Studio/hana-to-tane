@@ -26,62 +26,76 @@ export const News = async () => {
     <section id="news" className="bg-surface relative overflow-hidden pb-12 md:pb-24">
       {/* Infinite Scroll Banner */}
       <div className="w-full overflow-hidden bg-white border-border mb-12 md:mb-24 py-4">
-        <div className="flex animate-infinite-scroll w-[200%]">
-          {/* First set of images */}
-          <div className="flex w-1/2 justify-around gap-4 px-4">
-            {scrollingBanners.length > 0 ? (
-              scrollingBanners.map((banner: any, i: number) => (
-                <div
-                  key={i}
-                  className="aspect-video w-full rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
-                >
-                  {banner.image && typeof banner.image === 'object' && banner.image.url ? (
-                    <Link href={banner.link || '#'} className="block w-full h-full relative group">
-                      <Image
-                        src={banner.image.url}
-                        alt={banner.image.alt || `Banner ${i + 1}`}
-                        fill
-                        className="object-cover transition-transform group-hover:scale-105"
-                      />
-                    </Link>
-                  ) : (
-                    <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
-                  )}
+        {/* Infinite Scroll Banner */}
+        <div className="w-full overflow-hidden bg-white border-border mb-12 md:mb-24 py-4">
+          {/* 修正1: w-[200%] を w-max に変更し、中身に合わせて幅が伸びるようにする */}
+          <div className="flex animate-infinite-scroll w-max">
+            {/* First set of images */}
+            {/* 修正2: w-1/2 justify-around を削除し、shrink-0 (縮小禁止) を追加 */}
+            <div className="flex shrink-0 items-center gap-4 px-4">
+              {scrollingBanners.length > 0 ? (
+                scrollingBanners.map((banner: any, i: number) => (
+                  <div
+                    key={i}
+                    // 修正3: w-full を w-[70vw] (スマホで画面の7割) md:w-96 (PCで固定幅) に変更
+                    className="aspect-video w-[70vw] md:w-96 rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
+                  >
+                    {banner.image && typeof banner.image === 'object' && banner.image.url ? (
+                      <Link
+                        href={banner.link || '#'}
+                        className="block w-full h-full relative group"
+                      >
+                        <Image
+                          src={banner.image.url}
+                          alt={banner.image.alt || `Banner ${i + 1}`}
+                          fill
+                          className="object-cover transition-transform group-hover:scale-105"
+                        />
+                      </Link>
+                    ) : (
+                      <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="w-[100vw] h-full flex items-center justify-center text-gray-400">
+                  Banner Not Set
                 </div>
-              ))
-            ) : (
-              // Fallback if no banner
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                Banner Not Set
-              </div>
-            )}
-          </div>
-          {/* Duplicate set for seamless loop */}
-          <div className="flex w-1/2 justify-around gap-4 px-4">
-            {scrollingBanners.length > 0 &&
-              scrollingBanners.map((banner: any, i: number) => (
-                <div
-                  key={`dup-${i}`}
-                  className="aspect-video w-full rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
-                >
-                  {banner.image && typeof banner.image === 'object' && banner.image.url ? (
-                    <Link href={banner.link || '#'} className="block w-full h-full relative group">
-                      <Image
-                        src={banner.image.url}
-                        alt={banner.image.alt || `Banner ${i + 1}`}
-                        fill
-                        className="object-cover transition-transform group-hover:scale-105"
-                      />
-                    </Link>
-                  ) : (
-                    <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
-                  )}
-                </div>
-              ))}
+              )}
+            </div>
+
+            {/* Duplicate set for seamless loop */}
+            {/* 修正4: こちらも同様に shrink-0 を適用 */}
+            <div className="flex shrink-0 items-center gap-4 px-4">
+              {scrollingBanners.length > 0 &&
+                scrollingBanners.map((banner: any, i: number) => (
+                  <div
+                    key={`dup-${i}`}
+                    // 修正5: サイズ指定を上と合わせる
+                    className="aspect-video w-[70vw] md:w-96 rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
+                  >
+                    {banner.image && typeof banner.image === 'object' && banner.image.url ? (
+                      <Link
+                        href={banner.link || '#'}
+                        className="block w-full h-full relative group"
+                      >
+                        <Image
+                          src={banner.image.url}
+                          alt={banner.image.alt || `Banner ${i + 1}`}
+                          fill
+                          className="object-cover transition-transform group-hover:scale-105"
+                        />
+                      </Link>
+                    ) : (
+                      <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
+                    )}
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col w-1/2 mx-auto mt-8 justify-around gap-4 px-4">
+        <div className="flex flex-col w-full md:w-2/3 lg:w-1/2 mx-auto mt-8 justify-around gap-4 px-4">
           {bigBanners.map((banner: any, i: number) => (
             <div
               key={i}
