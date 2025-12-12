@@ -25,8 +25,8 @@ const NAV_ITEMS = [
     icon: GraduationCap,
     color: 'text-green',
   },
-  { label: 'はなたね図書館', href: '/column', icon: BookOpen, color: 'text-purple' },
-  { label: 'はなたねギャラリー', href: '/gallery', icon: Images, color: 'text-blue' },
+  { label: '図書館', href: '/column', icon: BookOpen, color: 'text-purple' },
+  { label: 'ギャラリー', href: '/gallery', icon: Images, color: 'text-blue' },
 ]
 
 export const Header = () => {
@@ -150,11 +150,11 @@ export const Header = () => {
             })}
 
             <Link
-              href="/contact"
+              href="/contact#form"
               onClick={() => setIsMenuOpen(false)}
               className="mt-8 w-full bg-blue text-white text-xl font-black text-center py-4 rounded-full border-3 border-black shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
             >
-              JOIN US!
+              お問い合わせ
             </Link>
           </nav>
         </div>

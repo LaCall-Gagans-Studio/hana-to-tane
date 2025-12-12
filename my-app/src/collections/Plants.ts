@@ -3,14 +3,30 @@ import type { CollectionConfig } from 'payload'
 export const Plants: CollectionConfig = {
   slug: 'plants',
   labels: {
-    singular: 'Plant',
-    plural: 'Plants',
+    singular: 'はなたねシステム',
+    plural: 'はなたねシステム',
   },
   access: {
     read: () => true,
     create: () => true,
     update: () => true,
     delete: () => false, // Only admin via DB really
+  },
+  admin: {
+    useAsTitle: 'dna',
+    defaultColumns: [
+      'dna',
+      'transferId',
+      'type',
+      'state',
+      'growthProgress',
+      'streak',
+      'hueShift',
+      'maxHeight',
+      'lastWatered',
+      'waterCount',
+    ],
+    group: '設定',
   },
   fields: [
     {

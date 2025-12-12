@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
+import { ReservationForm } from '../../components/ReservationForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -40,14 +41,14 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#b3e41d_2px,transparent_2px)] bg-size-[24px_24px] pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 py-12 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 py-24 max-w-4xl relative z-10">
         <div className="mb-12">
           <Link
             href="/column"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white text-text font-black rounded-full border-3 border-border shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all mb-8 group"
           >
             <span className="group-hover:-translate-x-1 transition-transform">&larr;</span>
-            BACK TO LIST
+            一覧に戻る
           </Link>
 
           <article className="bg-white border-3 border-border rounded-3xl p-8 md:p-12 shadow-hard-lg relative overflow-hidden">
@@ -105,6 +106,13 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
               </div>
             )}
           </article>
+
+          {/* Reservation Form Section */}
+          {column.reservationSettings?.enabled && (
+            <div className="mt-12">
+              <ReservationForm column={column} />
+            </div>
+          )}
         </div>
       </div>
     </div>

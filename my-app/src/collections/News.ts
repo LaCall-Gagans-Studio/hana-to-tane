@@ -3,8 +3,8 @@ import type { CollectionConfig } from 'payload'
 export const News: CollectionConfig = {
   slug: 'news',
   labels: {
-    singular: 'News',
-    plural: 'News',
+    singular: 'ニュース',
+    plural: 'ニュース',
   },
   access: {
     read: () => true,
@@ -12,6 +12,7 @@ export const News: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['publishedDate', 'title', 'category'],
+    group: '更新コンテンツ',
   },
   fields: [
     {

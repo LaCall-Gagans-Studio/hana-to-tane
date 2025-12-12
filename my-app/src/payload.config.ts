@@ -7,6 +7,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { ja } from 'payload/i18n/ja'
 
 import { Plants } from './collections/Plants'
 import { News } from './collections/News'
@@ -19,6 +20,7 @@ import { Sponsor } from './collections/Sponsor'
 import { About } from './collections/About'
 import { Freeschool } from './collections/Freeschool'
 import { Event } from './collections/Event'
+import { Reservations } from './collections/Reservations'
 
 import { Gallery } from './collections/Gallery'
 
@@ -32,7 +34,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Media, Column, Member, Sponsor, Event, Gallery, Users, Plants, News],
+  i18n: {
+    supportedLanguages: { ja }, // 日本語をサポート
+    fallbackLanguage: 'ja', // デフォルトを日本語に設定
+  },
+  collections: [Media, Column, Member, Sponsor, Event, Gallery, Users, Plants, News, Reservations],
   globals: [About, Freeschool],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

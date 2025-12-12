@@ -76,6 +76,7 @@ export interface Config {
     users: User;
     plants: Plant;
     news: News;
+    reservations: Reservation;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     plants: PlantsSelect<false> | PlantsSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    reservations: ReservationsSelect<false> | ReservationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -187,6 +189,57 @@ export interface Column {
     };
     [k: string]: unknown;
   } | null;
+  targetEvent?: (number | null) | Event;
+  reservationSettings?: {
+    enabled?: boolean | null;
+    capacity?: number | null;
+    deadline?: string | null;
+    customFields?:
+      | {
+          label: string;
+          type?: ('text' | 'textarea' | 'radio') | null;
+          options?:
+            | {
+                value?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  type: 'event' | 'free_school' | 'other';
+  date?: string | null;
+  endDate?: string | null;
+  isAllDay?: boolean | null;
+  recurringDays?: ('sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat')[] | null;
+  link?: string | null;
+  isHighlight?: boolean | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -238,38 +291,6 @@ export interface Sponsor {
   name: string;
   logo?: (number | null) | Media;
   url?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  title: string;
-  type: 'event' | 'free_school' | 'other';
-  date?: string | null;
-  endDate?: string | null;
-  isAllDay?: boolean | null;
-  recurringDays?: ('sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat')[] | null;
-  link?: string | null;
-  isHighlight?: boolean | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -354,6 +375,26 @@ export interface News {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reservations".
+ */
+export interface Reservation {
+  id: number;
+  column: number | Column;
+  name: string;
+  email: string;
+  phone: string;
+  responses?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -411,6 +452,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news';
         value: number | News;
+      } | null)
+    | ({
+        relationTo: 'reservations';
+        value: number | Reservation;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -489,6 +534,27 @@ export interface ColumnSelect<T extends boolean = true> {
       };
   image?: T;
   content?: T;
+  targetEvent?: T;
+  reservationSettings?:
+    | T
+    | {
+        enabled?: T;
+        capacity?: T;
+        deadline?: T;
+        customFields?:
+          | T
+          | {
+              label?: T;
+              type?: T;
+              options?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -621,6 +687,25 @@ export interface NewsSelect<T extends boolean = true> {
   publishedDate?: T;
   category?: T;
   link?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reservations_select".
+ */
+export interface ReservationsSelect<T extends boolean = true> {
+  column?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  responses?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
