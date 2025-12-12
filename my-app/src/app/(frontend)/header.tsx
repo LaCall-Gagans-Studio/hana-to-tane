@@ -3,17 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  Menu,
-  X,
-  Info,
-  Newspaper,
-  Calendar,
-  GraduationCap,
-  BookOpen,
-  Images,
-  Mail,
-} from 'lucide-react'
+import { Menu, X, Info, Newspaper, Calendar, GraduationCap, BookOpen, Images } from 'lucide-react'
 
 // Navigation Items
 const NAV_ITEMS = [
@@ -56,8 +46,13 @@ export const Header = () => {
 
   return (
     <header
+      // 修正: isMenuOpen時は強制的に背景透明にして、下の黄色いオーバーレイを見せる
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-md py-2 shadow-sm' : 'bg-transparent py-4'
+        isMenuOpen
+          ? 'bg-transparent py-4' // メニューオープン時は常に透明＆パディング維持
+          : scrolled
+            ? 'bg-white/80 backdrop-blur-md py-2 shadow-sm'
+            : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -73,7 +68,10 @@ export const Header = () => {
             />
           </div>
           <span
-            className={`text-xl font-black text-text tracking-tight ${scrolled ? 'opacity-100' : 'opacity-0 md:opacity-100'} transition-opacity`}
+            // 修正: メニューオープン時は常に表示（スクロール状態に関係なく）
+            className={`text-xl font-black text-text tracking-tight ${
+              isMenuOpen || scrolled ? 'opacity-100' : 'opacity-0 md:opacity-100'
+            } transition-opacity`}
           >
             はなとたね
           </span>
@@ -116,6 +114,7 @@ export const Header = () => {
           className={`fixed inset-0 bg-yellow z-40 flex flex-col justify-center items-center transition-all duration-300 ease-in-out ${
             isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
+          // top-0から全画面を覆うように指定（既に inset-0 なのでOKだが、念のため確認）
         >
           {/* Background Pattern */}
           <div
@@ -126,7 +125,7 @@ export const Header = () => {
             }}
           ></div>
 
-          <nav className="relative z-50 flex flex-col gap-8 w-full max-w-sm px-8">
+          <nav className="relative z-50 flex flex-col gap-8 w-full max-w-sm px-8 max-h-[80vh] overflow-y-auto">
             {NAV_ITEMS.map((item, index) => {
               const Icon = item.icon
               return (
