@@ -12,6 +12,7 @@ export const Event: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'date', 'type'],
+    group: '更新コンテンツ',
   },
   fields: [
     {

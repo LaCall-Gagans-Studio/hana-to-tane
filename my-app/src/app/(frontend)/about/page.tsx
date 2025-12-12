@@ -7,7 +7,7 @@ import { FreeSchoolSummary } from './sections/freeschool_summary'
 import { PlayPark } from './sections/playpark'
 import { Events } from './sections/events'
 import { Overview } from './sections/overview'
-import { AboutStaff } from './sections/staff'
+import { AboutStaff } from '../sections/staff'
 
 export default async function AboutPage() {
   const payload = await getPayload({ config: configPromise })
@@ -34,7 +34,7 @@ export default async function AboutPage() {
       {/* Pass the summary data from Freeschool global */}
       <FreeSchoolSummary data={freeschoolData.summary} />
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <PlayPark description={aboutData.play_park_desc} />
+        <PlayPark />
         <Events />
       </div>
       <AboutStaff members={members.docs} />

@@ -61,7 +61,7 @@ export const Concept = ({ data }: ConceptProps) => {
   const hasFeatures = features && features.length > 0
 
   return (
-    <section className="py-24 bg-yellow relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-yellow relative overflow-hidden">
       {/* Main Image Background if available */}
       {mainImageUrl && (
         <div className="absolute inset-0 z-0">
@@ -83,10 +83,10 @@ export const Concept = ({ data }: ConceptProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-20"
         >
           <div className="inline-block relative mb-8">
-            <h2 className="text-4xl md:text-6xl font-black text-text tracking-tight relative z-10">
+            <h2 className="text-3xl md:text-6xl font-black text-text tracking-tight relative z-10">
               {title || 'はなとたねってどんなところ？'}
             </h2>
             <motion.span
@@ -182,9 +182,9 @@ export const Concept = ({ data }: ConceptProps) => {
                   variants={floatAnimation}
                   animate="animate"
                   custom={i}
-                  className={`px-8 py-4 ${
+                  className={`px-6 py-3 md:px-8 md:py-4 ${
                     act.color || 'bg-white'
-                  } text-text font-black text-lg rounded-full border-3 border-text shadow-hard transform hover:scale-110 transition-transform cursor-default relative z-10`}
+                  } text-text font-black text-base md:text-lg rounded-full border-3 border-text shadow-hard transform hover:scale-110 transition-transform cursor-default relative z-10`}
                   style={{
                     animationDelay: `${i * 0.5}s`,
                   }}

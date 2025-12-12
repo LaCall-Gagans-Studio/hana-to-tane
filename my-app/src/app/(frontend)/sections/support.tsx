@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 export const Support = () => {
   return (
-    <section id="support" className="py-24 bg-surface relative overflow-hidden">
+    <section id="support" className="py-12 md:py-24 bg-surface relative overflow-hidden">
       {/* Background Pattern - Subtle dots */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#a349a3_2px,transparent_2px)] bg-size-[30px_30px] pointer-events-none"></div>
 
       <div className="max-w-[1200px] mx-auto px-4 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="inline-block text-5xl font-black text-text bg-surface px-8 py-2 border-3 border-border shadow-hard relative">
+          <h2 className="inline-block text-3xl md:text-5xl font-black text-text bg-surface px-8 py-2 border-3 border-border shadow-hard relative">
             SUPPORT
             <span className="absolute -top-4 -right-4 text-4xl animate-bounce-slow">🎁</span>
           </h2>
@@ -18,9 +18,9 @@ export const Support = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-5xl mx-auto">
           {/* Donation / Supporting Member - Gift Box Theme */}
-          <div className="bg-white border-3 border-border rounded-3xl p-8 md:p-12 shadow-hard relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+          <div className="bg-white border-3 border-border rounded-3xl p-6 md:p-12 shadow-hard relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
             <div className="absolute top-0 left-0 w-full h-4 bg-purple/20"></div>
             <div className="absolute top-0 right-12 w-16 h-24 bg-purple/20 rounded-b-lg"></div>
 
@@ -29,7 +29,7 @@ export const Support = () => {
                 <span className="text-4xl text-white">💝</span>
               </div>
 
-              <h3 className="text-3xl font-black mb-4 text-purple tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-black mb-4 text-purple tracking-tight">
                 寄付・賛助会員
               </h3>
 
@@ -48,7 +48,7 @@ export const Support = () => {
           </div>
 
           {/* Recruit - Team Theme */}
-          <div className="bg-white border-3 border-border rounded-3xl p-8 md:p-12 shadow-hard relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+          <div className="bg-white border-3 border-border rounded-3xl p-6 md:p-12 shadow-hard relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-yellow/20 rounded-full blur-3xl translate-y-1/2 translate-x-1/2"></div>
 
             <div className="relative z-10 flex flex-col h-full">
@@ -56,7 +56,9 @@ export const Support = () => {
                 <span className="text-4xl text-text">🤝</span>
               </div>
 
-              <h3 className="text-3xl font-black mb-4 text-text tracking-tight">スタッフ募集</h3>
+              <h3 className="text-2xl md:text-3xl font-black mb-4 text-text tracking-tight">
+                スタッフ募集
+              </h3>
 
               <p className="text-lg font-medium text-gray-600 leading-relaxed mb-8 flex-grow">
                 私たちと一緒に活動してくれる仲間を募集しています。

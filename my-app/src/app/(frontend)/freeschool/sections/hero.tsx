@@ -34,7 +34,7 @@ export const Hero = ({ data, schoolName }: HeroProps) => {
   const line2 = nameParts.length > 1 ? nameParts.slice(1).join(' ') : null
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-blue/30 overflow-hidden pt-20 pb-32">
+    <section className="relative min-h-[90vh] flex items-center bg-blue/30 overflow-hidden pt-12 pb-16 md:pt-20 md:pb-32">
       {/* Abstract Background Shapes (Blobs) */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         {/* Subtle grid or texture pattern */}
@@ -64,8 +64,8 @@ export const Hero = ({ data, schoolName }: HeroProps) => {
               </svg>
 
               <h1 className="font-black text-text leading-tight drop-shadow-sm">
-                <span className="block text-4xl mb-2 text-blue-900">{catchphrase}</span>
-                <span className="block text-7xl text-blue drop-shadow-[4px_4px_0px_rgba(255,255,255,1)] stroke-text stroke-2">
+                <span className="block text-2xl md:text-4xl mb-2 text-blue-900">{catchphrase}</span>
+                <span className="block text-5xl md:text-7xl text-blue drop-shadow-[4px_4px_0px_rgba(255,255,255,1)] stroke-text stroke-2">
                   {displaySchoolName}
                 </span>
               </h1>
@@ -74,7 +74,7 @@ export const Hero = ({ data, schoolName }: HeroProps) => {
             {/* Description Bubble */}
             <div className="relative inline-block lg:block max-w-xl mx-auto lg:mx-0">
               <div className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border-dashed border-3 border-blue shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                <p className="text-lg md:text-xl font-bold text-gray-700 leading-relaxed font-handwriting whitespace-pre-wrap">
+                <p className="text-base md:text-xl font-bold text-gray-700 leading-relaxed font-handwriting whitespace-pre-wrap">
                   {descriptionText}
                 </p>
               </div>
@@ -82,7 +82,7 @@ export const Hero = ({ data, schoolName }: HeroProps) => {
           </div>
 
           {/* Right: Visual Area (Organic Image Mask) */}
-          <div className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
+          <div className="relative h-[300px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
             {/* Main Photo Blob Mask */}
             <div className="relative w-full h-full">
               {/* Organic Border/Frame */}
@@ -115,7 +115,7 @@ export const Hero = ({ data, schoolName }: HeroProps) => {
                   return (
                     <div
                       key={i}
-                      className={`absolute w-32 md:w-48 aspect-square z-20 rounded-full border-4 border-white shadow-lg overflow-hidden animate-float`}
+                      className={`absolute w-24 md:w-48 aspect-square z-20 rounded-full border-4 border-white shadow-lg overflow-hidden animate-float`}
                       style={{
                         top: i === 0 ? '-10%' : 'auto',
                         bottom: i === 1 ? '-5%' : 'auto',

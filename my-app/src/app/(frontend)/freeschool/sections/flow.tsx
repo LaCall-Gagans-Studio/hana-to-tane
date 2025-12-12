@@ -41,16 +41,16 @@ export const Flow = ({ data }: FlowProps) => {
   ]
 
   return (
-    <section className="py-24 bg-surface relative overflow-visible">
+    <section className="py-12 md:py-24 bg-surface relative overflow-visible">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-black text-text inline-block border-b-4 border-yellow pb-2 transform -rotate-1">
+        <div className="text-center mb-10 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-black text-text inline-block border-b-4 border-yellow pb-2 transform -rotate-1">
             FLOW
           </h2>
           <p className="mt-4 font-bold text-gray-500">入会までの流れ</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 lg:gap-8 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center lg:flex-row lg:justify-center gap-8 lg:gap-8 max-w-7xl mx-auto">
           {stepsToRender.map((s, i) => {
             const imageUrl =
               s.image && typeof s.image === 'object' && s.image.url

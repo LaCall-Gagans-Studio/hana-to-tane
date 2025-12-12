@@ -8,7 +8,7 @@ type StaffSectionProps = {
   members: Member[]
 }
 
-export const FreeSchoolStaff = ({ members }: StaffSectionProps) => {
+export const AboutStaff = ({ members }: StaffSectionProps) => {
   const [selectedStaff, setSelectedStaff] = useState<Member | null>(null)
 
   const staffMembers = members.filter((s) => s.type === 'staff' || !s.type)
@@ -150,12 +150,12 @@ export const FreeSchoolStaff = ({ members }: StaffSectionProps) => {
   )
 
   return (
-    <section className="py-24 bg-surface relative">
+    <section className="py-12 md:py-24 bg-surface relative">
       <div className="container mx-auto px-4">
         {/* Staff Section */}
         <div className="mb-24">
           <div className="text-center mb-12">
-            <h3 className="text-4xl font-black text-text inline-block border-b-4 border-yellow pb-2">
+            <h3 className="text-3xl md:text-4xl font-black text-text inline-block border-b-4 border-yellow pb-2">
               STAFF
             </h3>
             <p className="mt-4 font-semibold text-gray-500">スタッフ紹介</p>
@@ -167,7 +167,7 @@ export const FreeSchoolStaff = ({ members }: StaffSectionProps) => {
               <div
                 key={s.id}
                 onClick={() => setSelectedStaff(s)}
-                className={`bg-white p-8 rounded-3xl border-3 border-border shadow-hard cursor-pointer transform transition-all hover:-translate-y-2 hover:shadow-hard-lg ${
+                className={`bg-white p-6 md:p-8 rounded-3xl border-3 border-border shadow-hard cursor-pointer transform transition-all hover:-translate-y-2 hover:shadow-hard-lg ${
                   i % 2 === 0 ? '-rotate-1' : 'rotate-1'
                 } hover:rotate-0 h-full flex flex-col`}
               >

@@ -17,6 +17,8 @@ import { About } from './collections/About'
 import { Freeschool } from './collections/Freeschool'
 import { Event } from './collections/Event'
 
+import { Gallery } from './collections/Gallery'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -27,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Column, Member, Sponsor, Event],
+  collections: [Media, Column, Member, Sponsor, Event, Gallery, Users],
   globals: [About, Freeschool],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

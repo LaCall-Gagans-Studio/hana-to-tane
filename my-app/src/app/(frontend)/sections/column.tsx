@@ -21,11 +21,11 @@ export const Column = async () => {
   }
 
   return (
-    <section id="column" className="py-24 bg-surface relative">
+    <section id="column" className="py-12 md:py-24 bg-surface relative">
       <div className="max-w-[1200px] mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row items-end justify-between mb-8 md:mb-16 gap-6">
           <div>
-            <h2 className="text-6xl font-black text-text tracking-tighter mb-4 relative inline-block">
+            <h2 className="text-4xl md:text-6xl font-black text-text tracking-tighter mb-4 relative inline-block">
               COLUMN
               <span className="absolute -bottom-2 left-0 w-full h-4 bg-blue/30 -z-10 rounded-full"></span>
             </h2>

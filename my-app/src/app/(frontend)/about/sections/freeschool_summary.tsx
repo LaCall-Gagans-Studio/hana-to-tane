@@ -22,21 +22,21 @@ export const FreeSchoolSummary = ({ data }: FreeSchoolSummaryProps) => {
     visualImage && typeof visualImage === 'object' && visualImage.url ? visualImage.url : null
 
   return (
-    <section className="py-24 bg-blue relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-blue relative overflow-hidden">
       {/* Background Pattern - Grid Line */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-size-[40px_40px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="bg-white rounded-[40px] border-4 border-border shadow-hard-lg p-8 md:p-16 max-w-5xl mx-auto relative">
+        <div className="bg-white rounded-3xl md:rounded-[40px] border-4 border-border shadow-hard-lg p-6 md:p-16 max-w-5xl mx-auto relative">
           {/* Notebook Binding Effect */}
-          <div className="absolute top-0 left-8 md:left-16 w-4 h-16 bg-gray-300 rounded-b-lg border-2 border-border border-t-0"></div>
-          <div className="absolute top-0 right-8 md:right-16 w-4 h-16 bg-gray-300 rounded-b-lg border-2 border-border border-t-0"></div>
+          <div className="hidden md:block absolute top-0 left-8 md:left-16 w-4 h-16 bg-gray-300 rounded-b-lg border-2 border-border border-t-0"></div>
+          <div className="hidden md:block absolute top-0 right-8 md:right-16 w-4 h-16 bg-gray-300 rounded-b-lg border-2 border-border border-t-0"></div>
 
           <div className="text-center mb-16 mt-8">
             <span className="inline-block px-4 py-1 bg-blue text-white font-black rounded-full border-2 border-border mb-4 shadow-sm">
               FREE SCHOOL
             </span>
-            <h1 className="text-4xl md:text-6xl font-black text-text mb-8 tracking-tight">
+            <h1 className="text-3xl md:text-6xl font-black text-text mb-8 tracking-tight">
               森の子がっこう{' '}
               <span className="text-blue inline-block transform -rotate-2">いっぽ</span>
             </h1>
@@ -79,7 +79,7 @@ export const FreeSchoolSummary = ({ data }: FreeSchoolSummaryProps) => {
             </p>
           </div>
 
-          <div className="bg-yellow/10 rounded-3xl p-8 md:p-12 border-3 border-border border-dashed mb-16 relative">
+          <div className="bg-yellow/10 rounded-3xl p-6 md:p-12 border-3 border-border border-dashed mb-16 relative">
             <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-yellow px-6 py-2 rounded-full border-3 border-border shadow-sm">
               <h4 className="font-black text-text">{importantPointsTitle || '大切にしたいこと'}</h4>
             </div>
@@ -105,7 +105,9 @@ export const FreeSchoolSummary = ({ data }: FreeSchoolSummaryProps) => {
           {/* Dialogue */}
           <div className="max-w-3xl mx-auto grid gap-6 mb-12">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-pink rounded-full border-2 border-border flex-shrink-0"></div>
+              <div className="w-12 h-12 bg-white rounded-full border-2 border-border flex-shrink-0 shadow-sm flex items-center justify-center text-xl">
+                🌸
+              </div>
               <div className="bg-gray-50 px-6 py-3 rounded-2xl border-2 border-border shadow-sm">
                 <p className="font-bold text-sm md:text-base whitespace-pre-wrap">
                   {dialogueLeft ||
@@ -114,7 +116,9 @@ export const FreeSchoolSummary = ({ data }: FreeSchoolSummaryProps) => {
               </div>
             </div>
             <div className="flex items-center gap-4 flex-row-reverse">
-              <div className="w-12 h-12 bg-blue rounded-full border-2 border-border flex-shrink-0"></div>
+              <div className="w-12 h-12 bg-blue rounded-full border-2 border-border flex-shrink-0 shadow-sm flex items-center justify-center text-xl">
+                🌱
+              </div>
               <div className="bg-gray-50 px-6 py-3 rounded-2xl border-2 border-border shadow-sm">
                 <p className="font-bold text-sm md:text-base whitespace-pre-wrap">
                   {dialogueRight || '詳しくは下のボタンをタップしてお問い合わせください。'}

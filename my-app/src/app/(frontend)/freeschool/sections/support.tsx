@@ -11,7 +11,7 @@ export const Support = ({ data }: SupportProps) => {
   if (!data) return null
 
   return (
-    <section className="py-24 bg-surface relative overflow-visible">
+    <section className="py-12 md:py-24 bg-surface relative overflow-visible">
       {/* Wave Separator Top - simulating organic feel */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
         <svg
@@ -26,14 +26,14 @@ export const Support = ({ data }: SupportProps) => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-text mb-4">SUPPORT SYSTEM</h2>
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-black text-text mb-4">SUPPORT SYSTEM</h2>
           <p className="font-semibold text-gray-500">安心して過ごせるサポート体制</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Learning Support */}
-          <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border-2 border-green/30 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow">
+          <div className="bg-white rounded-3xl md:rounded-[2.5rem] p-6 md:p-10 border-2 border-green/30 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow">
             <div className="absolute top-0 right-0 w-32 h-32 bg-lime/20 rounded-bl-[100%] transition-transform group-hover:scale-110 origin-top-right"></div>
 
             <h3 className="text-2xl font-black text-text mb-6 flex items-center gap-3 relative z-10">
@@ -49,7 +49,7 @@ export const Support = ({ data }: SupportProps) => {
           </div>
 
           {/* School Relations */}
-          <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border-2 border-blue/30 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow">
+          <div className="bg-white rounded-3xl md:rounded-[2.5rem] p-6 md:p-10 border-2 border-blue/30 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow">
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue/20 rounded-bl-[100%] transition-transform group-hover:scale-110 origin-top-right"></div>
 
             <h3 className="text-2xl font-black text-text mb-6 flex items-center gap-3 relative z-10">

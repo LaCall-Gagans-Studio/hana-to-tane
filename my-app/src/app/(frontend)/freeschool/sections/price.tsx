@@ -30,7 +30,7 @@ export const Price = ({ data }: PriceProps) => {
   const annotation = data?.annotation
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#f0f4f8]">
+    <section className="py-12 md:py-24 relative overflow-hidden bg-[#f0f4f8]">
       {/* Graph Paper Background */}
       <div
         className="absolute inset-0 z-0"
@@ -43,7 +43,7 @@ export const Price = ({ data }: PriceProps) => {
       ></div>
 
       {/* Stationery Decorations */}
-      <div className="absolute top-10 -left-8 w-64 h-64 rotate-12 z-0 pointer-events-none opacity-80">
+      <div className="absolute top-10 -left-8 w-32 h-32 md:w-64 md:h-64 rotate-12 z-0 pointer-events-none opacity-80">
         <Image
           src="https://media.istockphoto.com/id/2196102714/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E9%89%9B%E7%AD%86%E3%81%A8%E7%99%BD%E7%B4%99%E3%82%92%E6%8C%81%E3%81%A4%E6%89%8B.jpg?s=612x612&w=0&k=20&c=ycac4aELqzFTekQA6G-FmpZmoxHag3H0Ti-JiLyTu90="
           alt="Pencil"
@@ -51,7 +51,7 @@ export const Price = ({ data }: PriceProps) => {
           className="object-contain"
         />
       </div>
-      <div className="absolute bottom-10 -right-4 w-64 h-64 -rotate-12 z-0 pointer-events-none opacity-80">
+      <div className="absolute bottom-10 -right-4 w-32 h-32 md:w-64 md:h-64 -rotate-12 z-0 pointer-events-none opacity-80">
         <Image
           src="https://media.istockphoto.com/id/1446110460/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E5%AE%BF%E9%A1%8C%E3%82%92%E3%81%99%E3%82%8B%E6%97%A5%E6%9C%AC%E3%81%AE%E5%B0%8F%E5%AD%A6%E7%94%9F.jpg?s=612x612&w=0&k=20&c=qZhOvp_UzoGFEN4Ze7-nn79pOPV18yhSEd_7-R1CbI8="
           alt="Eraser"
@@ -61,12 +61,12 @@ export const Price = ({ data }: PriceProps) => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 relative">
-          <h2 className="text-5xl font-black text-text mb-2 tracking-tight">PRICE</h2>
+        <div className="text-center mb-8 md:mb-16 relative">
+          <h2 className="text-3xl md:text-5xl font-black text-text mb-2 tracking-tight">PRICE</h2>
           <p className="font-bold text-gray-400">ご利用料金</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto mb-8 md:mb-16">
           {plans.map((plan, i) => {
             const isBlue = plan.themeColor === 'blue' || (!plan.themeColor && i === 0)
             const colorClass = isBlue ? 'blue' : 'pink'

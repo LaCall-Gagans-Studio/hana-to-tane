@@ -12,6 +12,7 @@ export const Member: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'role'],
+    group: 'サイトコンテンツ',
   },
   fields: [
     {

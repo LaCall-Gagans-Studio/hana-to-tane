@@ -1,45 +1,153 @@
-import React from 'react'
+'use client'
+
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { Menu, X, Info, Newspaper, Calendar, GraduationCap, BookOpen } from 'lucide-react'
+
+// Navigation Items
+const NAV_ITEMS = [
+  { label: 'はなとたねとは？', href: '/about', icon: Info, color: 'text-pink' },
+  { label: 'ニュース', href: '/#news', icon: Newspaper, color: 'text-blue' },
+  { label: 'イベント', href: '/event', icon: Calendar, color: 'text-yellow' },
+  {
+    label: '認定フリースクールいっぽ',
+    href: '/freeschool',
+    icon: GraduationCap,
+    color: 'text-green',
+  },
+  { label: 'はなたね図書館', href: '/column', icon: BookOpen, color: 'text-purple' },
+]
 
 export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
+
   return (
-    <header className="sticky top-0 z-50 bg-surface border-b-3 border-border">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/" className="group relative">
-          <div className="text-3xl font-black tracking-tighter transform group-hover:scale-105 transition-transform duration-300">
-            <span className="text-text drop-shadow-[2px_2px_0px_var(--color-yellow)]">はな</span>
-            <span className="text-green inline-block transform -rotate-12 mx-0.5">と</span>
-            <span className="text-text drop-shadow-[2px_2px_0px_var(--color-yellow)]">たね</span>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/80 backdrop-blur-md py-2 shadow-sm' : 'bg-transparent py-4'
+      }`}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* Logo Section */}
+        <Link href="/" className="flex items-center gap-3 group relative z-50">
+          <div className="relative w-[50px] h-[50px] bg-white rounded-full border-2 border-border flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform overflow-hidden">
+            <Image
+              src="/logo.png"
+              alt="はなとたね Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
           </div>
+          <span
+            className={`text-xl font-black text-text tracking-tight ${scrolled ? 'opacity-100' : 'opacity-0 md:opacity-100'} transition-opacity`}
+          >
+            はなとたね
+          </span>
         </Link>
-        <nav>
-          <ul className="flex gap-2 md:gap-6 items-center list-none m-0 p-0">
-            {[
-              { label: 'はなとたねとは？', href: '/about' },
-              { label: 'ニュース', href: '/#news' },
-              { label: 'イベントカレンダー', href: '/#calendar' },
-              { label: '認定フリースクールいっぽ', href: '/freeschool' },
-              { label: 'はなたね図書館', href: '/column' },
-            ].map((item) => (
-              <li key={item.label} className="hidden md:block">
-                <Link
-                  href={item.href}
-                  className="font-bold uppercase text-sm tracking-wide border-b-4 border-transparent hover:border-lime hover:-translate-y-1 transition-all duration-300 inline-block"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-2">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon
+            return (
               <Link
-                href="/#support"
-                className="inline-block px-6 py-2 bg-yellow text-text font-black text-sm rounded-full border-2 border-border shadow-hard hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all rotate-2 hover:rotate-0"
+                key={item.href}
+                href={item.href}
+                className="text-base font-black text-gray-700 hover:text-text hover:bg-white/50 px-4 py-2 rounded-full transition-all flex items-center gap-2"
               >
-                JOIN US!
+                <Icon size={20} className={item.color} />
+                {item.label}
               </Link>
-            </li>
-          </ul>
+            )
+          })}
+          <Link
+            href="/join"
+            className="ml-4 px-6 py-2 bg-blue text-white text-lg font-black rounded-full border-2 border-transparent hover:border-black hover:bg-yellow hover:text-text transition-all shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+          >
+            JOIN US!
+          </Link>
         </nav>
+
+        {/* Mobile Menu Trigger */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden relative z-50 p-2 text-text hover:bg-gray-100 rounded-full transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 bg-yellow z-40 flex flex-col justify-center items-center transition-all duration-300 ease-in-out ${
+            isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          }`}
+        >
+          {/* Background Pattern */}
+          <div
+            className="absolute inset-0 opacity-10 pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(#000 2px, transparent 2px)',
+              backgroundSize: '24px 24px',
+            }}
+          ></div>
+
+          <nav className="relative z-50 flex flex-col gap-8 w-full max-w-sm px-8">
+            {NAV_ITEMS.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`flex items-center gap-4 text-2xl font-black text-text hover:scale-105 transition-transform group`}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                >
+                  <div
+                    className={`p-2 bg-white rounded-full border-2 border-black shadow-sm group-hover:bg-opacity-80`}
+                  >
+                    <Icon size={24} className={item.color} />
+                  </div>
+                  <span className="border-b-4 border-transparent group-hover:border-black transition-colors">
+                    {item.label}
+                  </span>
+                </Link>
+              )
+            })}
+
+            <Link
+              href="/join"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-8 w-full bg-blue text-white text-xl font-black text-center py-4 rounded-full border-3 border-black shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+            >
+              JOIN US!
+            </Link>
+          </nav>
+        </div>
       </div>
     </header>
   )

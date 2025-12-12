@@ -3,14 +3,15 @@ import { CollectionConfig } from 'payload'
 export const Sponsor: CollectionConfig = {
   slug: 'sponsors',
   labels: {
-    singular: 'Sponsor',
-    plural: 'Sponsors',
+    singular: 'スポンサー',
+    plural: 'スポンサー',
   },
   access: {
     read: () => true,
   },
   admin: {
     useAsTitle: 'name',
+    group: 'サイトコンテンツ',
   },
   fields: [
     {

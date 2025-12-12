@@ -12,14 +12,14 @@ export const Message = ({ data }: MessageProps) => {
     data?.image && typeof data.image === 'object' && data.image.url ? data.image.url : null
 
   return (
-    <section className="py-24 bg-pink relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-pink relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_3px,transparent_3px)] bg-size-[20px_20px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="bg-white rounded-[3rem] border-4 border-border shadow-hard-lg p-8 md:p-16 max-w-4xl mx-auto relative overflow-visible">
+        <div className="bg-white rounded-3xl md:rounded-[3rem] border-4 border-border shadow-hard-lg p-6 pt-16 md:p-16 max-w-4xl mx-auto relative overflow-visible">
           {/* Photo in Hand-drawn Speech Bubble (Absolute position on top right or overlapping) */}
-          <div className="absolute -top-16 right-8 md:-right-8 w-40 h-40 md:w-56 md:h-56 z-20 drop-shadow-lg transform rotate-6">
+          <div className="absolute -top-12 right-1/2 translate-x-1/2 md:translate-x-0 md:-top-16 md:right-8 md:-right-8 w-32 h-32 md:w-56 md:h-56 z-20 drop-shadow-lg transform rotate-6">
             <div className="relative w-full h-full">
               {/*  Hand-drawn bubble shape using Border Radius tricks */}
               <div className="absolute inset-0 bg-white border-4 border-black rounded-[40%_60%_70%_30%/50%_60%_30%_60%] overflow-hidden z-10">

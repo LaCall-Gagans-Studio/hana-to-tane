@@ -11,9 +11,9 @@ export const News = () => {
   const bannerImages = ['bg-pink', 'bg-blue', 'bg-yellow', 'bg-lime', 'bg-purple']
 
   return (
-    <section id="news" className="bg-surface relative overflow-hidden pb-24">
+    <section id="news" className="bg-surface relative overflow-hidden pb-12 md:pb-24">
       {/* Infinite Scroll Banner */}
-      <div className="w-full overflow-hidden bg-white border-border mb-24 py-4">
+      <div className="w-full overflow-hidden bg-white border-border mb-12 md:mb-24 py-4">
         <div className="flex animate-infinite-scroll w-[200%]">
           {/* First set of images */}
           <div className="flex w-1/2 justify-around gap-4 px-4">
@@ -45,7 +45,7 @@ export const News = () => {
 
       <div className="max-w-[1200px] mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="inline-block text-5xl font-black text-text bg-yellow px-8 py-2 border-3 border-border shadow-hard transform hover:scale-105 transition-transform">
+          <h2 className="inline-block text-3xl md:text-5xl font-black text-text bg-yellow px-8 py-2 border-3 border-border shadow-hard transform hover:scale-105 transition-transform">
             NEWS & TOPICS
           </h2>
         </div>

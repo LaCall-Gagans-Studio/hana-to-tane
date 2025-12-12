@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const Footer = () => {
   return (
-    <footer className="relative mt-32 bg-blue text-surface pt-32 pb-16 overflow-hidden">
+    <footer className="relative mt-16 md:mt-32 bg-blue text-surface pt-16 md:pt-32 pb-12 md:pb-16 overflow-hidden">
       {/* Wavy Top Border */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
         <svg
@@ -24,7 +24,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
           {/* Logo & Address */}
           <div className="flex-1">
-            <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter">
+            <h3 className="text-3xl md:text-5xl font-black mb-6 tracking-tighter">
               <span className="text-yellow drop-shadow-[4px_4px_0px_var(--color-purple)]">
                 NPO HANA TO TANE
               </span>
@@ -67,9 +67,9 @@ export const Footer = () => {
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="w-14 h-14 bg-surface rounded-2xl border-3 border-transparent hover:border-lime flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer group shadow-hard hover:shadow-hard-lg"
+                  className="w-12 h-12 md:w-14 md:h-14 bg-surface rounded-2xl border-3 border-transparent hover:border-lime flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer group shadow-hard hover:shadow-hard-lg"
                 >
-                  <div className="w-8 h-8 bg-text rounded-full opacity-20 group-hover:bg-lime group-hover:opacity-100 transition-colors"></div>
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-text rounded-full opacity-20 group-hover:bg-lime group-hover:opacity-100 transition-colors"></div>
                 </div>
               ))}
             </div>

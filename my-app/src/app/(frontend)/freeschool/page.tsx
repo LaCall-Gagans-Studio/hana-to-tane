@@ -6,7 +6,7 @@ import { Features } from './sections/features'
 import { Flow } from './sections/flow'
 import { Price } from './sections/price'
 import { About } from './sections/about'
-import { FreeSchoolStaff } from './sections/staff'
+import { AboutStaff } from '../sections/staff'
 import { Message } from './sections/message'
 import { Schedule } from './sections/schedule'
 import { Merit } from './sections/merit'
@@ -19,9 +19,6 @@ export default async function FreeSchoolPage() {
     slug: 'freeschool',
   })
 
-  // Fetch all members, sorted by creation or a specific order if available
-  // We'll filter for visual consistency in the component if needed,
-  // but usually we want all staff members.
   const membersData = await payload.find({
     collection: 'members',
     limit: 100,
@@ -38,8 +35,7 @@ export default async function FreeSchoolPage() {
       <Schedule data={freeschoolData.schedule} />
       <Price data={freeschoolData.price} />
       <Flow data={freeschoolData.flow} />
-      {/* Pass members docs to the Staff component */}
-      <FreeSchoolStaff members={membersData.docs} />
+      <AboutStaff members={membersData.docs} />
       <Message data={freeschoolData.message} />
     </main>
   )

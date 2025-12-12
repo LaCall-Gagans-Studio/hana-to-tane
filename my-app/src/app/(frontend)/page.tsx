@@ -15,6 +15,10 @@ export default async function Page() {
     slug: 'about',
   })
 
+  const freeschoolData = await payload.findGlobal({
+    slug: 'freeschool',
+  })
+
   const members = await payload.find({
     collection: 'members',
     sort: 'createdAt',
@@ -38,7 +42,12 @@ export default async function Page() {
       <Hero />
       <News />
       <Calendar events={events.docs} />
-      <About aboutData={aboutData} members={members.docs} sponsors={sponsors.docs} />
+      <About
+        aboutData={aboutData}
+        freeschoolData={freeschoolData}
+        members={members.docs}
+        sponsors={sponsors.docs}
+      />
       <Support />
       <Column />
     </div>

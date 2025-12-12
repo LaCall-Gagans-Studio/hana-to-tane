@@ -19,10 +19,10 @@ export const Schedule = ({ data }: ScheduleProps) => {
     data?.image && typeof data.image === 'object' && data.image.url ? data.image.url : null
 
   return (
-    <section className="py-16 bg-surface relative overflow-visible">
+    <section className="py-12 md:py-16 bg-surface relative overflow-visible">
       <div className="container mx-auto px-4">
         {/* Blackboard Container */}
-        <div className="bg-[#2d3748] rounded-4xl border-8 border-[#8b5a2b] shadow-2xl p-6 md:p-10 max-w-4xl mx-auto relative overflow-hidden">
+        <div className="bg-[#2d3748] rounded-3xl md:rounded-4xl border-8 border-[#8b5a2b] shadow-2xl p-6 md:p-10 max-w-4xl mx-auto relative overflow-hidden">
           {/* Chalk Dust Texture */}
           <div className="absolute inset-0 opacity-20 pointer-events-none bg-noise mix-blend-overlay"></div>
           <div
@@ -35,7 +35,7 @@ export const Schedule = ({ data }: ScheduleProps) => {
           {/* Chalk piece */}
           <div className="text-center mb-10 relative z-10">
             <h2
-              className="text-4xl md:text-5xl font-black text-white/90 mb-2 font-handwriting tracking-wide"
+              className="text-3xl md:text-5xl font-black text-white/90 mb-2 font-handwriting tracking-wide"
               style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.3)' }}
             >
               DAILY SCHEDULE

@@ -18,22 +18,22 @@ export const About = ({ data }: AboutProps) => {
   const img2 = images[1] ? getImageUrl(images[1].image) : '/images/freeschool/about-interior-2.jpg'
   const img3 = images[2] ? getImageUrl(images[2].image) : '/images/freeschool/about-interior-3.jpg'
   return (
-    <section className="py-24 bg-surface relative">
+    <section className="py-12 md:py-24 bg-surface relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-blue tracking-tight mb-2 uppercase">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-black text-blue tracking-tight mb-2 uppercase">
             WHAT IS IPPO?
           </h2>
           <p className="font-bold text-gray-400">いっぽについて</p>
         </div>
-        <div className="bg-white rounded-[3rem] border-3 border-border shadow-hard-lg p-8 md:p-12 max-w-5xl mx-auto relative overflow-hidden backdrop-blur-sm">
+        <div className="bg-white rounded-3xl md:rounded-[3rem] border-3 border-border shadow-hard-lg p-6 md:p-12 max-w-5xl mx-auto relative overflow-hidden backdrop-blur-sm">
           {/* Decorative Tape */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow/80 rotate-1 shadow-sm z-20"></div>
           {/* Background Collage Photos (Absolute positioning around text) */}
-          <div className="absolute top-0 left-0 w-32 h-32 md:w-48 md:h-48 -translate-x-1/4 -translate-y-1/4 z-0 opacity-80 rotate-[-10deg] border-4 border-white shadow-lg rounded-xl overflow-hidden">
+          <div className="absolute top-0 left-0 w-24 h-24 md:w-48 md:h-48 -translate-x-1/4 -translate-y-1/4 z-0 opacity-80 rotate-[-10deg] border-4 border-white shadow-lg rounded-xl overflow-hidden">
             {img1 && <Image src={img1} alt="Interior 1" fill className="object-cover" />}
           </div>
-          <div className="absolute bottom-0 right-0 w-40 h-40 md:w-56 md:h-56 translate-x-1/4 translate-y-1/4 z-0 opacity-80 rotate-[5deg] border-4 border-white shadow-lg rounded-xl overflow-hidden">
+          <div className="absolute bottom-0 right-0 w-32 h-32 md:w-56 md:h-56 translate-x-1/4 translate-y-1/4 z-0 opacity-80 rotate-[5deg] border-4 border-white shadow-lg rounded-xl overflow-hidden">
             {img2 && <Image src={img2} alt="Interior 2" fill className="object-cover" />}
           </div>
           <div className="hidden md:block absolute top-[20%] -right-8 w-32 h-32 z-0 opacity-80 rotate-[15deg] border-4 border-white shadow-lg rounded-xl overflow-hidden">

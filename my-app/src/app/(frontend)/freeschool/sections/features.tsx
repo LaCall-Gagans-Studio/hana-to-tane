@@ -9,15 +9,8 @@ type FeaturesProps = {
 const ROTATIONS = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-1']
 
 export const Features = ({ data }: FeaturesProps) => {
-  // Use CMS data if available, otherwise fallback (or empty)
-  // Since we want to migrate, we can remove fallback eventually,
-  // but for now let's keep the hardcoded one only if data is absolutely missing.
-  // Actually, standard practice is to just render data. If data is [], render nothing.
-
-  const featuresToRender = data || []
-
   return (
-    <section className="py-24 bg-surface relative overflow-visible">
+    <section className="py-12 md:py-24 bg-surface relative overflow-visible">
       {/* Wood Texture Background or Tablecloth Pattern could be nice here, keeping subtle for now but adding texture */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -25,18 +18,18 @@ export const Features = ({ data }: FeaturesProps) => {
       ></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-20 relative">
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl md:text-9xl font-black text-gray-100 -z-10 select-none">
+        <div className="text-center mb-10 md:mb-20 relative">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl md:text-9xl font-black text-gray-100 -z-10 select-none">
             FEATURES
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-text mb-2 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-text mb-2 tracking-tight">
             いっぽの特徴
           </h2>
           <div className="w-24 h-2 bg-yellow mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto perspective-[1000px]">
-          {featuresToRender.map((f, i) => {
+          {data?.map((f, i) => {
             const imageUrl =
               f.image && typeof f.image === 'object' && f.image.url
                 ? f.image.url
@@ -88,11 +81,6 @@ export const Features = ({ data }: FeaturesProps) => {
                     {f.description}
                   </p>
                 </div>
-
-                {/* Handwritten Note Effect (Bottom Right) */}
-                {/* <div className="absolute -bottom-2 -right-2 transform rotate-3">
-                    <span className="text-4xl opacity-10">Use SVG Here?</span>
-                </div> */}
               </div>
             )
           })}

@@ -5,6 +5,13 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: '更新コンテンツ',
+  },
+  labels: {
+    singular: 'メディア',
+    plural: 'メディア',
+  },
   fields: [
     {
       name: 'alt',

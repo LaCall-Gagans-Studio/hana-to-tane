@@ -9,6 +9,7 @@ export const Column: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedDate', 'updatedAt'],
+    group: '更新コンテンツ',
   },
   access: {
     read: () => true,

@@ -8,7 +8,7 @@ import { HeroFlower } from './hero-flower'
 
 export const Hero = () => {
   return (
-    <section className="bg-surface py-16 md:py-32 text-center border-b-4 border-border mb-32 relative overflow-hidden">
+    <section className="bg-surface py-12 md:py-32 text-center border-b-4 border-border mb-16 md:mb-32 relative overflow-hidden">
       {/* Dynamic Background Pattern */}
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#f1f100_4px,transparent_4px)] bg-size-[30px_30px] -z-10"></div>
 
@@ -68,7 +68,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="text-[4rem] md:text-[6rem] lg:text-[7rem] font-black text-text mb-8 leading-[0.9] tracking-wide drop-shadow-xl"
+              className="text-[3.5rem] md:text-[6rem] lg:text-[7rem] font-black text-text mb-8 leading-[0.9] tracking-wide drop-shadow-xl"
             >
               <span className="block hover:scale-105 transition-transform duration-500 cursor-default">
                 <h1 className="text-2xl ml-2 text-surface mb-1">
@@ -103,18 +103,18 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-col md:flex-row gap-6 justify-center xl:justify-start mt-4 mb-4"
+              className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center xl:justify-start mt-4 mb-4"
             >
               <Link
                 href="#about"
-                className="group relative inline-block px-8 py-4 bg-[#cfed75] text-text border-3 border-border rounded-2xl font-black text-xl shadow-hard transition-all hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-0 active:shadow-hard"
+                className="group relative inline-block px-8 py-4 bg-[#cfed75] text-text border-3 border-border rounded-2xl font-black text-lg md:text-xl shadow-hard transition-all hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-0 active:shadow-hard"
               >
                 <span className="relative z-10">はなとたねについて</span>
                 <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
               <Link
                 href="#calendar"
-                className="group relative inline-block px-8 py-4 bg-yellow text-text border-3 border-border rounded-2xl font-black text-xl shadow-hard transition-all hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-0 active:shadow-hard"
+                className="group relative inline-block px-8 py-4 bg-yellow text-text border-3 border-border rounded-2xl font-black text-lg md:text-xl shadow-hard transition-all hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-0 active:shadow-hard"
               >
                 <span className="relative z-10">イベントを見る</span>
                 <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>

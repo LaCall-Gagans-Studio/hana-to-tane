@@ -10,13 +10,13 @@ type IntroProps = {
 
 export const Intro = ({ message, representatives = [] }: IntroProps) => {
   return (
-    <section className="py-24 bg-surface relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-surface relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#a349a3_2px,transparent_2px)] bg-size-[20px_20px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h1 className="inline-block text-6xl md:text-7xl font-black text-text mb-6 relative tracking-tighter">
+          <h1 className="inline-block text-4xl md:text-7xl font-black text-text mb-6 relative tracking-tighter">
             ABOUT US
             <span className="absolute -bottom-2 left-0 w-full h-4 bg-pink/50 -z-10 rounded-full rotate-1"></span>
           </h1>
@@ -30,7 +30,7 @@ export const Intro = ({ message, representatives = [] }: IntroProps) => {
             representatives.slice(0, 2).map((rep, index) => (
               <div
                 key={rep.id}
-                className={`bg-white p-8 rounded-3xl border-3 border-border shadow-hard transform ${
+                className={`bg-white p-6 md:p-8 rounded-3xl border-3 border-border shadow-hard transform ${
                   index % 2 === 0 ? '-rotate-1' : 'rotate-1'
                 } hover:rotate-0 transition-transform duration-300 relative group`}
               >
@@ -73,8 +73,8 @@ export const Intro = ({ message, representatives = [] }: IntroProps) => {
         {/* Message Section */}
         {message && (
           <div className="mt-20 max-w-3xl mx-auto text-center">
-            <div className="bg-white/50 backdrop-blur-sm p-8 rounded-3xl border-2 border-border/50">
-              <div className="text-3xl font-black text-text leading-relaxed">
+            <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl border-2 border-border/50">
+              <div className="text-lg md:text-3xl font-black text-text leading-relaxed">
                 <RichText data={message} />
               </div>
             </div>

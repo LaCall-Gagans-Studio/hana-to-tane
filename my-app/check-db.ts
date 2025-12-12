@@ -20,7 +20,7 @@ async function testConnection() {
 
     client.release()
     await pool.end()
-  } catch (err) {
+  } catch (err: any) {
     console.error('Connection failed!')
     console.error('Error name:', err.name)
     console.error('Error message:', err.message)

@@ -2,9 +2,12 @@ import { GlobalConfig } from 'payload'
 
 export const About: GlobalConfig = {
   slug: 'about',
-  label: 'About Us (Global)',
+  label: '団体概要',
   access: {
     read: () => true,
+  },
+  admin: {
+    group: 'サイトコンテンツ',
   },
   fields: [
     {
@@ -31,21 +34,7 @@ export const About: GlobalConfig = {
             },
           ],
         },
-        {
-          label: '活動内容',
-          fields: [
-            {
-              name: 'free_school_desc',
-              label: 'フリースクール説明',
-              type: 'textarea',
-            },
-            {
-              name: 'play_park_desc',
-              label: 'プレーパーク説明',
-              type: 'textarea',
-            },
-          ],
-        },
+
         {
           label: 'コンセプト',
           fields: [

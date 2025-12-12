@@ -6,6 +6,9 @@ export const Freeschool: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: 'サイトコンテンツ',
+  },
   fields: [
     {
       type: 'tabs',
@@ -35,6 +38,11 @@ export const Freeschool: GlobalConfig = {
                   label: '導入タイトル',
                   type: 'text',
                   defaultValue: 'ここからはじまる一歩',
+                },
+                {
+                  name: 'free_school_desc',
+                  label: 'フリースクールの説明',
+                  type: 'textarea',
                 },
                 {
                   name: 'description',
