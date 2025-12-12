@@ -1,11 +1,15 @@
 import React from 'react'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import Link from 'next/link'
 
-export const News = () => {
-  const newsItems = [
-    { date: '2024.05.20', title: 'はなたね文化祭の開催が決定しました！', category: 'EVENT' },
-    { date: '2024.05.15', title: 'フリースクールの見学会を実施します', category: 'INFO' },
-    { date: '2024.05.01', title: '5月のたねラボの予定を更新しました', category: 'INFO' },
-  ]
+export const News = async () => {
+  const payload = await getPayload({ config: configPromise })
+  const newsData = await payload.find({
+    collection: 'news',
+    limit: 3,
+    sort: '-publishedDate',
+  })
 
   // Placeholder images for the banner
   const bannerImages = ['bg-pink', 'bg-blue', 'bg-yellow', 'bg-lime', 'bg-purple']
@@ -50,41 +54,67 @@ export const News = () => {
           </h2>
         </div>
         <div className="flex flex-col gap-6 max-w-[800px] mx-auto">
-          {newsItems.map((item, index) => (
-            <div
-              key={index}
-              className={`group relative bg-surface border-3 border-border rounded-xl p-6 transition-all hover:-translate-y-1 hover:shadow-hard-lg flex flex-col md:flex-row items-start md:items-center gap-4`}
-            >
-              {/* Ticket holes effect */}
-              <div className="absolute left-[-10px] top-1/2 -translate-y-1/2 w-5 h-5 bg-surface border-r-3 border-border rounded-full"></div>
-              <div className="absolute right-[-10px] top-1/2 -translate-y-1/2 w-5 h-5 bg-surface border-l-3 border-border rounded-full"></div>
+          {newsData.docs.length === 0 ? (
+            <p className="text-center font-bold text-gray-500">ニュースはまだありません。</p>
+          ) : (
+            newsData.docs.map((item, index) => (
+              <div
+                key={index}
+                className={`group relative bg-surface border-3 border-border rounded-xl p-6 transition-all hover:-translate-y-1 hover:shadow-hard-lg flex flex-col md:flex-row items-start md:items-center gap-4`}
+              >
+                {/* Ticket holes effect */}
+                <div className="absolute left-[-10px] top-1/2 -translate-y-1/2 w-5 h-5 bg-surface border-r-3 border-border rounded-full"></div>
+                <div className="absolute right-[-10px] top-1/2 -translate-y-1/2 w-5 h-5 bg-surface border-l-3 border-border rounded-full"></div>
 
-              <div className="flex items-center gap-4 w-full md:w-auto">
-                <span className="text-lg font-black text-text border-b-4 border-lime">
-                  {item.date}
-                </span>
-                <span
-                  className={`px-4 py-1 rounded-full text-sm font-black border-2 border-text shadow-sm ${item.category === 'EVENT' ? 'bg-pink text-text' : 'bg-blue text-text'}`}
-                >
-                  {item.category}
-                </span>
+                <div className="flex items-center gap-4 w-full md:w-auto min-w-[200px]">
+                  <span className="text-lg font-black text-text border-b-4 border-lime">
+                    {new Date(item.publishedDate).toLocaleDateString('ja-JP')}
+                  </span>
+                  <span
+                    className={`px-4 py-1 rounded-full text-sm font-black border-2 border-text shadow-sm ${
+                      item.category === 'EVENT'
+                        ? 'bg-pink text-text'
+                        : item.category === 'REPORT'
+                          ? 'bg-green text-white'
+                          : 'bg-blue text-text'
+                    }`}
+                  >
+                    {item.category}
+                  </span>
+                </div>
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    className="flex-1 flex items-center gap-4 group-hover:text-purple transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="font-bold text-lg line-clamp-1 flex-1">{item.title}</span>
+                    <span className="hidden md:block text-2xl font-black text-lime group-hover:translate-x-2 transition-transform">
+                      &rarr;
+                    </span>
+                  </a>
+                ) : (
+                  <>
+                    <span className="font-bold text-lg flex-1 group-hover:text-purple transition-colors line-clamp-1">
+                      {item.title}
+                    </span>
+                    <span className="hidden md:block text-2xl font-black text-lime group-hover:translate-x-2 transition-transform opacity-30">
+                      &rarr;
+                    </span>
+                  </>
+                )}
               </div>
-              <span className="font-bold text-lg flex-1 group-hover:text-purple transition-colors">
-                {item.title}
-              </span>
-              <span className="hidden md:block text-2xl font-black text-lime group-hover:translate-x-2 transition-transform">
-                &rarr;
-              </span>
-            </div>
-          ))}
+            ))
+          )}
         </div>
         <div className="text-center mt-16">
-          <a
-            href="#"
+          <Link
+            href="/news"
             className="inline-block px-10 py-4 bg-blue text-text border-3 border-border rounded-full font-black text-xl uppercase tracking-widest shadow-hard transition-all hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-1 active:shadow-none"
           >
             VIEW ALL NEWS
-          </a>
+          </Link>
         </div>
       </div>
     </section>

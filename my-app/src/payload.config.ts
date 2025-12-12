@@ -8,6 +8,9 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { Plants } from './collections/Plants'
+import { News } from './collections/News'
+
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Column } from './collections/Column'
@@ -29,7 +32,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Media, Column, Member, Sponsor, Event, Gallery, Users],
+  collections: [Media, Column, Member, Sponsor, Event, Gallery, Users, Plants, News],
   globals: [About, Freeschool],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

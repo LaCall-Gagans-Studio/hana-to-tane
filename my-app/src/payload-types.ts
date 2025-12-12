@@ -74,6 +74,8 @@ export interface Config {
     events: Event;
     gallery: Gallery;
     users: User;
+    plants: Plant;
+    news: News;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +90,8 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    plants: PlantsSelect<false> | PlantsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -315,6 +319,41 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plants".
+ */
+export interface Plant {
+  id: number;
+  dna: number;
+  transferId: string;
+  type: string;
+  state: string;
+  growthProgress?: number | null;
+  streak?: number | null;
+  hueShift?: number | null;
+  maxHeight?: number | null;
+  lastWatered?: string | null;
+  waterCount?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  title: string;
+  publishedDate: string;
+  category: 'EVENT' | 'INFO' | 'REPORT' | 'OTHER';
+  /**
+   * 詳細ページや外部サイトのURLを入力してください。設定時はクリックで遷移します。
+   */
+  link?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -364,6 +403,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'plants';
+        value: number | Plant;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: number | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -546,6 +593,36 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plants_select".
+ */
+export interface PlantsSelect<T extends boolean = true> {
+  dna?: T;
+  transferId?: T;
+  type?: T;
+  state?: T;
+  growthProgress?: T;
+  streak?: T;
+  hueShift?: T;
+  maxHeight?: T;
+  lastWatered?: T;
+  waterCount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  publishedDate?: T;
+  category?: T;
+  link?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

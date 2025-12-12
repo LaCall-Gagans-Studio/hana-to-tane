@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence, useAnimation } from 'framer-motion'
-import { Droplets, Ruler, ArrowRightLeft, X, Save, Check } from 'lucide-react'
+import { Droplets, Ruler, ArrowRightLeft, X, Save, Check, RefreshCw } from 'lucide-react'
+import { getOrCreatePlant, updatePlant, getPlantStats } from './plant-actions'
 
 // --- Types ---
 type FloatingTextData = {
@@ -43,6 +44,7 @@ type Environment = 'day' | 'sunset' | 'night'
 
 type PlantData = {
   id: string
+  transferId: string // Mnemonic ID
   dna: number // Seed for random generation
   type: string // Plant type key (e.g., 'Classic', 'Sakura')
   state: GameState
@@ -606,6 +608,7 @@ export const HeroFlower = () => {
   // State
   const [plant, setPlant] = useState<PlantData>({
     id: 'init',
+    transferId: '',
     dna: 0,
     type: 'Classic',
     state: 'seed',
@@ -623,9 +626,11 @@ export const HeroFlower = () => {
   const [showTransferModal, setShowTransferModal] = useState(false)
   const [transferIdInput, setTransferIdInput] = useState('')
   const [isWatering, setIsWatering] = useState(false)
+
   const [debugMode, setDebugMode] = useState(false)
   const [floatingTexts, setFloatingTexts] = useState<FloatingTextData[]>([])
   const [environment, setEnvironment] = useState<Environment>('day')
+  const [globalStats, setGlobalStats] = useState({ totalHeight: 0, maxUserHeight: 0 })
 
   // Time of Day Logic
   useEffect(() => {
@@ -640,47 +645,66 @@ export const HeroFlower = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Load from LocalStorage
+  // Load from Server (init)
   useEffect(() => {
-    const savedData = localStorage.getItem('hana_plant_data_v2')
-    if (savedData) {
-      setPlant(JSON.parse(savedData))
-      addMessage('データ を ロード しました！')
-    } else {
-      const randomHue = () => {
-        const r = Math.random()
-        if (r > 0.95) return 180 // 5%の確率で青/紫系のレアカラー (補色)
-        if (r > 0.8) return 60 // 15%の確率で紅葉/枯れ色系
-        return Math.random() * 60 - 30 // 通常は ±30度
+    const initPlant = async () => {
+      const savedId = localStorage.getItem('hana_transfer_id') || undefined
+      try {
+        const data = await getOrCreatePlant(savedId)
+        // Transform Payload Data to PlantData if necessary (assuming matching fields for now)
+        // Ensure type cast or mapping
+        const mappedData: PlantData = {
+          id: String(data.id),
+          transferId: data.transferId as string,
+          dna: data.dna,
+          type: data.type,
+          state: data.state as GameState,
+          growthProgress: data.growthProgress || 0,
+          streak: data.streak || 0,
+          hueShift: data.hueShift || 0,
+          maxHeight: data.maxHeight || 0,
+          lastWatered: data.lastWatered || null,
+          waterCount: data.waterCount || 0,
+        }
+        setPlant(mappedData)
+        if (data.transferId) {
+          localStorage.setItem('hana_transfer_id', data.transferId as string)
+        }
+        if (savedId) {
+          addMessage('おかえりなさい！ データ を ロード しました！')
+        } else {
+          addMessage('あたらしい たね を うえました！')
+        }
+      } catch (error) {
+        console.error('Failed to load plant:', error)
+        addMessage('データの読み込みに失敗しました。')
       }
-      const newId = crypto.randomUUID()
-      const newPlant: PlantData = {
-        id: newId,
-        dna: Math.floor(Math.random() * 1000000),
-        type: randomPick(seededRandom(Date.now()), Object.keys(PRESETS)),
-        state: 'seed',
-        growthProgress: 0,
-        streak: 0,
-        hueShift: randomHue(),
-        maxHeight: 0,
-        lastWatered: null,
-        waterCount: 0,
-      }
-      setPlant(newPlant)
-      saveData(newPlant)
     }
+    initPlant()
   }, [])
 
-  const saveData = (data: PlantData) => {
-    localStorage.setItem('hana_plant_data_v2', JSON.stringify(data))
-  }
+  // Poll Global Stats
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const stats = await getPlantStats()
+        setGlobalStats(stats)
+      } catch (error) {
+        console.error('Failed to fetch stats', error)
+      }
+    }
+    fetchStats()
+    const interval = setInterval(fetchStats, 60000) // 1 min
+    return () => clearInterval(interval)
+  }, [])
 
   const addMessage = (msg: string) => {
     setMessages((prev) => [msg, ...prev].slice(0, 3))
   }
 
-  const handleWater = () => {
+  const handleWater = async () => {
     if (isWatering) return
+    if (plant.id === 'init') return
 
     const today = new Date().toISOString().split('T')[0]
     const lastWateredDate = plant.lastWatered ? plant.lastWatered.split('T')[0] : null
@@ -701,7 +725,8 @@ export const HeroFlower = () => {
     }
     setFloatingTexts((prev) => [...prev, newText])
 
-    setTimeout(() => {
+    // Delay for animation
+    setTimeout(async () => {
       let growthAmount = 0.1 + Math.random() * 0.1
       if (plant.state === 'seed') {
         growthAmount = 1.0
@@ -727,14 +752,12 @@ export const HeroFlower = () => {
 
       // State transition logic (Generation up)
       if (newGrowthProgress >= 1.0) {
-        // 次のフェーズを判定
         let nextState: GameState | null = null
         if (newState === 'seed') nextState = 'sprout'
         else if (newState === 'sprout') nextState = 'growing'
         else if (newState === 'growing') nextState = 'bud'
         else if (newState === 'bud') nextState = 'flower'
 
-        // 次のフェーズがある場合のみ、Progressを減らして遷移
         if (nextState) {
           newGrowthProgress -= 1.0
           newState = nextState
@@ -748,106 +771,141 @@ export const HeroFlower = () => {
           const label = stateLabels[newState] || newState
           addMessage(`おや...？ たねの ようすが...！ -> ${label} になった！`)
         } else {
-          // 次がない（最終形態）場合、Progressはそのまま維持（増やし続ける）
-          // これにより植物は縮まず、無限に大きくなり続ける
           addMessage('はな は さらに おおきく なった！')
         }
       } else {
         addMessage('ぐんぐん のびている！')
       }
 
-      const updatedPlant = {
-        ...plant,
+      const updatedData = {
         growthProgress: newGrowthProgress,
         streak: newStreak,
         lastWatered: new Date().toISOString(),
         waterCount: newWaterCount,
         state: newState,
-        type: plant.type || 'Classic',
-        maxHeight: plant.maxHeight,
+        maxHeight: plant.maxHeight, // Keep existing max for now, visual update will trigger save later
       }
 
+      // Optimistic update
+      const updatedPlant = { ...plant, ...updatedData }
       setPlant(updatedPlant)
-      saveData(updatedPlant)
       setIsWatering(false)
+
+      // Sync with server
+      try {
+        await updatePlant(plant.id, updatedData)
+      } catch (error) {
+        console.error('Failed to sync water update:', error)
+        addMessage('データのほぞんに しっぱいしました...')
+      }
     }, 800)
   }
+
+  // Update Max Height on Server when visual height changes significantly
+  const updateMaxHeightRef = useCallback(
+    async (h: number) => {
+      if (h > plant.maxHeight) {
+        try {
+          await updatePlant(plant.id, { maxHeight: h })
+          setPlant((prev) => ({ ...prev, maxHeight: h })) // Sync local
+        } catch (error) {
+          console.error('Failed to update max height:', error)
+        }
+      }
+    },
+    [plant.id, plant.maxHeight],
+  )
+
+  // Throttle height updates if needed, but for now direct call inside onHeightChange wrapper is fine
+  // Actually, we pass onHeightChange to PlantVisual.
+  // Let's modify PlantVisual prop to just call setPlant strictly, and use useEffect to sync server?
+  // Or just call server here. Debouncing recommended for high freq updates.
+  // For simplicity, we only update if (h > plant.maxHeight + 1) or similar.
+  // PlantVisual calls it only when visualHeight > data.maxHeight.
 
   const handleCheckHeight = () => {
     addMessage(`げんざいの たかさは ${Math.round(plant.maxHeight)}cm だ！`)
   }
 
-  const handleTransfer = () => {
+  const handleTransfer = async () => {
     if (!transferIdInput) return
+    if (plant.id === 'init') return
 
+    // Debug Commands
     if (transferIdInput === 'debug-godmode') {
-      setDebugMode(!debugMode)
-      addMessage(debugMode ? 'デバッグモード: OFF' : 'デバッグモード: ON (みずやりむげん)')
+      setDebugMode((prev) => !prev)
+      addMessage('デバッグモード切り替え！')
       setShowTransferModal(false)
+      setTransferIdInput('')
       return
     }
 
-    if (transferIdInput === 'reset-seed') {
-      const newPlant = {
-        ...plant,
-        dna: Math.floor(Math.random() * 1000000),
-        state: 'seed' as GameState,
-        height: 0,
-        waterCount: 0,
-        lastWatered: null,
+    addMessage('さがしています...')
+    try {
+      const data = await getOrCreatePlant(transferIdInput)
+      const mappedData: PlantData = {
+        id: String(data.id),
+        transferId: data.transferId as string,
+        dna: data.dna,
+        type: data.type,
+        state: data.state as GameState,
+        growthProgress: data.growthProgress || 0,
+        streak: data.streak || 0,
+        hueShift: data.hueShift || 0,
+        maxHeight: data.maxHeight || 0,
+        lastWatered: data.lastWatered || null,
+        waterCount: data.waterCount || 0,
       }
-      setPlant(newPlant)
-      saveData(newPlant)
-      addMessage('あたらしい たね を うえました！')
+      setPlant(mappedData)
+      if (data.transferId) {
+        localStorage.setItem('hana_transfer_id', data.transferId as string) // Update local storage
+      }
+      addMessage('データを ひきつぎました！')
       setShowTransferModal(false)
-      return
+      setTransferIdInput('')
+    } catch (error) {
+      console.error('Transfer failed', error)
+      addMessage('データが みつかりませんでした。')
     }
-
-    addMessage(`ID: ${transferIdInput} のデータを さがしています... (Mock)`)
-    setTimeout(() => {
-      addMessage('データが見つかりませんでした (Mock)')
-    }, 1000)
   }
 
-  useEffect(() => {
-    if (transferIdInput === 'debug-reset') {
+  const handleChangeSeed = async () => {
+    if (!confirm('本当に たねを かえますか？\n(いまの 植物は リセットされます)')) return
+
+    addMessage('たねを かえています...')
+    try {
       const rng = seededRandom(Date.now())
+      const newDna = Math.floor(rng() * 1000000)
       const newType = randomPick(rng, Object.keys(PRESETS))
-      const newPlant: PlantData = {
-        id: crypto.randomUUID(),
-        dna: Math.floor(rng() * 1000000),
+
+      const resetData = {
+        dna: newDna,
         type: newType,
         state: 'seed',
         growthProgress: 0,
         streak: 0,
-        hueShift: Math.floor(rng() * 40) - 20,
+        hueShift: Math.floor(rng() * 60) - 30,
         maxHeight: 0,
         lastWatered: null,
         waterCount: 0,
       }
-      setPlant(newPlant)
-      saveData(newPlant)
-      addMessage(`デバッグ: データをリセットしました (Type: ${PRESETS[newType].name})`)
-      setTransferIdInput('')
-      setShowTransferModal(false)
-    }
 
-    if (transferIdInput === 'debug-day') {
-      setEnvironment('day')
-      addMessage('デバッグ: Day Mode')
+      await updatePlant(plant.id, resetData)
+
+      // Update local
+      setPlant((prev) => ({
+        ...prev,
+        ...resetData,
+        state: 'seed' as GameState,
+      }))
+      addMessage('あたらしい たね に なりました！')
+      // Close modal if open (reuse transfer modal logic? or separate?)
       setShowTransferModal(false)
+    } catch (error) {
+      console.error('Change seed failed', error)
+      addMessage('エラーが はっせいしました。')
     }
-    if (transferIdInput === 'debug-sunset') {
-      setEnvironment('sunset')
-      addMessage('デバッグ: Sunset Mode')
-      setShowTransferModal(false)
-    }
-    if (transferIdInput === 'debug-night') {
-      setEnvironment('night')
-      addMessage('デバッグ: Night Mode')
-      setShowTransferModal(false)
-    }
-  }, [transferIdInput])
+  }
 
   const isWateredToday = () => {
     if (debugMode) return false
@@ -989,15 +1047,7 @@ export const HeroFlower = () => {
             {environment === 'sunset' && (
               <div className="absolute inset-0 bg-orange-500/20 mix-blend-overlay pointer-events-none z-20" />
             )}
-            <PlantVisual
-              data={plant}
-              isWatering={isWatering}
-              onHeightChange={(h) => {
-                if (h !== plant.maxHeight) {
-                  setPlant((prev) => ({ ...prev, maxHeight: h }))
-                }
-              }}
-            />
+            <PlantVisual data={plant} isWatering={isWatering} onHeightChange={updateMaxHeightRef} />
 
             <AnimatePresence>
               {isWatering && (
@@ -1036,12 +1086,20 @@ export const HeroFlower = () => {
               <p className="text-xs font-bold text-gray-500">あなたの おはな</p>
               <p className="text-2xl font-black text-pink-500">{Math.round(plant.maxHeight)}cm</p>
             </div>
+            <div className="bg-white/90 backdrop-blur border-4 border-slate-800 px-4 py-2 rounded-xl shadow-lg transform rotate-1 mt-2">
+              <p className="text-xs font-bold text-gray-500">せかいきろく</p>
+              <p className="text-xl font-black text-purple-500">
+                {Math.round(globalStats.maxUserHeight)}cm
+              </p>
+            </div>
           </div>
 
           <div className="absolute top-4 right-4 z-30 flex flex-col gap-2 items-end">
             <div className="bg-white/90 backdrop-blur border-4 border-slate-800 px-4 py-2 rounded-xl shadow-lg transform rotate-2">
               <p className="text-xs font-bold text-gray-500">みんなの ごうけい</p>
-              <p className="text-2xl font-black text-blue-500">1,234m</p>
+              <p className="text-2xl font-black text-blue-500">
+                {Math.round(globalStats.totalHeight)}cm
+              </p>
             </div>
             {plant.streak > 1 && (
               <div className="bg-yellow-400 border-4 border-slate-800 px-3 py-1 rounded-lg shadow-sm transform rotate-1">
@@ -1081,13 +1139,13 @@ export const HeroFlower = () => {
             whileHover={{ scale: 1.02, x: 2 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleWater}
-            disabled={isWateredToday()}
+            disabled={isWateredToday() && !debugMode}
             className={`w-full py-3 px-4 rounded-xl border-4 border-slate-800 font-black text-lg flex items-center justify-center gap-2 shadow-lg transition-colors
-                          ${isWateredToday() ? 'bg-gray-300 text-gray-500 cursor-not-allowed border-gray-500 shadow-none' : 'bg-blue-500 text-white hover:bg-blue-400'}
+                          ${isWateredToday() && !debugMode ? 'bg-gray-300 text-gray-500 cursor-not-allowed border-gray-500 shadow-none' : 'bg-blue-500 text-white hover:bg-blue-400'}
                         `}
           >
-            {isWateredToday() ? <Check size={20} /> : <Droplets size={20} />}
-            {isWateredToday() ? 'みずやりずみ' : 'みずをやる'}
+            {isWateredToday() && !debugMode ? <Check size={20} /> : <Droplets size={20} />}
+            {isWateredToday() && !debugMode ? 'みずやりずみ' : 'みずをやる'}
           </motion.button>
 
           <div className="grid grid-cols-2 gap-2">
@@ -1108,7 +1166,7 @@ export const HeroFlower = () => {
               className="w-full py-2 px-2 rounded-xl border-4 border-slate-800 font-bold text-sm text-slate-800 bg-white flex items-center justify-center gap-1 shadow-lg hover:bg-gray-100"
             >
               <ArrowRightLeft size={16} />
-              ひきつぎ
+              メニュー
             </motion.button>
           </div>
         </div>
@@ -1137,24 +1195,43 @@ export const HeroFlower = () => {
 
               <h3 className="text-2xl font-black text-slate-800 mb-4 flex items-center gap-2">
                 <Save size={24} />
-                データひきつぎ
+                データかんり
               </h3>
 
               <div className="mb-6">
-                <p className="text-sm font-bold text-gray-500 mb-2">あなたのID</p>
+                <p className="text-sm font-bold text-gray-500 mb-2">あなたのID (合言葉)</p>
                 <div className="bg-gray-100 p-3 rounded-lg font-mono text-center border-2 border-gray-200 select-all text-slate-600">
-                  {plant.id}
+                  {plant.transferId || 'Generating...'}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <button
+                  onClick={handleChangeSeed}
+                  className="flex flex-col items-center justify-center gap-1 p-3 rounded-xl border-2 border-slate-800 bg-orange-100 hover:bg-orange-200 transition-colors"
+                >
+                  <RefreshCw size={20} className="text-orange-600" />
+                  <span className="text-xs font-bold text-orange-800">たねをかえる</span>
+                </button>
+              </div>
+
+              <div className="mb-6 relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">または</span>
                 </div>
               </div>
 
               <div className="mb-6">
-                <p className="text-sm font-bold text-gray-500 mb-2">ひきつぐIDを入力</p>
+                <p className="text-sm font-bold text-gray-500 mb-2">ひきつぐID（合言葉）を入力</p>
                 <input
                   type="text"
                   value={transferIdInput}
                   onChange={(e) => setTransferIdInput(e.target.value)}
                   className="w-full bg-white p-3 rounded-lg font-mono text-center border-2 border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-slate-800"
-                  placeholder="UUID..."
+                  placeholder="apple-green-sky-dream"
                 />
               </div>
 
@@ -1162,7 +1239,7 @@ export const HeroFlower = () => {
                 onClick={handleTransfer}
                 className="w-full py-3 bg-green-500 text-white font-black rounded-xl border-3 border-slate-800 shadow-lg hover:translate-y-1 hover:shadow-none transition-all"
               >
-                けってい
+                ひきつぎ じっこう
               </button>
             </motion.div>
           </motion.div>
