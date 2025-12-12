@@ -39,7 +39,7 @@ export default async function NewsPage({
             <h1 className="inline-block text-4xl md:text-6xl font-black text-white bg-purple px-12 py-4 border-4 border-border shadow-hard mb-8 transform -rotate-2">
               NEWS & TOPICS
             </h1>
-            <p className="text-xl md:text-2xl font-bold text-slate-600 bg-white/80 inline-block px-6 py-2 rounded-full border-2 border-border shadow-sm">
+            <p className="text-xl md:text-2xl font-bold text-slate-600 bg-white/80 mx-auto px-6 py-2 rounded-full border-2 border-border shadow-sm">
               はなとたねからの最新情報
             </p>
           </div>

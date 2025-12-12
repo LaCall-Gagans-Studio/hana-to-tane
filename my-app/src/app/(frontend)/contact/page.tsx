@@ -118,10 +118,10 @@ export default function ContactPage() {
                   お振込先
                 </div>
                 <div className="mt-4 font-mono text-center space-y-2 text-slate-700 font-bold">
-                  <p>ゆうちょ銀行</p>
-                  <p>記号：XXXXX</p>
-                  <p>番号：XXXXXXX</p>
-                  <p>名義：トクヒ）ハナトタネ</p>
+                  <p>山陰合同銀行</p>
+                  <p>千代水支店</p>
+                  <p>普通：4530689</p>
+                  <p>NPO法人はなとたね（エヌピーオーホウジンハナトタネ）</p>
                 </div>
               </div>
 
@@ -152,42 +152,83 @@ export default function ContactPage() {
           <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#ca8a04_1px,transparent_1px)] bg-size-[20px_20px] pointer-events-none"></div>
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-16 relative">
-              <span className="inline-block px-4 py-1  bg-yellow text-slate-800 font-black text-sm rounded-full mb-6  shadow-sm border-2 border-border">
+              <span className="inline-block px-4 py-1 bg-yellow text-slate-800 font-black text-sm rounded-full mb-6 shadow-sm border-2 border-border">
                 RECRUIT
               </span>
-              <h1 className="text-4xl md:text-5xl font-black text-slate-800 mb-6 relative">
+              <h1 className="text-4xl md:text-5xl font-black text-slate-800 mb-8 relative">
                 スタッフ募集
               </h1>
-              <div className="bg-white/80 p-8 rounded-2xl border-3 border-border shadow-hard mx-auto max-w-3xl transform">
-                <p className="text-xl md:text-2xl font-black text-slate-700 leading-relaxed font-sans">
-                  あなたの手が、
-                  <br className="md:hidden" />
-                  誰かの明日を変える。
-                </p>
-                <p className="mt-4 text-slate-600 font-medium">
-                  はなとたねでは、子どもたち一人ひとりの個性に寄り添い、
-                  <br />
-                  共に成長できる仲間を募集しています。
-                </p>
+
+              <div className="bg-white/80 p-8 md:p-12 rounded-2xl border-3 border-border shadow-hard mx-auto max-w-4xl transform text-left">
+                {/* キャッチコピー部分 */}
+                <div className="text-center mb-10">
+                  <p className="text-2xl md:text-3xl font-black text-slate-700 leading-relaxed font-sans relative inline-block">
+                    あなたの手が、
+                    <br className="md:hidden" />
+                    誰かの明日を変える。
+                    <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-yellow rounded-full"></span>
+                  </p>
+                </div>
+
+                {/* 本文部分 */}
+                <div className="space-y-6 text-slate-600 font-medium leading-loose text-sm md:text-base">
+                  <p>
+                    私たちのフリースクールは、一人ひとりの子どもの個性と可能性を大切にする場所です。従来の教育に馴染めなかった子どもたち、自分のペースで学びたい子どもたちが、自分らしく成長できる環境づくりに取り組んでいます。
+                  </p>
+                  <p>
+                    子どもたちは皆、無限の可能性を秘めています。その芽を見つけ、共に育てていくのが私たちの喜びです。時には悩み、立ち止まることもありますが、一人の子どもが小さな一歩を踏み出す瞬間に立ち会えたとき、この仕事の意義を実感します。
+                  </p>
+                  <p>
+                    私たちは、子どもたちと真摯に向き合い、共に考え、共に成長できる仲間を求めています。子どもたちの声に耳を傾け、その思いに寄り添える温かい心を持った方と一緒に働きたいと考えています。
+                  </p>
+                  <p>
+                    あなたの経験や視点が、子どもたちの新たな可能性を開くきっかけになるかもしれません。子どもたちの「今」を大切にしながら、共に未来を創っていきませんか？私たちと一緒に、子どもたちの笑顔あふれる場所をつくりましょう。
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Ideal Candidate */}
             <div className="mb-16">
-              <h1 className="text-center text-2xl font-black text-slate-700 mb-8">求める人物像</h1>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <h2 className="text-center text-3xl font-black text-slate-700 mb-10 inline-block relative">
+                求める人物像
+                <span className="absolute -bottom-2 left-0 w-full h-4 bg-yellow/50 -z-10 rounded-full transform -rotate-1"></span>
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { icon: '👂', text: '聴く力がある' },
-                  { icon: '🔥', text: '情熱がある' },
-                  { icon: '💡', text: '柔軟な発想' },
-                  { icon: '🤝', text: 'チームワーク' },
+                  {
+                    icon: '🗣️',
+                    title: 'コミュニケーション力',
+                    desc: '明確で効果的なコミュニケーション能力を持ち、チーム内外の人々と円滑にやり取りできる方。',
+                  },
+                  {
+                    icon: '🔥',
+                    title: '将来の志がある',
+                    desc: '自身のキャリアと同時に、組織の将来に対しても熱意とビジョンを持って取り組める方。',
+                  },
+                  {
+                    icon: '💡',
+                    title: '問題を解決する能力',
+                    desc: '複雑な課題に直面しても、創造的かつ実践的な解決策を見つけ出すことができる方。',
+                  },
+                  {
+                    icon: '🤝',
+                    title: '共感力とサポート精神',
+                    desc: '利用者の立場に立って感じ取る共感力を持ち、支援が必要な人々への深い理解と優しさで接することができる方。',
+                  },
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="bg-white p-6 rounded-xl border-3 border-border shadow-hard flex flex-col items-center justify-center gap-4 text-center hover:bg-yellow/10 transition-colors"
+                    className="bg-white p-6 md:p-8 rounded-2xl border-3 border-border shadow-hard flex flex-col items-start gap-4 hover:-translate-y-1 transition-transform h-full"
                   >
-                    <span className="text-4xl">{item.icon}</span>
-                    <span className="font-bold text-slate-700">{item.text}</span>
+                    <div className="flex items-center gap-4 mb-2">
+                      <div className="w-14 h-14 bg-yellow/20 rounded-full flex items-center justify-center text-3xl border-2 border-border shadow-sm">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-xl font-black text-slate-800">{item.title}</h3>
+                    </div>
+                    <p className="text-slate-600 font-medium leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>

@@ -55,12 +55,13 @@ export const Events = () => {
           </div>
 
           <Image
-            src="https://media.istockphoto.com/id/2164186064/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E8%A6%8B%E6%9C%AC%E5%B8%82%E4%BC%9A%E5%A0%B4%E3%81%AE%E5%AE%B6%E6%97%8F%E3%81%AE%E5%8F%8B%E4%BA%BA.jpg?s=612x612&w=0&k=20&c=88rbpasCugbcOLx_FdlF2ur9N8smx89UpNRdC3HQ8jo="
+            src="https://media.istockphoto.com/id/1361917606/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E9%81%8A%E3%81%B6%E8%A6%AA%E5%AD%90.jpg?s=612x612&w=0&k=20&c=Na-uvXOO8QRDku6tAR7y-YOBW7_QEo_JjrS-PzG3WgU="
             alt="プレーパーク"
             width={1000}
             height={700}
             className="rounded-3xl mt-8"
           />
+          <div className="text-center text-sm font-bold text-gray-400">（写真はイメージです）</div>
         </div>
 
         {/* Dialogue */}

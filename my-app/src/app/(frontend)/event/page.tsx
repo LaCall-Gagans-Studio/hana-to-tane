@@ -47,7 +47,7 @@ export default async function EventPage() {
             <div>
               <h2 className="text-6xl font-black text-text tracking-tighter mb-4 relative inline-block">
                 EVENT REPORTS
-                <span className="absolute -bottom-2 left-0 w-full h-4 bg-pink/30 -z-10 rounded-full"></span>
+                <span className="absolute -bottom-2 left-0 w-full h-4 bg-yellow block -z-10 rounded-full transform -rotate-1"></span>
               </h2>
               <p className="text-xl font-bold text-gray-600">イベントの様子や活動報告</p>
             </div>
