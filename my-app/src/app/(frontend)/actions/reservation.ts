@@ -61,6 +61,9 @@ export async function submitReservation(
   // 4. Extract Data
   const name = formData.get('name') as string
   const email = formData.get('email') as string
+  if (!email || !email.includes('@')) {
+    return { success: false, error: 'メールアドレスが正しくありません' }
+  }
   const phone = formData.get('phone') as string
 
   if (!name || !email || !phone) {

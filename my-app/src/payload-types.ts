@@ -106,10 +106,12 @@ export interface Config {
   globals: {
     about: About;
     freeschool: Freeschool;
+    banner: Banner;
   };
   globalsSelect: {
     about: AboutSelect<false> | AboutSelect<true>;
     freeschool: FreeschoolSelect<false> | FreeschoolSelect<true>;
+    banner: BannerSelect<false> | BannerSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1063,6 +1065,29 @@ export interface Freeschool {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banner".
+ */
+export interface Banner {
+  id: number;
+  scrollingBanners?:
+    | {
+        image: number | Media;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  bigBanners?:
+    | {
+        image: number | Media;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
@@ -1248,6 +1273,29 @@ export interface FreeschoolSelect<T extends boolean = true> {
               id?: T;
             };
         annotation?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banner_select".
+ */
+export interface BannerSelect<T extends boolean = true> {
+  scrollingBanners?:
+    | T
+    | {
+        image?: T;
+        link?: T;
+        id?: T;
+      };
+  bigBanners?:
+    | T
+    | {
+        image?: T;
+        link?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

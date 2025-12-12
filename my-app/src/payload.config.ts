@@ -21,6 +21,7 @@ import { About } from './collections/About'
 import { Freeschool } from './collections/Freeschool'
 import { Event } from './collections/Event'
 import { Reservations } from './collections/Reservations'
+import { Banner } from './collections/Banner'
 
 import { Gallery } from './collections/Gallery'
 
@@ -39,7 +40,7 @@ export default buildConfig({
     fallbackLanguage: 'ja', // デフォルトを日本語に設定
   },
   collections: [Media, Column, Member, Sponsor, Event, Gallery, Users, Plants, News, Reservations],
-  globals: [About, Freeschool],
+  globals: [About, Freeschool, Banner],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

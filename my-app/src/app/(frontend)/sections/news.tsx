@@ -2,6 +2,7 @@ import React from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const News = async () => {
   const payload = await getPayload({ config: configPromise })
@@ -11,8 +12,15 @@ export const News = async () => {
     sort: '-publishedDate',
   })
 
-  // Placeholder images for the banner
-  const bannerImages = ['bg-pink', 'bg-blue', 'bg-yellow', 'bg-lime', 'bg-purple']
+  // Fetch Banner data (Global)
+  const bannerData = await payload.findGlobal({
+    slug: 'banner',
+  })
+
+  // scrollingBanners: 上部の無限スクロールバナー
+  const scrollingBanners = bannerData.scrollingBanners || []
+  // bigBanners: 下部の大きいバナー
+  const bigBanners = bannerData.bigBanners || []
 
   return (
     <section id="news" className="bg-surface relative overflow-hidden pb-12 md:pb-24">
@@ -21,26 +29,78 @@ export const News = async () => {
         <div className="flex animate-infinite-scroll w-[200%]">
           {/* First set of images */}
           <div className="flex w-1/2 justify-around gap-4 px-4">
-            {bannerImages.map((color, i) => (
-              <div
-                key={i}
-                className={`aspect-video w-full ${color} rounded-xl border-3 border-border shadow-hard flex items-center justify-center`}
-              >
-                <span className="font-black text-white text-xl opacity-50">IMAGE {i + 1}</span>
+            {scrollingBanners.length > 0 ? (
+              scrollingBanners.map((banner: any, i: number) => (
+                <div
+                  key={i}
+                  className="aspect-video w-full rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
+                >
+                  {banner.image && typeof banner.image === 'object' && banner.image.url ? (
+                    <Link href={banner.link || '#'} className="block w-full h-full relative group">
+                      <Image
+                        src={banner.image.url}
+                        alt={banner.image.alt || `Banner ${i + 1}`}
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                    </Link>
+                  ) : (
+                    <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
+                  )}
+                </div>
+              ))
+            ) : (
+              // Fallback if no banner
+              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                Banner Not Set
               </div>
-            ))}
+            )}
           </div>
           {/* Duplicate set for seamless loop */}
           <div className="flex w-1/2 justify-around gap-4 px-4">
-            {bannerImages.map((color, i) => (
-              <div
-                key={`dup-${i}`}
-                className={`aspect-video w-full ${color} rounded-xl border-3 border-border shadow-hard flex items-center justify-center`}
-              >
-                <span className="font-black text-white text-xl opacity-50">IMAGE {i + 1}</span>
-              </div>
-            ))}
+            {scrollingBanners.length > 0 &&
+              scrollingBanners.map((banner: any, i: number) => (
+                <div
+                  key={`dup-${i}`}
+                  className="aspect-video w-full rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
+                >
+                  {banner.image && typeof banner.image === 'object' && banner.image.url ? (
+                    <Link href={banner.link || '#'} className="block w-full h-full relative group">
+                      <Image
+                        src={banner.image.url}
+                        alt={banner.image.alt || `Banner ${i + 1}`}
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                    </Link>
+                  ) : (
+                    <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
+                  )}
+                </div>
+              ))}
           </div>
+        </div>
+
+        <div className="flex flex-col w-1/2 mx-auto mt-8 justify-around gap-4 px-4">
+          {bigBanners.map((banner: any, i: number) => (
+            <div
+              key={i}
+              className="aspect-video w-full rounded-xl border-3 border-border shadow-hard flex items-center justify-center overflow-hidden bg-gray-100 relative"
+            >
+              {banner.image && typeof banner.image === 'object' && banner.image.url ? (
+                <Link href={banner.link || '#'} className="block w-full h-full relative group">
+                  <Image
+                    src={banner.image.url}
+                    alt={banner.image.alt || `Big Banner ${i + 1}`}
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
+                  />
+                </Link>
+              ) : (
+                <span className="font-black text-gray-300 text-xl">NO IMAGE</span>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

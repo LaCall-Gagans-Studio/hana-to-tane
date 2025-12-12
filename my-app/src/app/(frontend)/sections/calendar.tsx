@@ -264,12 +264,10 @@ export const Calendar = ({ events }: CalendarProps) => {
                   .map((event, idx) => (
                     <div key={`${event.id}-${idx}`} className="group">
                       <div
-                        className={`p-4 rounded-xl border-2 transition-all hover:shadow-md ${
+                        className={`p-4 rounded-xl border-2 transition-all hover:shadow-md group ${
                           event.isHighlight
-                            ? 'border-yellow bg-yellow/10'
-                            : event.type === 'free_school'
-                              ? 'border-border bg-green/10'
-                              : 'border-border bg-pink/10'
+                            ? 'border-border bg-green/10'
+                            : 'border-border bg-pink/10'
                         }`}
                       >
                         <div className="flex items-start justify-between mb-2">
@@ -291,7 +289,11 @@ export const Calendar = ({ events }: CalendarProps) => {
                         </div>
                         <h4 className="text-lg font-black text-text mb-2 group-hover:text-blue transition-colors">
                           {event.link ? (
-                            <Link href={event.link} target="_blank" className="hover:underline">
+                            <Link
+                              href={event.link}
+                              target="_blank"
+                              className="group-hover:underline"
+                            >
                               {event.title} ↗
                             </Link>
                           ) : (

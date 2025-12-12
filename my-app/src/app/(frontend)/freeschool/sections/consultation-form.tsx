@@ -252,7 +252,7 @@ export const ConsultationForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-4 text-white font-black text-xl rounded-xl border-3 border-border shadow-hard transition-all flex items-center justify-center gap-2 mt-4
+            className={`w-full py-4 text-text hover:text-white font-black text-xl rounded-xl border-3 border-border shadow-hard transition-all flex items-center justify-center gap-2 mt-4
                 ${isLoading ? 'bg-gray-400 cursor-not-allowed shadow-none translate-y-1' : 'bg-orange hover:bg-orange-600 hover:-translate-y-1 hover:shadow-hard-lg active:translate-y-1 active:shadow-none'}`}
           >
             {isLoading ? (

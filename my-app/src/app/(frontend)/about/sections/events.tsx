@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 export const Events = () => {
   const events = [
@@ -52,6 +53,14 @@ export const Events = () => {
               </span>
             ))}
           </div>
+
+          <Image
+            src="https://media.istockphoto.com/id/2164186064/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E8%A6%8B%E6%9C%AC%E5%B8%82%E4%BC%9A%E5%A0%B4%E3%81%AE%E5%AE%B6%E6%97%8F%E3%81%AE%E5%8F%8B%E4%BA%BA.jpg?s=612x612&w=0&k=20&c=88rbpasCugbcOLx_FdlF2ur9N8smx89UpNRdC3HQ8jo="
+            alt="プレーパーク"
+            width={1000}
+            height={700}
+            className="rounded-3xl mt-8"
+          />
         </div>
 
         {/* Dialogue */}

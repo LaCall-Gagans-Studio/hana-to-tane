@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { EventReservationForm } from '../../components/EventReservationForm'
+
 import { Event } from '@/payload-types'
 import { Calendar, MapPin, Clock } from 'lucide-react'
 
@@ -122,13 +122,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             ) : (
               <p className="text-gray-500">詳細情報はありません。</p>
             )}
-          </div>
-        </div>
-
-        {/* Sidebar / Reservation Form */}
-        <div className="md:col-span-1">
-          <div className="sticky top-32">
-            <EventReservationForm event={event} />
           </div>
         </div>
       </div>
