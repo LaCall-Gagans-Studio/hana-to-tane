@@ -5,7 +5,8 @@ import { Footer } from './footer'
 import { FixedContactMenu } from './FixedContactMenu'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
+  description:
+    'はなとたねは2023年に設立、現在は鳥取市内にフリースクール「森の子がっこういっぽ」の運営をしています。鳥取にプレーパークを作るべく、活動しています。',
   title: 'はなとたね公式サイト｜鳥取市のフリースクール＆プレーパーク',
 }
 
