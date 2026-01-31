@@ -29,7 +29,12 @@ export const News = async () => {
         {/* Infinite Scroll Banner */}
         <div className="w-full overflow-hidden bg-white border-border mb-12 md:mb-24 py-4">
           {/* 修正1: w-[200%] を w-max に変更し、中身に合わせて幅が伸びるようにする */}
-          <div className="flex animate-infinite-scroll w-max">
+          <div
+            className="flex animate-infinite-scroll w-max"
+            style={{
+              animationDuration: `${Math.max(scrollingBanners.length * 15, 40)}s`,
+            }}
+          >
             {/* First set of images */}
             {/* 修正2: w-1/2 justify-around を削除し、shrink-0 (縮小禁止) を追加 */}
             <div className="flex shrink-0 items-center gap-4 px-4">
