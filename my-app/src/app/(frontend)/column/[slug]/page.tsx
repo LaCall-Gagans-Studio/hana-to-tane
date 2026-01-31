@@ -39,7 +39,7 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
   return (
     <div className="bg-surface min-h-screen relative overflow-hidden pb-32">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#b3e41d_2px,transparent_2px)] bg-size-[24px_24px] pointer-events-none"></div>
+      <div className="absolute inset-0  opacity-10 bg-[radial-gradient(#b3e41d_2px,transparent_2px)] bg-size-[24px_24px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 py-24 max-w-4xl relative z-10">
         <div className="mb-12">

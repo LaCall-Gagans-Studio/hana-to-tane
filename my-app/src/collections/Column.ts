@@ -162,6 +162,17 @@ export const Column: CollectionConfig = {
             },
           ],
         },
+        {
+          name: 'reservationManager',
+          label: '予約管理パネル',
+          type: 'ui',
+          admin: {
+            components: {
+              Field: '@/components/admin/ReservationManager',
+            },
+            condition: (_, siblingData) => siblingData?.enabled,
+          },
+        },
       ],
     },
   ],
