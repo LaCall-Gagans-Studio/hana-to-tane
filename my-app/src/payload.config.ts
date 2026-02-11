@@ -34,6 +34,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    theme: 'light', // ライトテーマに変更
   },
   i18n: {
     supportedLanguages: { ja }, // 日本語をサポート

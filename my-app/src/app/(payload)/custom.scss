@@ -1,1 +1,254 @@
-@import '../(frontend)/styles.css';
+/* PayloadCMS管理画面専用のカスタムスタイル */
+/* フロントエンド用のスタイルはインポートしない */
+
+/* 予約管理画面専用のスタイル */
+.reservation-list-custom {
+  /* テーブルスタイル */
+  .custom-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #9ca3af !important;
+    background: white !important;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.875rem;
+    text-align: left;
+    border-collapse: collapse;
+    background: white !important;
+    color: black !important;
+  }
+
+  thead {
+    background: #f3f4f6 !important;
+    color: black !important;
+    border-bottom: 1px solid #9ca3af !important;
+  }
+
+  th {
+    padding: 0.75rem;
+    border-right: 1px solid #9ca3af !important;
+    color: black !important;
+    font-weight: normal !important;
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #9ca3af !important;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: #f9fafb !important;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    td {
+      padding: 0.75rem;
+      border-right: 1px solid #9ca3af !important;
+      color: black !important;
+    }
+  }
+
+  /* モーダルスタイル */
+  .custom-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6) !important;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .custom-modal-content {
+    background: white !important;
+    border: 2px solid #374151 !important;
+    border-radius: 8px !important;
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    width: 100%;
+    max-width: 36rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .custom-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid #e5e7eb !important;
+    background: linear-gradient(to bottom, #f9fafb, #ffffff) !important;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827 !important;
+      margin: 0;
+    }
+
+    button {
+      color: #6b7280;
+      transition: all 0.2s;
+      padding: 0.25rem;
+      border-radius: 4px;
+
+      &:hover {
+        color: #111827 !important;
+        background: #f3f4f6 !important;
+      }
+    }
+  }
+
+  /* フォームスタイル */
+  .custom-modal-form {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .custom-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151 !important;
+    margin: 0;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  textarea,
+  .custom-field-input {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 2px solid #d1d5db !important;
+    border-radius: 6px !important;
+    background: white !important;
+    color: #111827 !important;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  /* ボタンスタイル */
+  .custom-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-top: 2px solid #e5e7eb !important;
+    background: #f9fafb !important;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  textarea,
+  .custom-field-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #9ca3af !important;
+    border-radius: 0 !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  .custom-btn-cancel {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151 !important;
+    border: 2px solid #d1d5db !important;
+    background: white !important;
+    border-radius: 6px !important;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background: #f3f4f6 !important;
+      border-color: #9ca3af !important;
+    }
+  }
+
+  .custom-btn-save {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background: #2563eb !important;
+    color: white !important;
+    border: 2px solid #2563eb !important;
+    border-radius: 6px !important;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background: #1d4ed8 !important;
+      border-color: #1d4ed8 !important;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3) !important;
+    }
+  }
+
+  /* ラジオボタンラベル */
+  .custom-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: black !important;
+  }
+
+  /* 質問と回答のスタイル */
+  .custom-response-item {
+    font-size: 0.875rem;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .question {
+      font-weight: 600;
+      color: black !important;
+      display: block;
+      margin-bottom: 0.125rem;
+    }
+
+    .answer {
+      color: black !important;
+      display: block;
+      margin-left: 0.25rem;
+    }
+  }
+}

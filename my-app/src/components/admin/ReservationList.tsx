@@ -203,7 +203,7 @@ export default function ReservationList({ columnId }: ReservationListProps) {
   return (
     <>
       <div
-        className="
+        className="reservation-list-custom
       p-4 border border-border rounded-lg bg-card text-card-foreground shadow-sm mt-8
       print:fixed print:inset-0 print:z-9999 print:bg-white print:p-8 print:w-screen print:h-screen print:m-0 print:border-0 print:rounded-none
     "
@@ -235,37 +235,37 @@ export default function ReservationList({ columnId }: ReservationListProps) {
         ) : reservations.length === 0 ? (
           <p className="text-muted-foreground p-4 text-center bg-muted/50">まだ予約はありません</p>
         ) : (
-          <div className="overflow-x-auto border border-gray-400! bg-white!">
-            <table className="w-full text-sm text-left border-collapse bg-white! text-black!">
-              <thead className="bg-gray-100! text-black! border-b border-gray-400!">
+          <div className="custom-table-wrapper">
+            <table className="w-full text-sm text-left border-collapse bg-white text-black">
+              <thead className="bg-gray-100 text-black border-b border-gray-400">
                 <tr>
-                  <th className="p-3 border-r border-gray-400! w-[100px] text-center text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 w-[100px] text-center text-black font-normal">
                     操作
                   </th>
-                  <th className="p-3 border-r border-gray-400! min-w-[120px] text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 min-w-[120px] text-black font-normal">
                     名前
                   </th>
-                  <th className="p-3 border-r border-gray-400! min-w-[150px] text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 min-w-[150px] text-black font-normal">
                     メールアドレス
                   </th>
-                  <th className="p-3 border-r border-gray-400! min-w-[120px] text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 min-w-[120px] text-black font-normal">
                     電話番号
                   </th>
-                  <th className="p-3 border-r border-gray-400! min-w-[200px] text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 min-w-[200px] text-black font-normal">
                     備考 (回答)
                   </th>
-                  <th className="p-3 border-r border-gray-400! min-w-[150px] text-black! font-normal!">
+                  <th className="p-3 border-r border-gray-400 min-w-[150px] text-black font-normal">
                     申込日時
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-400!">
+              <tbody className="divide-y divide-gray-400">
                 {reservations.map((res) => (
                   <tr
                     key={res.id}
-                    className="hover:bg-gray-50! transition-colors border-b border-gray-400! last:border-b-0"
+                    className="hover:bg-gray-50 transition-colors border-b border-gray-400 last:border-b-0"
                   >
-                    <td className="p-3 border-r border-gray-400! text-center">
+                    <td className="p-3 border-r border-gray-400 text-center">
                       <div className="flex justify-center gap-2 print:hidden">
                         <button
                           onClick={() => openModal(res)}
@@ -283,21 +283,16 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                         </button>
                       </div>
                     </td>
-                    <td className="p-3 border-r border-gray-400! text-black!">{res.name}</td>
-                    <td className="p-3 border-r border-gray-400! text-black!">{res.email}</td>
-                    <td className="p-3 border-r border-gray-400! text-black!">{res.phone}</td>
-                    <td className="p-3 border-r border-gray-400! max-w-xs break-words">
+                    <td className="p-3 border-r border-gray-400 text-black">{res.name}</td>
+                    <td className="p-3 border-r border-gray-400 text-black">{res.email}</td>
+                    <td className="p-3 border-r border-gray-400 text-black">{res.phone}</td>
+                    <td className="p-3 border-r border-gray-400 max-w-xs break-words">
                       {res.responses && res.responses.length > 0 ? (
                         <div className="flex flex-col">
                           {res.responses.map((r, i) => (
-                            <div
-                              key={i}
-                              className="text-sm border-b border-gray-300 last:border-0 pb-1 mb-1 last:pb-0 last:mb-0"
-                            >
-                              <span className="font-semibold text-black! block mb-0.5">
-                                {r.question}
-                              </span>
-                              <span className="text-black! block ml-1">{r.answer}</span>
+                            <div key={i} className="custom-response-item">
+                              <span className="question">{r.question}</span>
+                              <span className="answer">{r.answer}</span>
                             </div>
                           ))}
                         </div>
@@ -305,7 +300,7 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                         <span className="text-gray-400">-</span>
                       )}
                     </td>
-                    <td className="p-3 border-r border-gray-400! whitespace-nowrap text-black!">
+                    <td className="p-3 border-r border-gray-400 whitespace-nowrap text-black">
                       {new Date(res.createdAt).toLocaleString('ja-JP')}
                     </td>
                   </tr>
@@ -316,75 +311,70 @@ export default function ReservationList({ columnId }: ReservationListProps) {
         )}
 
         {/* Print only footer */}
-        <div className="hidden print:block mt-8 text-right text-sm text-black!">
+        <div className="hidden print:block mt-8 text-right text-sm text-black">
           出力日時: {new Date().toLocaleString('ja-JP')}
         </div>
       </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50! backdrop-blur-none! p-4 print:hidden">
-          <div className="bg-white! rounded-none! shadow-none! border border-black! w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center p-4 border-b border-gray-300!">
-              <h3 className="text-lg font-bold text-black!">
-                {editingReservation ? '予約情報の編集' : '新規予約の追加'}
-              </h3>
-              <button onClick={closeModal} className="text-gray-500 hover:text-black!">
+        <div className="custom-modal-overlay print:hidden">
+          <div className="custom-modal-content">
+            <div className="custom-modal-header">
+              <h3>{editingReservation ? '予約情報の編集' : '新規予約の追加'}</h3>
+              <button onClick={closeModal}>
                 <X size={20} />
               </button>
             </div>
-            <form onSubmit={handleSave} className="p-4 space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1 text-black!">お名前 *</label>
+            <form onSubmit={handleSave} className="custom-modal-form">
+              <div className="custom-form-field">
+                <label>お名前 *</label>
                 <input
                   type="text"
                   required
                   value={formData.name || ''}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full p-2 border border-gray-400! rounded-none! bg-white! text-black!"
+                  placeholder="山田 太郎"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1 text-black!">
-                  メールアドレス *
-                </label>
+              <div className="custom-form-field">
+                <label>メールアドレス *</label>
                 <input
                   type="email"
                   required
                   value={formData.email || ''}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full p-2 border border-gray-400! rounded-none! bg-white! text-black!"
+                  placeholder="example@example.com"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1 text-black!">電話番号 *</label>
+              <div className="custom-form-field">
+                <label>電話番号 *</label>
                 <input
                   type="tel"
                   required
                   value={formData.phone || ''}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  className="w-full p-2 border border-gray-400! rounded-none! bg-white! text-black!"
+                  placeholder="090-1234-5678"
                 />
               </div>
 
               {/* Custom Fields */}
               {columnSettings?.reservationSettings?.customFields?.map((field, idx) => (
-                <div key={idx}>
-                  <label className="block text-sm font-medium mb-1 text-black!">
-                    {field.label}
-                  </label>
+                <div key={idx} className="custom-form-field">
+                  <label>{field.label}</label>
                   {field.type === 'textarea' ? (
                     <textarea
                       value={
                         formData.responses?.find((r) => r.question === field.label)?.answer || ''
                       }
                       onChange={(e) => handleResponseChange(field.label, e.target.value)}
-                      className="w-full p-2 border border-gray-400! rounded-none! bg-white! text-black!"
+                      placeholder="こちらに入力してください"
+                      className="custom-field-input"
                     />
                   ) : field.type === 'radio' && field.options ? (
                     <div className="flex gap-4">
                       {field.options.map((opt, optIdx) => (
-                        <label key={optIdx} className="flex items-center gap-2 text-black!">
+                        <label key={optIdx} className="custom-radio-label">
                           <input
                             type="radio"
                             name={`radio-${idx}`}
@@ -406,24 +396,17 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                         formData.responses?.find((r) => r.question === field.label)?.answer || ''
                       }
                       onChange={(e) => handleResponseChange(field.label, e.target.value)}
-                      className="w-full p-2 border border-gray-400! rounded-none! bg-white! text-black!"
+                      placeholder="こちらに入力してください"
                     />
                   )}
                 </div>
               ))}
 
-              <div className="flex justify-end gap-2 mt-6">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="px-4 py-2 text-sm text-black! border border-gray-400! bg-white! hover:bg-gray-100! rounded-none!"
-                >
+              <div className="custom-modal-actions">
+                <button type="button" onClick={closeModal} className="custom-btn-cancel">
                   キャンセル
                 </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-sm bg-blue-600! text-white! hover:bg-blue-700! border border-blue-700! rounded-none!"
-                >
+                <button type="submit" className="custom-btn-save">
                   保存
                 </button>
               </div>
