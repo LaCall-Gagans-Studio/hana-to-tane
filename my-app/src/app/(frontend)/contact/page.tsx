@@ -2,6 +2,8 @@ import React from 'react'
 import { ContactForm } from '@/components/ContactForm'
 import { Heart, Users, Mail, CheckCircle, Briefcase, Star } from 'lucide-react'
 
+export const revalidate = 60
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-stone-100 font-sans text-slate-800">

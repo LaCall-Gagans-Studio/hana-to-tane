@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { fetchGalleryItems } from './actions'
 import { GalleryGrid } from './GalleryGrid'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function GalleryPage() {
   const { docs, hasNextPage, nextPage } = await fetchGalleryItems(1)

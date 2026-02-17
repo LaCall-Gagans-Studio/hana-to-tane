@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar } from '../sections/calendar'
 
+export const revalidate = 60
+
 export default async function EventPage() {
   const payload = await getPayload({ config: configPromise })
 

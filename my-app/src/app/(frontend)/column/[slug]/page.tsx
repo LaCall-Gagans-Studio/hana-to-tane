@@ -7,7 +7,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { ReservationForm } from '../../components/ReservationForm'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function ColumnDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

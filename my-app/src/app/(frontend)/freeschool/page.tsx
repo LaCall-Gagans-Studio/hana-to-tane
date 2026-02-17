@@ -15,6 +15,8 @@ import { Support } from './sections/support'
 import { Reports } from './sections/reports'
 import { ConsultationForm } from './sections/consultation-form'
 
+export const revalidate = 60
+
 export default async function FreeSchoolPage() {
   const payload = await getPayload({ config: configPromise })
 

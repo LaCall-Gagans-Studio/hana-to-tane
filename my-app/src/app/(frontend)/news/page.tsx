@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { Header } from '../header'
 import { Footer } from '../footer'
 
+export const revalidate = 60
+
 export default async function NewsPage({
   searchParams,
 }: {
