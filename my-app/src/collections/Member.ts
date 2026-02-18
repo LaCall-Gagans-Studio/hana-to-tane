@@ -21,6 +21,7 @@ export const Member: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'スタッフ', value: 'staff' },
+        { label: 'ちびっこセンター', value: 'chibikko' },
         { label: 'コラボレーター', value: 'collaborator' },
       ],
       defaultValue: 'staff',

@@ -12,6 +12,7 @@ export const AboutStaff = ({ members }: StaffSectionProps) => {
   const [selectedStaff, setSelectedStaff] = useState<Member | null>(null)
 
   const staffMembers = members.filter((s) => s.type === 'staff' || !s.type)
+  const chibikkoMembers = members.filter((s) => (s as any).type === 'chibikko')
   const collaborators = members.filter((s) => s.type === 'collaborator')
 
   const representatives = staffMembers.filter((s) => s.isRepresentative)
@@ -44,9 +45,16 @@ export const AboutStaff = ({ members }: StaffSectionProps) => {
             )}
           </div>
           <h3 className="text-3xl font-black text-text mb-2">{member.name}</h3>
-          {(member.role || member.type === 'collaborator') && (
+          {(member.role ||
+            member.type === 'collaborator' ||
+            (member as any).type === 'chibikko') && (
             <p className="text-sm font-semibold text-gray-500 bg-gray-100 inline-block px-4 py-1 rounded-full mb-4">
-              {member.role || 'コラボレーター'}
+              {member.role ||
+                (member.type === 'collaborator'
+                  ? 'コラボレーター'
+                  : (member as any).type === 'chibikko'
+                    ? 'ちびっこセンター'
+                    : '')}
             </p>
           )}
 
@@ -205,7 +213,7 @@ export const AboutStaff = ({ members }: StaffSectionProps) => {
                 className="bg-white p-6 rounded-2xl border-2 border-border shadow-sm cursor-pointer hover:shadow-md transition-all flex items-center gap-4 group"
               >
                 <div
-                  className={`w-16 h-16 ${s.color || 'bg-gray-200'} rounded-full border-2 border-border flex items-center justify-center text-2xl flex-shrink-0 overflow-hidden relative`}
+                  className={`w-16 h-16 ${s.color || 'bg-gray-200'} rounded-full border-2 border-border flex items-center justify-center text-2xl shrink-0 overflow-hidden relative`}
                 >
                   {s.image && typeof s.image === 'object' && s.image.url ? (
                     <Image src={s.image.url} alt={s.name} fill className="object-cover" />
@@ -229,6 +237,50 @@ export const AboutStaff = ({ members }: StaffSectionProps) => {
             ))}
           </div>
         </div>
+
+        {/* Chibikko Center Section */}
+        {chibikkoMembers.length > 0 && (
+          <div className="mb-24">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-black text-text inline-block border-b-4 border-pink pb-2">
+                CHIBIKKO CENTER
+              </h3>
+              <p className="mt-4 font-semibold text-gray-500">ちびっこセンター</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              {chibikkoMembers.map((s) => (
+                <div
+                  key={s.id}
+                  onClick={() => setSelectedStaff(s)}
+                  className="bg-white p-6 rounded-2xl border-2 border-border shadow-sm cursor-pointer hover:shadow-md transition-all flex items-center gap-4 group"
+                >
+                  <div
+                    className={`w-16 h-16 ${s.color || 'bg-gray-200'} rounded-full border-2 border-border flex items-center justify-center text-2xl shrink-0 overflow-hidden relative`}
+                  >
+                    {s.image && typeof s.image === 'object' && s.image.url ? (
+                      <Image src={s.image.url} alt={s.name} fill className="object-cover" />
+                    ) : (
+                      <span>{'👶'}</span>
+                    )}
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-black text-text">{s.name}</h4>
+                    <p className="text-xs font-semibold text-gray-500 mb-1">{s.role}</p>
+                    <p className="text-sm text-gray-600 line-clamp-1 whitespace-pre-wrap">
+                      {s.description}
+                    </p>
+                    <div className="h-4">
+                      <span className="text-xs font-semibold text-blue flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">
+                        VIEW PROFILE →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Collaborators Section */}
         {collaborators.length > 0 && (

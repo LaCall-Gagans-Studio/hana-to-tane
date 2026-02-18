@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -156,7 +156,7 @@ export const About = ({ aboutData, freeschoolData, members, sponsors }: AboutPro
                 href={sponsor.url || '#'}
                 target={sponsor.url ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="w-64 h-24 bg-white border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer overflow-hidden relative"
+                className={`w-64 h-24 ${(sponsor as any).backgroundColor || 'bg-white'} border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer overflow-hidden relative`}
               >
                 {sponsor.logo && typeof sponsor.logo === 'object' && sponsor.logo.url ? (
                   <Image

@@ -251,7 +251,7 @@ export interface Event {
  */
 export interface Member {
   id: number;
-  type: 'staff' | 'collaborator';
+  type: 'staff' | 'chibikko' | 'collaborator';
   collaborationType?: string | null;
   isRepresentative?: boolean | null;
   name: string;
@@ -293,6 +293,9 @@ export interface Sponsor {
   name: string;
   logo?: (number | null) | Media;
   url?: string | null;
+  backgroundColor?:
+    | ('bg-white' | 'bg-pink' | 'bg-blue' | 'bg-yellow' | 'bg-lime' | 'bg-green' | 'bg-gray-100' | 'bg-black')
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -606,6 +609,7 @@ export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
   url?: T;
+  backgroundColor?: T;
   updatedAt?: T;
   createdAt?: T;
 }
