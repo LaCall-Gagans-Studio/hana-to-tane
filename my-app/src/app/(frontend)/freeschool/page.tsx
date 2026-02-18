@@ -15,7 +15,29 @@ import { Support } from './sections/support'
 import { Reports } from './sections/reports'
 import { ConsultationForm } from './sections/consultation-form'
 
+import type { Metadata } from 'next'
+
 export const revalidate = 60
+
+export async function generateMetadata(): Promise<Metadata> {
+  const payload = await getPayload({ config: configPromise })
+  const freeschoolData = await payload.findGlobal({
+    slug: 'freeschool',
+  })
+
+  return {
+    title: freeschoolData.summary?.schoolName || 'フリースクール森の子がっこういっぽ',
+    description:
+      freeschoolData.summary?.description ||
+      '鳥取市のフリースクール「森の子がっこういっぽ」の紹介ページです。',
+    openGraph: {
+      title: freeschoolData.summary?.schoolName || 'フリースクール森の子がっこういっぽ',
+      description:
+        freeschoolData.summary?.description ||
+        '鳥取市のフリースクール「森の子がっこういっぽ」の紹介ページです。',
+    },
+  }
+}
 
 export default async function FreeSchoolPage() {
   const payload = await getPayload({ config: configPromise })

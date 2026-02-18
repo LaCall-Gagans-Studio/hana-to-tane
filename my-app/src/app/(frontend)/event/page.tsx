@@ -5,7 +5,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar } from '../sections/calendar'
 
+import type { Metadata } from 'next'
+
 export const revalidate = 60
+
+export function generateMetadata(): Metadata {
+  return {
+    title: 'イベントカレンダー',
+    description: 'はなとたね、フリースクールいっぽのイベントスケジュールです。',
+  }
+}
 
 export default async function EventPage() {
   const payload = await getPayload({ config: configPromise })

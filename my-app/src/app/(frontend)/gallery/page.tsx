@@ -1,9 +1,17 @@
-import React, { Suspense } from 'react'
-import Link from 'next/link'
+import React from 'react'
 import { fetchGalleryItems } from './actions'
 import { GalleryGrid } from './GalleryGrid'
 
+import type { Metadata } from 'next'
+
 export const revalidate = 60
+
+export function generateMetadata(): Metadata {
+  return {
+    title: 'はなたねギャラリー',
+    description: 'はなとたねの活動風景や子供たちの笑顔を集めたギャラリーです。',
+  }
+}
 
 export default async function GalleryPage() {
   const { docs, hasNextPage, nextPage } = await fetchGalleryItems(1)

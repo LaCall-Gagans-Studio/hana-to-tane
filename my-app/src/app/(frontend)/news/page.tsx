@@ -4,7 +4,16 @@ import Link from 'next/link'
 import { Header } from '../header'
 import { Footer } from '../footer'
 
+import type { Metadata } from 'next'
+
 export const revalidate = 60
+
+export function generateMetadata(): Metadata {
+  return {
+    title: 'NEWS & TOPICS',
+    description: 'はなとたねからの最新情報。フリースクールやイベントのニュースをお届けします。',
+  }
+}
 
 export default async function NewsPage({
   searchParams,

@@ -7,7 +7,55 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { ReservationForm } from '../../components/ReservationForm'
 
+import type { Metadata } from 'next'
+
 export const revalidate = 60
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const payload = await getPayload({ config: configPromise })
+
+  const columns = await payload.find({
+    collection: 'column',
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+  })
+
+  const column = columns.docs[0]
+
+  if (!column) {
+    return {
+      title: '記事が見つかりません',
+    }
+  }
+
+  const title = column.title
+  const description = `はなとたねのコラム「${title}」の記事詳細です。`
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images:
+        column.image &&
+        typeof column.image === 'object' &&
+        'url' in column.image &&
+        typeof column.image.url === 'string'
+          ? [column.image.url]
+          : undefined,
+    },
+  }
+}
 
 export default async function ColumnDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

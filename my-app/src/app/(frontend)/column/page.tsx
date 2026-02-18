@@ -1,11 +1,42 @@
-import React, { Suspense } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+
+import type { Metadata } from 'next'
 
 export const revalidate = 60
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}): Promise<Metadata> {
+  const resolvedSearchParams = await searchParams
+  const category =
+    typeof resolvedSearchParams?.category === 'string' ? resolvedSearchParams.category : undefined
+  const tag = typeof resolvedSearchParams?.tag === 'string' ? resolvedSearchParams.tag : undefined
+  const query = typeof resolvedSearchParams?.q === 'string' ? resolvedSearchParams.q : undefined
+
+  let title = 'はなとたね図書館'
+  if (category) {
+    const categoryLabels: { [key: string]: string } = {
+      free_school: 'フリースクール',
+      event: 'イベント',
+      other: 'その他',
+    }
+    title = `${categoryLabels[category] || category} | はなとたね図書館`
+  } else if (tag) {
+    title = `#${tag} | はなとたね図書館`
+  } else if (query) {
+    title = `"${query}"の検索結果 | はなとたね図書館`
+  }
+
+  return {
+    title,
+    description: '日々の活動の様子やイベント情報、フリースクールでの出来事などをお届けします。',
+  }
+}
 
 export default async function ColumnPage({
   searchParams,
@@ -243,9 +274,9 @@ export default async function ColumnPage({
                     </h2>
 
                     <div className="mt-auto pt-2 flex flex-wrap gap-2">
-                      {col.tags?.map((tagItem: any, index: number) => (
+                      {col.tags?.map((tagItem: any) => (
                         <span
-                          key={index}
+                          key={tagItem.tag}
                           className="inline-flex items-center px-2 py-1 rounded-md text-xs font-bold bg-gray-50 text-gray-600 border border-transparent group-hover:border-border group-hover:bg-yellow group-hover:text-text transition-all"
                         >
                           #{tagItem.tag}
