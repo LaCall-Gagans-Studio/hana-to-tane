@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send } from 'lucide-react'
 
 export const ConsultationForm = () => {
   const [submitted, setSubmitted] = useState(false)
@@ -10,11 +10,30 @@ export const ConsultationForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    // Mock submission - replace with actual API call later
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log('Consultation form submitted')
-    setIsLoading(false)
-    setSubmitted(true)
+
+    try {
+      const formData = new FormData(e.currentTarget)
+      const data = Object.fromEntries(formData.entries())
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setSubmitted(true)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      alert('メールの送信に失敗しました。後ほど再度お試しください。')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (submitted) {
