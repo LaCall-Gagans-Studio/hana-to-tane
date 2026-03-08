@@ -272,7 +272,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* --- FORM SECTION --- */}
+        
         <section id="form" className="py-20 px-4 bg-blue/5 relative">
           <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-size-[20px_20px] pointer-events-none"></div>
 
@@ -280,7 +280,7 @@ export default function ContactPage() {
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-1 bg-blue text-white font-black text-sm rounded-full mb-4 shadow-sm border-2 border-border">
                 CONTACT
-              </span>
+              </span>{/* --- FORM SECTION --- */}
               <h1 className="text-3xl md:text-5xl font-black text-slate-800 mb-4">お問い合わせ</h1>
               <p className="text-slate-600 font-bold">
                 ご不明な点やご相談など、お気軽にお問い合わせください。
