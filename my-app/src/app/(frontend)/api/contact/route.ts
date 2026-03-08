@@ -25,6 +25,8 @@ export async function POST(request: Request) {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
+      debug: true, // デバッグ出力を有効化
+      logger: true, // コンソールに詳細なログを出力
     })
 
     // 管理者向け通知メールの内容
@@ -83,14 +85,19 @@ ${memo}
     }
 
     // 両方のメールを送信
-    await Promise.all([
+    console.log('[Mail API] 送信処理を開始します...')
+    const [adminInfo, userInfo] = await Promise.all([
       transporter.sendMail(adminMailOptions),
       transporter.sendMail(userMailOptions),
     ])
 
+    console.log('[Mail API] 送信成功:')
+    console.log(' - 管理者宛 MessageId:', adminInfo.messageId)
+    console.log(' - ユーザー宛 MessageId:', userInfo.messageId)
+
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Mail Send Error:', error)
+    console.error('[Mail API] 送信エラー詳細:', error)
     return NextResponse.json({ error: 'メールの送信に失敗しました。' }, { status: 500 })
   }
 }
