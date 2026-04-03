@@ -15,7 +15,7 @@ const NAV_ITEMS = [
     icon: GraduationCap,
     color: 'text-green',
   },
-  { label: '図書館', href: '/column', icon: BookOpen, color: 'text-purple' },
+  { label: 'コラム', href: '/column', icon: BookOpen, color: 'text-purple' },
   { label: 'ギャラリー', href: '/gallery', icon: Images, color: 'text-blue' },
 ]
 
@@ -78,23 +78,23 @@ export const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-base font-black text-gray-700 hover:text-text hover:bg-white/50 px-4 py-2 rounded-full transition-all flex items-center gap-2"
+                className="text-xs lg:text-sm xl:text-base font-black text-gray-700 hover:text-text hover:bg-white/50 px-2 lg:px-3 xl:px-4 py-2 rounded-full transition-all flex items-center gap-1 lg:gap-2"
               >
-                <Icon size={20} className={item.color} />
+                <Icon className={`${item.color} w-4 h-4 lg:w-5 lg:h-5`} />
                 {item.label}
               </Link>
             )
           })}
           <Link
             href="/contact#form"
-            className="ml-4 px-6 py-2 bg-blue text-white text-lg font-black rounded-full border-2 border-transparent hover:border-black hover:bg-yellow hover:text-text transition-all shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+            className="ml-2 xl:ml-4 px-4 xl:px-6 py-2 bg-blue text-white text-sm xl:text-lg font-black rounded-full border-2 border-transparent hover:border-black hover:bg-yellow hover:text-text transition-all shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
           >
             お問い合わせ
           </Link>
@@ -103,7 +103,7 @@ export const Header = () => {
         {/* Mobile Menu Trigger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden relative z-50 p-2 text-text hover:bg-gray-100 rounded-full transition-colors"
+          className="lg:hidden relative z-50 p-2 text-text hover:bg-gray-100 rounded-full transition-colors"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? <X size={32} /> : <Menu size={32} />}

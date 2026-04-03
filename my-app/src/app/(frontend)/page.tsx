@@ -21,6 +21,11 @@ export default async function Page() {
     slug: 'freeschool',
   })
 
+  // サイトコンテンツの取得
+  const siteContent = await payload.findGlobal({
+    slug: 'siteContent' as any,
+  })
+
   const members = await payload.find({
     collection: 'members',
     sort: 'createdAt',
@@ -41,7 +46,7 @@ export default async function Page() {
 
   return (
     <div className="font-zenMaruGothic">
-      <Hero />
+      <Hero siteContent={siteContent} />
       <News />
       <Calendar events={events.docs} />
       <About

@@ -107,11 +107,13 @@ export interface Config {
     about: About;
     freeschool: Freeschool;
     banner: Banner;
+    siteContent: SiteContent;
   };
   globalsSelect: {
     about: AboutSelect<false> | AboutSelect<true>;
     freeschool: FreeschoolSelect<false> | FreeschoolSelect<true>;
     banner: BannerSelect<false> | BannerSelect<true>;
+    siteContent: SiteContentSelect<false> | SiteContentSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1092,6 +1094,38 @@ export interface Banner {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteContent".
+ */
+export interface SiteContent {
+  id: number;
+  heroLargeLinks?:
+    | {
+        label: string;
+        url: string;
+        colorClass?: ('bg-[#cfed75]' | 'bg-yellow' | 'bg-pink' | 'bg-blue') | null;
+        id?: string | null;
+      }[]
+    | null;
+  heroSmallLinks?:
+    | {
+        label: string;
+        url: string;
+        hoverClass?: ('hover:bg-blue' | 'hover:bg-pink' | 'hover:bg-orange-400' | 'hover:bg-yellow') | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        platform: 'instagram' | 'x' | 'facebook' | 'youtube' | 'other';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
@@ -1299,6 +1333,38 @@ export interface BannerSelect<T extends boolean = true> {
     | {
         image?: T;
         link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteContent_select".
+ */
+export interface SiteContentSelect<T extends boolean = true> {
+  heroLargeLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        colorClass?: T;
+        id?: T;
+      };
+  heroSmallLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        hoverClass?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
         id?: T;
       };
   updatedAt?: T;

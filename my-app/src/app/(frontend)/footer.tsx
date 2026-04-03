@@ -1,7 +1,32 @@
 import React from 'react'
 import Link from 'next/link'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { Instagram, Twitter, Facebook, Youtube, Link as LinkIcon } from 'lucide-react'
 
-export const Footer = () => {
+const PlatformIcon = ({ platform }: { platform: string }) => {
+  switch (platform) {
+    case 'instagram':
+      return <Instagram size={28} />
+    case 'x':
+      return <Twitter size={28} />
+    case 'facebook':
+      return <Facebook size={28} />
+    case 'youtube':
+      return <Youtube size={28} />
+    default:
+      return <LinkIcon size={28} />
+  }
+}
+
+export const Footer = async () => {
+  const payload = await getPayload({ config: configPromise })
+  const siteContent = await payload.findGlobal({
+    slug: 'siteContent' as any,
+  })
+
+  const socialLinks = (siteContent as any)?.socialLinks || []
+
   return (
     <footer className="relative mt-16 md:mt-32 bg-blue text-surface pt-16 md:pt-32 pb-12 md:pb-16 overflow-hidden">
       {/* Wavy Top Border */}
@@ -63,16 +88,35 @@ export const Footer = () => {
 
           {/* Social Icons */}
           <div>
-            <div className="flex gap-4">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="w-12 h-12 md:w-14 md:h-14 bg-surface rounded-2xl border-3 border-transparent hover:border-lime flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer group shadow-hard hover:shadow-hard-lg"
-                >
-                  <div className="w-6 h-6 md:w-8 md:h-8 bg-text rounded-full opacity-20 group-hover:bg-lime group-hover:opacity-100 transition-colors"></div>
-                </div>
-              ))}
-            </div>
+            {socialLinks.length > 0 ? (
+              <div className="flex gap-4">
+                {socialLinks.map((social: any, i: number) => (
+                  <Link
+                    key={i}
+                    href={social.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-12 h-12 md:w-14 md:h-14 bg-surface rounded-2xl border-3 border-transparent hover:border-lime flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer group shadow-hard hover:shadow-hard-lg"
+                  >
+                    <span className="text-text opacity-60 group-hover:text-lime group-hover:opacity-100 transition-colors">
+                      <PlatformIcon platform={social.platform} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              // Fallback icons if no payload data
+              <div className="flex gap-4">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-12 h-12 md:w-14 md:h-14 bg-surface rounded-2xl border-3 border-transparent hover:border-lime flex items-center justify-center hover:-translate-y-1 transition-all cursor-pointer group shadow-hard hover:shadow-hard-lg"
+                  >
+                    <div className="w-6 h-6 md:w-8 md:h-8 bg-text rounded-full opacity-20 group-hover:bg-lime group-hover:opacity-100 transition-colors"></div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -91,3 +135,4 @@ export const Footer = () => {
     </footer>
   )
 }
+
