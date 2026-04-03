@@ -153,7 +153,7 @@ export const Hero = ({ siteContent }: { siteContent?: any }) => {
                   はなとたね
                 </span>
                 <span className="text-xl sm:text-2xl ml-2 text-surface mb-1 block">認定</span>
-                <span className="text-[2.2rem] sm:text-[2.6rem] md:text-[3.8rem] lg:text-[4rem] tracking-tight text-surface text-stroke-2 text-stroke-black drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] block">
+                <span className="text-nowrap text-[2.2rem] sm:text-[2.6rem] md:text-[3.8rem] lg:text-[3.8rem] tracking-tight text-surface text-stroke-2 text-stroke-black drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] block">
                   フリースクールいっぽ
                 </span>
               </span>
