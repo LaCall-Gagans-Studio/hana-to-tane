@@ -51,12 +51,12 @@ const MasonryImages = () => (
 )
 
 const MobileHeroImages = () => (
-  <div className="relative w-full h-[350px] sm:h-[450px] mb-4 pointer-events-none">
+  <div className="relative w-full h-full min-h-[500px] sm:min-h-[650px] pointer-events-none">
     {/* Image 1 (Top Left) */}
     <motion.div
       animate={{ y: [0, -10, 0], rotate: [-6, -4, -6] }}
       transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      className="absolute z-10 top-2 left-[5%] w-[45%] h-[60%]"
+      className="absolute z-10 top-[10%] left-[2%] w-[45%] aspect-[4/5]"
     >
       <div className="w-full h-full relative rounded-3xl overflow-hidden border-4 border-white shadow-xl">
         <NextImage
@@ -72,7 +72,7 @@ const MobileHeroImages = () => (
     <motion.div
       animate={{ y: [0, 15, 0], rotate: [3, 5, 3] }}
       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-      className="absolute z-20 top-20 right-[5%] w-[50%] h-[65%]"
+      className="absolute z-20 top-[35%] right-[2%] w-[50%] aspect-[4/5]"
     >
       <div className="w-full h-full relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
         <NextImage
@@ -88,7 +88,7 @@ const MobileHeroImages = () => (
     <motion.div
       animate={{ y: [0, -8, 0], rotate: [12, 10, 12] }}
       transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-      className="absolute z-0 bottom-4 left-[20%] w-[40%] h-[40%]"
+      className="absolute z-0 top-[60%] left-[20%] w-[40%] aspect-[3/4]"
     >
       <div className="w-full h-full relative rounded-3xl overflow-hidden border-4 border-white shadow-lg opacity-90">
         <NextImage
@@ -135,7 +135,12 @@ export const Hero = ({ siteContent }: { siteContent?: any }) => {
       <div className="container relative z-10 mx-auto px-4">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-16 md:gap-12">
           {/* Left Side: Hero Content */}
-          <div className="flex-1 text-center xl:text-left relative w-full">
+          <div className="flex-1 text-center xl:text-left relative w-full pt-4">
+            {/* Mobile Hero Images (Mobile Only - Beautiful floating collage acting as background) */}
+            <div className="absolute inset-0 z-[-1] w-[120%] -ml-[10%] h-[120%] -top-[10%] xl:hidden opacity-30 pointer-events-none">
+              <MobileHeroImages />
+            </div>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -207,11 +212,6 @@ export const Hero = ({ siteContent }: { siteContent?: any }) => {
                 </Link>
               ))}
             </motion.div>
-          </div>
-
-          {/* Mobile Hero Images (Mobile Only - Beautiful floating collage) */}
-          <div className="flex-1 w-full xl:hidden mb-4 relative flex justify-center mt-8">
-            <MobileHeroImages />
           </div>
 
           {/* Right Side: Hero Flower Game */}

@@ -33,7 +33,7 @@ const config: Config = {
         'hard-lg': '8px 8px 0px 0px var(--color-border)',
       },
       animation: {
-        'infinite-scroll': 'infinite-scroll 150s linear infinite',
+        'infinite-scroll': 'infinite-scroll 600s linear infinite',
         highlight: 'highlight 1s ease-out forwards',
       },
       keyframes: {
