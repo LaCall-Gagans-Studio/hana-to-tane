@@ -1,0 +1,5 @@
+- [x] `src/collections/Reservations.ts` にnodemailerのインポートを追加
+- [x] `afterChange` フックを修正し、`doc` からの情報を用いてメールオプション（管理者宛・ユーザー宛）を組み立てる
+- [x] `req.payload.findByID` を用いて、関連するコラム（イベント名称）を取得する
+- [x] `nodemailer` 経由でメールを送信する
+- [x] `walkthrough.md` を作成する
