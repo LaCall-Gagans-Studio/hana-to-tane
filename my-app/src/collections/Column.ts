@@ -1,4 +1,8 @@
 import type { CollectionConfig } from 'payload'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { CTA } from '../blocks/cta'
+import { Accordion } from '../blocks/accordion'
+import { Table } from '../blocks/table'
 
 export const Column: CollectionConfig = {
   slug: 'column',
@@ -80,6 +84,14 @@ export const Column: CollectionConfig = {
       name: 'content',
       label: '本文',
       type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          BlocksFeature({
+            blocks: [CTA, Accordion, Table],
+          }),
+        ],
+      }),
     },
     {
       name: 'targetEvent',

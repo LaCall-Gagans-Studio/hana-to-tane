@@ -1,0 +1,6 @@
+- `[x]` `src/blocks/cta.ts` の作成
+- `[x]` `src/blocks/accordion.ts` の作成
+- `[x]` `src/blocks/table.ts` の作成
+- `[x]` `src/collections/Column.ts` にブロックを追加・設定
+- `[x]` `src/components/Blocks/RichTextBlocks.tsx` コンポーネントの作成
+- `[x]` `src/app/(frontend)/column/[slug]/page.tsx` でカスタムブロックを描画するように変更

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { ReservationForm } from '../../components/ReservationForm'
+import { CtaComponent, AccordionComponent, CustomTableComponent } from '@/components/Blocks/RichTextBlocks'
 
 import type { Metadata } from 'next'
 
@@ -136,8 +137,14 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
                 </div>
               )}
 
-            <div className="prose prose-lg max-w-none prose-headings:font-black prose-headings:text-text prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-blue prose-a:font-bold prose-a:no-underline prose-a:border-b-2 prose-a:border-blue/30 hover:prose-a:border-blue prose-img:rounded-xl prose-img:border-3 prose-img:border-border prose-img:shadow-md">
-              {column.content && <RichText data={column.content} />}
+            <div className="prose prose-lg max-w-none prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-blue prose-a:font-bold prose-a:no-underline prose-a:border-b-2 prose-a:border-blue/30 hover:prose-a:border-blue prose-img:rounded-xl prose-img:border-2 prose-img:border-gray-200 prose-img:shadow-sm prose-h2:text-2xl prose-h2:font-bold prose-h2:text-gray-800 prose-h2:border-b-2 prose-h2:border-gray-200 prose-h2:pb-3 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:text-gray-800 prose-h3:mt-8 prose-h3:mb-4 prose-h3:pl-4 prose-h3:border-l-4 prose-h3:border-lime">
+              {column.content && <RichText data={column.content} converters={{
+                blocks: {
+                  cta: ({ node }) => <CtaComponent fields={node.fields} />,
+                  accordion: ({ node }) => <AccordionComponent fields={node.fields} />,
+                  customTable: ({ node }) => <CustomTableComponent fields={node.fields} />,
+                }
+              }}/>}
             </div>
 
             {column.tags && (column.tags as any[]).length > 0 && (
