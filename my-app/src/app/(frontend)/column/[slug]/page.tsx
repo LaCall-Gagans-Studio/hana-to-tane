@@ -6,7 +6,11 @@ import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { ReservationForm } from '../../components/ReservationForm'
-import { CtaComponent, AccordionComponent, CustomTableComponent } from '@/components/Blocks/RichTextBlocks'
+import {
+  CtaComponent,
+  AccordionComponent,
+  CustomTableComponent,
+} from '@/components/Blocks/RichTextBlocks'
 
 import type { Metadata } from 'next'
 
@@ -92,7 +96,7 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
       {/* Background Pattern */}
       <div className="absolute inset-0  opacity-10 bg-[radial-gradient(#b3e41d_2px,transparent_2px)] bg-size-[24px_24px] pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 py-24 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 py-24 max-w-6l relative z-10">
         <div className="mb-12">
           <Link
             href="/column"
@@ -137,7 +141,8 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
                 </div>
               )}
 
-            <div className="
+            <div
+              className="
               text-gray-800 leading-[1.8] sm:leading-[2] tracking-[0.03em]
               [&_p]:mb-8 [&_p]:text-[1rem] sm:[&_p]:text-[1.125rem]
               [&_h2]:text-2xl sm:[&_h2]:text-3xl [&_h2]:font-black [&_h2]:border-b-4 [&_h2]:border-yellow [&_h2]:pb-4 [&_h2]:mt-16 [&_h2]:mb-8
@@ -150,16 +155,26 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
               [&_img]:rounded-2xl [&_img]:border-3 [&_img]:border-border [&_img]:shadow-hard hover:[&_img]:shadow-hard-lg [&_img]:transition-shadow [&_img]:my-12 [&_img]:w-full [&_img]:object-cover
               [&_strong]:font-black [&_strong]:text-black [&_strong]:underline [&_strong]:decoration-pink/30 [&_strong]:decoration-4 [&_strong]:underline-offset-4
               [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-6 [&_blockquote]:text-gray-600 [&_blockquote]:my-10 [&_blockquote]:bg-gray-50 [&_blockquote]:py-6 [&_blockquote]:rounded-r-2xl
-            ">
-              {column.content && <RichText data={column.content} converters={({ defaultConverters }) => ({
-                ...defaultConverters,
-                blocks: {
-                  ...defaultConverters.blocks,
-                  cta: ({ node }: { node: any }) => <CtaComponent fields={node.fields} />,
-                  accordion: ({ node }: { node: any }) => <AccordionComponent fields={node.fields} />,
-                  customTable: ({ node }: { node: any }) => <CustomTableComponent fields={node.fields} />,
-                }
-              })}/>}
+            "
+            >
+              {column.content && (
+                <RichText
+                  data={column.content}
+                  converters={({ defaultConverters }) => ({
+                    ...defaultConverters,
+                    blocks: {
+                      ...defaultConverters.blocks,
+                      cta: ({ node }: { node: any }) => <CtaComponent fields={node.fields} />,
+                      accordion: ({ node }: { node: any }) => (
+                        <AccordionComponent fields={node.fields} />
+                      ),
+                      customTable: ({ node }: { node: any }) => (
+                        <CustomTableComponent fields={node.fields} />
+                      ),
+                    },
+                  })}
+                />
+              )}
             </div>
 
             {column.tags && (column.tags as any[]).length > 0 && (
