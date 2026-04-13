@@ -137,14 +137,29 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
                 </div>
               )}
 
-            <div className="prose prose-lg max-w-none prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-blue prose-a:font-bold prose-a:no-underline prose-a:border-b-2 prose-a:border-blue/30 hover:prose-a:border-blue prose-img:rounded-xl prose-img:border-2 prose-img:border-gray-200 prose-img:shadow-sm prose-h2:text-2xl prose-h2:font-bold prose-h2:text-gray-800 prose-h2:border-b-2 prose-h2:border-gray-200 prose-h2:pb-3 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:font-bold prose-h3:text-gray-800 prose-h3:mt-8 prose-h3:mb-4 prose-h3:pl-4 prose-h3:border-l-4 prose-h3:border-lime">
-              {column.content && <RichText data={column.content} converters={{
+            <div className="
+              text-gray-800 leading-[1.8] sm:leading-[2] tracking-[0.03em]
+              [&_p]:mb-8 [&_p]:text-[1rem] sm:[&_p]:text-[1.125rem]
+              [&_h2]:text-2xl sm:[&_h2]:text-3xl [&_h2]:font-black [&_h2]:border-b-4 [&_h2]:border-yellow [&_h2]:pb-4 [&_h2]:mt-16 [&_h2]:mb-8
+              [&_h3]:text-xl sm:[&_h3]:text-2xl [&_h3]:font-bold [&_h3]:border-l-4 [&_h3]:border-lime [&_h3]:pl-4 [&_h3]:mt-14 [&_h3]:mb-6
+              [&_h4]:text-lg sm:[&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-10 [&_h4]:mb-4
+              [&_a]:text-blue [&_a]:border-b-2 [&_a]:border-blue/30 [&_a]:font-bold hover:[&_a]:border-blue hover:[&_a]:bg-blue/5 [&_a]:transition-all
+              [&_ul]:list-disc [&_ul]:pl-6 sm:[&_ul]:pl-8 [&_ul]:mb-8 [&_ul]:space-y-4
+              [&_ol]:list-decimal [&_ol]:pl-6 sm:[&_ol]:pl-8 [&_ol]:mb-8 [&_ol]:space-y-4
+              [&_li]:text-[1rem] sm:[&_li]:text-[1.125rem]
+              [&_img]:rounded-2xl [&_img]:border-3 [&_img]:border-border [&_img]:shadow-hard hover:[&_img]:shadow-hard-lg [&_img]:transition-shadow [&_img]:my-12 [&_img]:w-full [&_img]:object-cover
+              [&_strong]:font-black [&_strong]:text-black [&_strong]:underline [&_strong]:decoration-pink/30 [&_strong]:decoration-4 [&_strong]:underline-offset-4
+              [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-6 [&_blockquote]:text-gray-600 [&_blockquote]:my-10 [&_blockquote]:bg-gray-50 [&_blockquote]:py-6 [&_blockquote]:rounded-r-2xl
+            ">
+              {column.content && <RichText data={column.content} converters={({ defaultConverters }) => ({
+                ...defaultConverters,
                 blocks: {
-                  cta: ({ node }) => <CtaComponent fields={node.fields} />,
-                  accordion: ({ node }) => <AccordionComponent fields={node.fields} />,
-                  customTable: ({ node }) => <CustomTableComponent fields={node.fields} />,
+                  ...defaultConverters.blocks,
+                  cta: ({ node }: { node: any }) => <CtaComponent fields={node.fields} />,
+                  accordion: ({ node }: { node: any }) => <AccordionComponent fields={node.fields} />,
+                  customTable: ({ node }: { node: any }) => <CustomTableComponent fields={node.fields} />,
                 }
-              }}/>}
+              })}/>}
             </div>
 
             {column.tags && (column.tags as any[]).length > 0 && (
