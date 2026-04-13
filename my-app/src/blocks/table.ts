@@ -12,12 +12,20 @@ export const Table: Block = {
       type: 'array',
       label: '行データ',
       minRows: 1,
+      labels: {
+        singular: '行',
+        plural: '行',
+      },
       fields: [
         {
           name: 'columns',
           type: 'array',
           label: '列データ',
           minRows: 1,
+          labels: {
+            singular: '列',
+            plural: '列',
+          },
           fields: [
             {
               name: 'text',

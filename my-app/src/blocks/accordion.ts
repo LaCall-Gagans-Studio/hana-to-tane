@@ -13,6 +13,10 @@ export const Accordion: Block = {
       required: true,
       label: 'アコーディオン項目',
       minRows: 1,
+      labels: {
+        singular: 'アコーディオン項目',
+        plural: 'アコーディオン項目',
+      },
       fields: [
         {
           name: 'title',

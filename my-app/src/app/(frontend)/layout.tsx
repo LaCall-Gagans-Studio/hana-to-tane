@@ -33,12 +33,21 @@ export const metadata: Metadata = {
     siteName: 'はなとたね',
     locale: 'ja_JP',
     type: 'website',
+    images: [
+      {
+        url: '/logo.png', // Fallback global OGP image
+        width: 1200,
+        height: 630,
+        alt: 'はなとたね OGP',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'はなとたね公式サイト｜鳥取市のフリースクール＆プレーパーク',
     description:
       'はなとたねは2023年に設立、現在は鳥取市内にフリースクール「森の子がっこういっぽ」の運営をしています。鳥取にプレーパークを作るべく、活動しています。',
+    images: ['/logo.png'],
   },
 }
 
