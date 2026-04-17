@@ -6,6 +6,7 @@ import { Table } from '../blocks/table'
 
 export const Column: CollectionConfig = {
   slug: 'column',
+  versions: { drafts: true },
   labels: {
     singular: 'コラム',
     plural: 'コラム',

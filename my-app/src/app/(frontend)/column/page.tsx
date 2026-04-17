@@ -52,7 +52,13 @@ export default async function ColumnPage({
   const payload = await getPayload({ config: configPromise })
 
   const where: any = {
-    and: [],
+    and: [
+      {
+        _status: {
+          equals: 'published',
+        },
+      },
+    ],
   }
 
   if (query) {

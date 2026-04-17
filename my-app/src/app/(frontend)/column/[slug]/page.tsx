@@ -28,9 +28,18 @@ export async function generateMetadata({
   const columns = await payload.find({
     collection: 'column',
     where: {
-      slug: {
-        equals: slug,
-      },
+      and: [
+        {
+          slug: {
+            equals: slug,
+          },
+        },
+        {
+          _status: {
+            equals: 'published',
+          },
+        },
+      ],
     },
     limit: 1,
   })
@@ -71,9 +80,18 @@ export default async function ColumnDetailPage({ params }: { params: Promise<{ s
   const columns = await payload.find({
     collection: 'column',
     where: {
-      slug: {
-        equals: slug,
-      },
+      and: [
+        {
+          slug: {
+            equals: slug,
+          },
+        },
+        {
+          _status: {
+            equals: 'published',
+          },
+        },
+      ],
     },
     limit: 1,
   })
