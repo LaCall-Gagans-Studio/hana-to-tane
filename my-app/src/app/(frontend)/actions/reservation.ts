@@ -94,12 +94,16 @@ export async function submitReservation(
     }
   }
 
-  const name = formData.get('name') as string
-  const email = formData.get('email') as string
-  if (!email || !email.includes('@')) {
-    return { success: false, error: 'メールアドレスが正しくありません' }
+  const name = (formData.get('name') as string)?.trim() || ''
+  const email = (formData.get('email') as string)?.trim() || ''
+  
+  // より厳格なメールアドレス形式チェック
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!email || !emailRegex.test(email)) {
+    return { success: false, error: '有効なメールアドレスの形式ではありません。正しく入力されているかご確認ください。' }
   }
-  const phone = formData.get('phone') as string
+  
+  const phone = (formData.get('phone') as string)?.trim() || ''
 
   if (!name || !email || !phone) {
     return { success: false, error: '必須項目が入力されていません。' }

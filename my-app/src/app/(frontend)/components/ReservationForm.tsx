@@ -51,6 +51,15 @@ const InnerReservationForm = ({ column }: Props) => {
 
     try {
       const token = await executeRecaptcha('reservation_submit')
+      
+      console.log('Generated reCAPTCHA token:', token)
+
+      if (!token) {
+        setError('スパム検証トークンの生成に失敗しました。ブラウザの通信状態か、設定キーをご確認ください。')
+        setIsLoading(false)
+        return
+      }
+
       formData.append('recaptchaToken', token)
       const result = await submitReservation(column.id, formData)
 
