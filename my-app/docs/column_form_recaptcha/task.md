@@ -1,0 +1,4 @@
+- [x] 必要なパッケージ (`react-google-recaptcha`, `@types/react-google-recaptcha`) のインストール
+- [x] テスト用または本番用の環境変数（Site Key, Secret Key）の設定
+- [x] `src/app/(frontend)/components/ReservationForm.tsx` への `ReCAPTCHA` コンポーネント追加とトークン取得処理の実装
+- [x] `src/app/(frontend)/actions/reservation.ts` へのトークン検証ロジック(`google recaptcha siteverify`)追加

@@ -59,6 +59,41 @@ export async function submitReservation(
   }
 
   // 4. Extract Data
+  const recaptchaToken = formData.get('recaptchaToken') as string
+
+  if (!recaptchaToken) {
+    return { success: false, error: 'スパム検証情報が不足しています。画面を再読み込みしてお試しください。' }
+  }
+
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY
+  if (secretKey) {
+    try {
+      const recaptchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `secret=${secretKey}&response=${recaptchaToken}`,
+      })
+      const recaptchaData = await recaptchaRes.json()
+      
+      console.log('reCAPTCHA Verify Response:', recaptchaData) // エラー原因の特定用
+      
+      if (!recaptchaData.success) {
+        // detailを追加してフロントに返すか、サーバーログで確認
+        return { success: false, error: `スパム検証に失敗しました。詳細: ${recaptchaData['error-codes']?.join(', ') || '不明'}` }
+      }
+      
+      // v3 score check (usually 0.0 ~ 1.0)
+      if (recaptchaData.score !== undefined && recaptchaData.score < 0.5) {
+        return { success: false, error: 'スパムの可能性が高いと判定されました。' }
+      }
+    } catch (error) {
+      console.error('reCAPTCHA verification error:', error)
+      return { success: false, error: 'reCAPTCHAの通信エラーが発生しました。' }
+    }
+  }
+
   const name = formData.get('name') as string
   const email = formData.get('email') as string
   if (!email || !email.includes('@')) {

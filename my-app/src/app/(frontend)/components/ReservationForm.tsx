@@ -4,16 +4,18 @@ import React, { useState } from 'react'
 import { Column } from '@/payload-types'
 import { submitReservation } from '../actions/reservation'
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 type Props = {
   column: Column
 }
 
-export const ReservationForm = ({ column }: Props) => {
+const InnerReservationForm = ({ column }: Props) => {
   const settings = column.reservationSettings
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   if (!settings?.enabled) {
     return null
@@ -35,17 +37,33 @@ export const ReservationForm = ({ column }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!executeRecaptcha) {
+      setError('スパム検証モジュールがまだ読み込まれていません。通信環境をご確認ください。')
+      return
+    }
+
     setIsLoading(true)
     setError(null)
 
+    // e.currentTarget が非同期後に参照不能になるため、事前にFormDataを作成
     const formData = new FormData(e.currentTarget)
-    const result = await submitReservation(column.id, formData)
 
-    if (result.success) {
-      setIsSuccess(true)
-    } else {
-      setError(result.error || '予期せぬエラーが発生しました。')
+    try {
+      const token = await executeRecaptcha('reservation_submit')
+      formData.append('recaptchaToken', token)
+      const result = await submitReservation(column.id, formData)
+
+      if (result.success) {
+        setIsSuccess(true)
+      } else {
+        setError(result.error || '予期せぬエラーが発生しました。')
+      }
+    } catch (err) {
+      console.error('reCAPTCHA execution error:', err)
+      setError('スパム検証中にエラーが発生しました。')
     }
+    
     setIsLoading(false)
   }
 
@@ -180,5 +198,15 @@ export const ReservationForm = ({ column }: Props) => {
         </button>
       </form>
     </div>
+  )
+}
+
+export const ReservationForm = ({ column }: Props) => {
+  return (
+    <GoogleReCaptchaProvider 
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+    >
+      <InnerReservationForm column={column} />
+    </GoogleReCaptchaProvider>
   )
 }
