@@ -132,7 +132,7 @@ export async function getOrCreatePlant(transferId?: string) {
       hueShift: 0,
       maxHeight: 0,
       waterCount: 0,
-      lastWatered: new Date().toISOString(),
+      lastWatered: null,
     },
   })
 

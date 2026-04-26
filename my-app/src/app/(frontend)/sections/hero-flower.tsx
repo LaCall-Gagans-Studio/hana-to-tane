@@ -604,6 +604,27 @@ const PlantVisual = ({
 }
 
 // --- Main Component ---
+const getLocalYYYYMMDD = (dateInput?: string | Date | null) => {
+  if (!dateInput) return null
+  const d = new Date(dateInput)
+  if (isNaN(d.getTime())) {
+    if (typeof dateInput === 'string') {
+      const fallback = new Date(dateInput.replace(/-/g, '/').replace('T', ' '))
+      if (!isNaN(fallback.getTime())) {
+        const fy = fallback.getFullYear()
+        const fm = String(fallback.getMonth() + 1).padStart(2, '0')
+        const fd = String(fallback.getDate()).padStart(2, '0')
+        return `${fy}-${fm}-${fd}`
+      }
+    }
+    return null
+  }
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 export const HeroFlower = () => {
   // State
   const [plant, setPlant] = useState<PlantData>({
@@ -706,8 +727,8 @@ export const HeroFlower = () => {
     if (isWatering) return
     if (plant.id === 'init') return
 
-    const today = new Date().toISOString().split('T')[0]
-    const lastWateredDate = plant.lastWatered ? plant.lastWatered.split('T')[0] : null
+    const today = getLocalYYYYMMDD(new Date())
+    const lastWateredDate = plant.lastWatered ? getLocalYYYYMMDD(plant.lastWatered) : null
 
     if (!debugMode && lastWateredDate === today) {
       addMessage('きょうは もう みずを あげたよ！')
@@ -740,7 +761,7 @@ export const HeroFlower = () => {
       if (lastWateredDate) {
         const yesterday = new Date()
         yesterday.setDate(yesterday.getDate() - 1)
-        const yesterdayStr = yesterday.toISOString().split('T')[0]
+        const yesterdayStr = getLocalYYYYMMDD(yesterday)
         if (lastWateredDate === yesterdayStr) {
           newStreak += 1
         } else if (lastWateredDate !== today) {
@@ -910,8 +931,8 @@ export const HeroFlower = () => {
   const isWateredToday = () => {
     if (debugMode) return false
     if (!plant.lastWatered) return false
-    const today = new Date().toISOString().split('T')[0]
-    return plant.lastWatered.split('T')[0] === today
+    const today = getLocalYYYYMMDD(new Date())
+    return getLocalYYYYMMDD(plant.lastWatered) === today
   }
 
   return (
