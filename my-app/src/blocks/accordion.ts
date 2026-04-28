@@ -26,7 +26,7 @@ export const Accordion: Block = {
         },
         {
           name: 'content',
-          type: 'textarea',
+          type: 'richText',
           required: true,
           label: '内容',
         },

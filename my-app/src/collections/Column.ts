@@ -1,8 +1,12 @@
 import type { CollectionConfig } from 'payload'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { BlocksFeature, lexicalEditor, EXPERIMENTAL_TableFeature } from '@payloadcms/richtext-lexical'
 import { CTA } from '../blocks/cta'
 import { Accordion } from '../blocks/accordion'
 import { Table } from '../blocks/table'
+import { FlexibleColumns } from '../blocks/flexibleColumns'
+import { VideoEmbed } from '../blocks/videoEmbed'
+import { Callout } from '../blocks/callout'
+import { Quote } from '../blocks/quote'
 
 export const Column: CollectionConfig = {
   slug: 'column',
@@ -15,6 +19,11 @@ export const Column: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedDate', 'updatedAt'],
     group: '更新コンテンツ',
+    livePreview: {
+      url: ({ data }) => {
+        return `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/column/${data?.slug || ''}?preview=true`;
+      },
+    },
   },
   access: {
     read: () => true,
@@ -88,8 +97,9 @@ export const Column: CollectionConfig = {
       editor: lexicalEditor({
         features: ({ rootFeatures }) => [
           ...rootFeatures,
+          EXPERIMENTAL_TableFeature(),
           BlocksFeature({
-            blocks: [CTA, Accordion, Table],
+            blocks: [CTA, Accordion, Table, FlexibleColumns, VideoEmbed, Callout, Quote],
           }),
         ],
       }),
