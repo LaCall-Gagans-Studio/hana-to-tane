@@ -144,7 +144,7 @@ export const CalloutComponent = ({ fields }: { fields: any }) => {
 export const QuoteComponent = ({ fields }: { fields: any }) => {
   return (
     <figure className="my-10 p-8 bg-gray-50 rounded-2xl border-l-8 border-pink border-y-3 border-r-3 border-y-border border-r-border shadow-hard relative">
-      <div className="absolute top-4 left-4 text-5xl text-pink/20 font-serif leading-none">"</div>
+      <div className="absolute top-4 left-4 text-5xl text-pink/20 font-serif leading-none">&quot;</div>
       <blockquote className="relative z-10 text-xl font-bold text-gray-700 italic leading-relaxed mb-4 whitespace-pre-wrap">
         {fields.text}
       </blockquote>
