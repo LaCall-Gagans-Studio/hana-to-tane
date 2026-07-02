@@ -144,6 +144,8 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * ※ 今後追加する画像は WebP（.webp）形式のみアップロードしてください。JPEG・PNG などは受け付けません。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
