@@ -283,6 +283,21 @@ export const Freeschool: GlobalConfig = {
                 },
                 { name: 'body', label: '説明 (リッチテキスト)', type: 'richText' },
                 {
+                  name: 'activityDays',
+                  label: '活動曜日',
+                  type: 'select',
+                  hasMany: true,
+                  options: [
+                    { label: '日', value: 'sun' },
+                    { label: '月', value: 'mon' },
+                    { label: '火', value: 'tue' },
+                    { label: '水', value: 'wed' },
+                    { label: '木', value: 'thu' },
+                    { label: '金', value: 'fri' },
+                    { label: '土', value: 'sat' },
+                  ],
+                },
+                {
                   name: 'scheduleItems',
                   label: 'スケジュール詳細 (黒板アイテム)',
                   type: 'array',

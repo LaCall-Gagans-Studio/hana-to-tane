@@ -48,7 +48,10 @@ export default async function Page() {
     <div className="font-zenMaruGothic">
       <Hero siteContent={siteContent} />
       <News />
-      <Calendar events={events.docs} />
+      <Calendar
+        events={events.docs}
+        freeschoolActivityDays={freeschoolData.schedule?.activityDays}
+      />
       <About
         aboutData={aboutData}
         freeschoolData={freeschoolData}

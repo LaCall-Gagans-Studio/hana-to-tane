@@ -4,13 +4,19 @@ import React, { useState } from 'react'
 import { Event } from '@/payload-types'
 import Link from 'next/link'
 
+type ActivityDay = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat'
+
 type CalendarProps = {
   events: Event[]
+  freeschoolActivityDays?: ActivityDay[] | null
 }
 
 const DAYS = ['日', '月', '火', '水', '木', '金', '土']
+const DAY_VALUES: ActivityDay[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
-export const Calendar = ({ events }: CalendarProps) => {
+export const Calendar = ({ events, freeschoolActivityDays }: CalendarProps) => {
+  const isFreeschoolDay = (dayIndex: number) =>
+    freeschoolActivityDays?.includes(DAY_VALUES[dayIndex]) ?? false
   const [currentDate, setCurrentDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedEvents, setSelectedEvents] = useState<any[]>([])
@@ -154,26 +160,51 @@ export const Calendar = ({ events }: CalendarProps) => {
               {DAYS.map((d, i) => (
                 <div
                   key={d}
-                  className={`font-black text-lg ${i === 0 ? 'text-pink' : i === 6 ? 'text-blue' : 'text-text'}`}
+                  className={`relative font-black text-lg rounded-lg py-1 ${
+                    isFreeschoolDay(i) ? 'bg-green/10' : ''
+                  } ${i === 0 ? 'text-pink' : i === 6 ? 'text-blue' : 'text-text'}`}
                 >
                   {d}
                 </div>
               ))}
 
+              {/* 開所日ラベル */}
+              {DAYS.map((d, i) => (
+                <div
+                  key={`open-label-${d}`}
+                  className="flex justify-center items-center min-h-6 md:min-h-7 -mt-1 mb-1"
+                >
+                  {isFreeschoolDay(i) && (
+                    <span className="text-[10px] md:text-xs font-black text-green-800 bg-green/15 border border-green/40 rounded-full px-2 py-0.5 leading-none whitespace-nowrap">
+                      開所日
+                    </span>
+                  )}
+                </div>
+              ))}
+
               {/* Empty slots */}
               {Array.from({ length: firstDay }).map((_, i) => (
-                <div key={`empty-${i}`} className="aspect-square"></div>
+                <div
+                  key={`empty-${i}`}
+                  className={`aspect-square rounded-xl ${isFreeschoolDay(i) ? 'bg-green/10' : ''}`}
+                />
               ))}
 
               {/* Calendar Grid */}
               {Array.from({ length: days }).map((_, i) => {
                 const day = i + 1
                 const dayEvents = getEventsForDay(day)
+                const dayOfWeekIndex = new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  day,
+                ).getDay()
 
                 const isToday = isSameDay(
                   new Date(),
                   new Date(currentDate.getFullYear(), currentDate.getMonth(), day),
                 )
+                const showFreeschoolTint = isFreeschoolDay(dayOfWeekIndex) && !isToday
 
                 return (
                   <div
@@ -182,52 +213,60 @@ export const Calendar = ({ events }: CalendarProps) => {
                     onClick={() => handleDateClick(day)}
                   >
                     <div
-                      className={`w-full h-full border-2 border-border rounded-xl flex flex-col justify-start p-1 transition-all group-hover:-translate-y-1 group-hover:shadow-md overflow-hidden relative
-                            ${isToday ? 'bg-lime' : 'bg-white group-hover:bg-yellow/10'}
-                        `}
+                      className={`relative w-full h-full border-2 border-border rounded-xl overflow-hidden transition-all group-hover:-translate-y-1 group-hover:shadow-md
+                          ${isToday ? 'bg-lime' : 'bg-white group-hover:bg-yellow/10'}
+                      `}
                     >
-                      {/* Date Header */}
-                      <span
-                        className={`text-sm font-black leading-none mb-1 ml-1 ${isToday ? 'text-text' : 'text-gray-400 group-hover:text-text'}`}
-                      >
-                        {day}
-                      </span>
+                      {showFreeschoolTint && (
+                        <div
+                          className="absolute inset-0 bg-green/10 pointer-events-none"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <div className="relative z-1 flex h-full flex-col justify-start p-1">
+                        {/* Date Header */}
+                        <span
+                          className={`text-sm font-black leading-none mb-1 ml-1 ${isToday ? 'text-text' : 'text-gray-400 group-hover:text-text'}`}
+                        >
+                          {day}
+                        </span>
 
-                      {/* Desktop: Event List (Shows titles) */}
-                      <div className="hidden md:flex flex-col gap-1 w-full overflow-hidden">
-                        {dayEvents.map((event, idx) => (
-                          <div
-                            key={idx}
-                            title={event.title}
-                            className={`text-[10px] px-1 py-0.5 rounded truncate font-bold leading-tight
-                                ${
-                                  event.isHighlight
-                                    ? 'bg-yellow text-text border border-black'
-                                    : event.type === 'free_school'
-                                      ? 'bg-green/20 text-green-800'
-                                      : 'bg-pink/20 text-pink-800'
-                                }
-                           `}
-                          >
-                            {event.title}
-                          </div>
-                        ))}
-                      </div>
+                        {/* Desktop: Event List (Shows titles) */}
+                        <div className="hidden md:flex flex-col gap-1 w-full overflow-hidden">
+                          {dayEvents.map((event, idx) => (
+                            <div
+                              key={idx}
+                              title={event.title}
+                              className={`text-[10px] px-1 py-0.5 rounded truncate font-bold leading-tight
+                                  ${
+                                    event.isHighlight
+                                      ? 'bg-yellow text-text border border-black'
+                                      : event.type === 'free_school'
+                                        ? 'bg-green/20 text-green-800'
+                                        : 'bg-pink/20 text-pink-800'
+                                  }
+                             `}
+                            >
+                              {event.title}
+                            </div>
+                          ))}
+                        </div>
 
-                      {/* Mobile: Dots (Fallback) */}
-                      <div className="md:hidden flex flex-wrap gap-1 px-1 content-start">
-                        {dayEvents.map((event, idx) => (
-                          <div
-                            key={idx}
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              event.isHighlight
-                                ? 'bg-yellow ring-1 ring-black'
-                                : event.type === 'free_school'
-                                  ? 'bg-green'
-                                  : 'bg-pink'
-                            }`}
-                          ></div>
-                        ))}
+                        {/* Mobile: Dots (Fallback) */}
+                        <div className="md:hidden flex flex-wrap gap-1 px-1 content-start">
+                          {dayEvents.map((event, idx) => (
+                            <div
+                              key={idx}
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                event.isHighlight
+                                  ? 'bg-yellow ring-1 ring-black'
+                                  : event.type === 'free_school'
+                                    ? 'bg-green'
+                                    : 'bg-pink'
+                              }`}
+                            ></div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -248,6 +287,12 @@ export const Calendar = ({ events }: CalendarProps) => {
                 <div className="w-4 h-4 bg-green rounded-full border-2 border-border"></div>
                 <span className="text-text font-bold">フリースクール</span>
               </div>
+              {freeschoolActivityDays && freeschoolActivityDays.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-green/10 rounded border-2 border-green/40"></div>
+                  <span className="text-text font-bold">フリースクール活動曜日</span>
+                </div>
+              )}
             </div>
           </div>
 
