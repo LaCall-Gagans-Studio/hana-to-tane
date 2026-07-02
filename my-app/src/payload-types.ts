@@ -202,7 +202,11 @@ export interface Column {
     customFields?:
       | {
           label: string;
-          type?: ('text' | 'textarea' | 'radio') | null;
+          type?: ('text' | 'textarea' | 'radio' | 'content') | null;
+          /**
+           * 詳細説明や送信前の同意文など、フォームに表示する文章を入力してください。
+           */
+          content?: string | null;
           options?:
             | {
                 value?: string | null;
@@ -556,6 +560,7 @@ export interface ColumnSelect<T extends boolean = true> {
           | {
               label?: T;
               type?: T;
+              content?: T;
               options?:
                 | T
                 | {

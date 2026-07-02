@@ -153,7 +153,26 @@ const InnerReservationForm = ({ column }: Props) => {
         </div>
 
         {/* Custom Fields */}
-        {settings.customFields?.map((field: any) => (
+        {settings.customFields?.map((field: any) => {
+          if (field.type === 'content') {
+            return (
+              <div
+                key={field.id}
+                className="bg-gray-50 border-2 border-border rounded-xl p-4 md:p-5"
+              >
+                {field.label && (
+                  <p className="text-lg font-black text-slate-700 mb-2">{field.label}</p>
+                )}
+                {field.content && (
+                  <p className="text-slate-600 font-bold leading-relaxed whitespace-pre-wrap">
+                    {field.content}
+                  </p>
+                )}
+              </div>
+            )
+          }
+
+          return (
           <div key={field.id} className="flex flex-col gap-2">
             <label className="text-lg font-black text-slate-700">{field.label}</label>
             {field.type === 'text' && (
@@ -189,7 +208,8 @@ const InnerReservationForm = ({ column }: Props) => {
               </div>
             )}
           </div>
-        ))}
+          )
+        })}
 
         <button
           type="submit"

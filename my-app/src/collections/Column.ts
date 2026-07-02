@@ -153,7 +153,7 @@ export const Column: CollectionConfig = {
           fields: [
             {
               name: 'label',
-              label: '質問文',
+              label: '質問文 / 見出し',
               type: 'text',
               required: true,
             },
@@ -165,8 +165,18 @@ export const Column: CollectionConfig = {
                 { label: '1行テキスト', value: 'text' },
                 { label: '複数行テキスト', value: 'textarea' },
                 { label: 'ラジオボタン (はい/いいえ等)', value: 'radio' },
+                { label: '文章（表示のみ）', value: 'content' },
               ],
               defaultValue: 'text',
+            },
+            {
+              name: 'content',
+              label: '表示文章',
+              type: 'textarea',
+              admin: {
+                condition: (_, siblingData) => siblingData?.type === 'content',
+                description: '詳細説明や送信前の同意文など、フォームに表示する文章を入力してください。',
+              },
             },
             {
               name: 'options',

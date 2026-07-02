@@ -113,6 +113,8 @@ export async function submitReservation(
   const responses = []
   if (settings.customFields) {
     for (const field of settings.customFields) {
+      if (field.type === 'content') continue
+
       const answer = formData.get(`custom_${field.id}`) as string
       if (answer) {
         responses.push({
