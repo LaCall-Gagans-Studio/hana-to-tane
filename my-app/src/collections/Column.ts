@@ -113,43 +113,78 @@ export const Column: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    // @deprecated — 移行完了後に削除する。管理画面には表示しない。
     {
       name: 'reservationSettings',
-      label: '予約設定',
+      label: '予約設定 (旧)',
       type: 'group',
+      admin: { condition: () => false },
+      fields: [
+        { name: 'enabled', type: 'checkbox', defaultValue: false },
+        { name: 'capacity', type: 'number' },
+        { name: 'deadline', type: 'date' },
+        {
+          name: 'customFields',
+          type: 'array',
+          fields: [
+            { name: 'label', type: 'text', required: true },
+            {
+              name: 'type',
+              type: 'select',
+              options: [
+                { label: '1行テキスト', value: 'text' },
+                { label: '複数行テキスト', value: 'textarea' },
+                { label: 'ラジオボタン', value: 'radio' },
+                { label: '文章', value: 'content' },
+              ],
+              defaultValue: 'text',
+            },
+            { name: 'content', type: 'textarea' },
+            {
+              name: 'options',
+              type: 'array',
+              fields: [{ name: 'value', type: 'text' }],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'reservationSlots',
+      label: '予約枠',
+      type: 'array',
+      labels: { singular: '予約枠', plural: '予約枠' },
+      admin: { initCollapsed: true },
       fields: [
         {
+          name: 'name',
+          label: '予約名称',
+          type: 'text',
+          required: true,
+        },
+        {
           name: 'enabled',
-          label: '予約を受け付ける',
+          label: '受付中',
           type: 'checkbox',
-          defaultValue: false,
+          defaultValue: true,
         },
         {
           name: 'capacity',
           label: '定員 (人)',
           type: 'number',
-          admin: {
-            condition: (_, siblingData) => siblingData?.enabled,
-          },
         },
         {
           name: 'deadline',
           label: '締め切り日時',
           type: 'date',
           admin: {
-            date: {
-              pickerAppearance: 'dayAndTime',
-            },
-            condition: (_, siblingData) => siblingData?.enabled,
+            date: { pickerAppearance: 'dayAndTime' },
           },
         },
         {
           name: 'customFields',
           label: '追加質問項目',
           type: 'array',
-          admin: {
-            condition: (_, siblingData) => siblingData?.enabled,
-          },
           fields: [
             {
               name: 'label',
@@ -195,18 +230,19 @@ export const Column: CollectionConfig = {
             },
           ],
         },
-        {
-          name: 'reservationManager',
-          label: '予約管理パネル',
-          type: 'ui',
-          admin: {
-            components: {
-              Field: '@/components/admin/ReservationManager',
-            },
-            condition: (_, siblingData) => siblingData?.enabled,
-          },
-        },
       ],
+    },
+    {
+      name: 'reservationManager',
+      label: '予約管理パネル',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/ReservationManager',
+        },
+        condition: (data) =>
+          Array.isArray(data?.reservationSlots) && data.reservationSlots.length > 0,
+      },
     },
   ],
 }

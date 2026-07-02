@@ -3,37 +3,44 @@
 import React, { useState } from 'react'
 import { Column } from '@/payload-types'
 import { submitReservation } from '../actions/reservation'
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle, Loader2, ChevronDown } from 'lucide-react'
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 type Props = {
   column: Column
 }
 
-const InnerReservationForm = ({ column }: Props) => {
-  const settings = column.reservationSettings
+type ReservationSlot = NonNullable<Column['reservationSlots']>[number]
+
+const SingleSlotForm = ({
+  column,
+  slot,
+}: {
+  column: Column
+  slot: ReservationSlot
+}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const { executeRecaptcha } = useGoogleReCaptcha()
 
-  if (!settings?.enabled) {
-    return null
-  }
+  const isDeadlinePassed = slot.deadline && new Date() > new Date(slot.deadline)
 
-  const isDeadlinePassed = settings.deadline && new Date() > new Date(settings.deadline)
-
-  if (isDeadlinePassed) {
+  if (!slot.enabled) {
     return (
-      <div className="bg-gray-100 border-3 border-gray-300 rounded-xl p-8 text-center">
-        <h3 className="text-xl font-bold text-gray-500">予約受付は終了しました</h3>
+      <div className="text-center py-6">
+        <p className="text-gray-500 font-bold">この予約枠は現在受付を停止しています</p>
       </div>
     )
   }
 
-  // Note: Capacity check strictly happens on server action to avoid race conditions,
-  // but we could also pass a "isFull" prop if we did a server-side check before rendering.
-  // For now, we rely on server response.
+  if (isDeadlinePassed) {
+    return (
+      <div className="text-center py-6">
+        <p className="text-gray-500 font-bold">予約受付は終了しました</p>
+      </div>
+    )
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,13 +53,10 @@ const InnerReservationForm = ({ column }: Props) => {
     setIsLoading(true)
     setError(null)
 
-    // e.currentTarget が非同期後に参照不能になるため、事前にFormDataを作成
     const formData = new FormData(e.currentTarget)
 
     try {
       const token = await executeRecaptcha('reservation_submit')
-      
-      console.log('Generated reCAPTCHA token:', token)
 
       if (!token) {
         setError('スパム検証トークンの生成に失敗しました。ブラウザの通信状態か、設定キーをご確認ください。')
@@ -61,6 +65,7 @@ const InnerReservationForm = ({ column }: Props) => {
       }
 
       formData.append('recaptchaToken', token)
+      formData.append('slotId', slot.id!)
       const result = await submitReservation(column.id, formData)
 
       if (result.success) {
@@ -72,20 +77,18 @@ const InnerReservationForm = ({ column }: Props) => {
       console.error('reCAPTCHA execution error:', err)
       setError('スパム検証中にエラーが発生しました。')
     }
-    
+
     setIsLoading(false)
   }
 
   if (isSuccess) {
     return (
-      <div className="bg-white border-3 border-green rounded-xl p-8 text-center shadow-hard animate-fade-in">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-green text-white rounded-full mb-4 shadow-sm">
-          <CheckCircle size={32} />
+      <div className="text-center py-6">
+        <div className="inline-flex items-center justify-center w-14 h-14 bg-green text-white rounded-full mb-3">
+          <CheckCircle size={28} />
         </div>
-        <h3 className="text-2xl font-black text-slate-800 mb-4">予約を受け付けました</h3>
-        <p className="text-slate-600 font-bold mb-6 leading-relaxed">
-          ご予約ありがとうございます。
-          <br />
+        <h3 className="text-xl font-black text-slate-800 mb-2">予約を受け付けました</h3>
+        <p className="text-slate-600 font-bold leading-relaxed">
           確認メールをお送りしましたので、ご確認ください。
         </p>
       </div>
@@ -93,17 +96,7 @@ const InnerReservationForm = ({ column }: Props) => {
   }
 
   return (
-    <div className="bg-white border-3 border-pink rounded-xl p-6 md:p-8 shadow-hard relative overflow-hidden">
-      {/* Decor */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-pink/10 rounded-bl-full pointer-events-none"></div>
-
-      <div className="text-center mb-8">
-        <span className="inline-block px-4 py-1 bg-pink text-white font-black text-sm rounded-full mb-4 shadow-sm border-2 border-border">
-          RESERVATION
-        </span>
-        <h2 className="text-3xl font-black text-slate-800">参加予約</h2>
-      </div>
-
+    <>
       {error && (
         <div className="bg-red-50 border-2 border-red-500 text-red-700 p-4 rounded-lg mb-6 flex items-start gap-3">
           <AlertCircle className="shrink-0 mt-0.5" size={20} />
@@ -112,9 +105,8 @@ const InnerReservationForm = ({ column }: Props) => {
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        {/* Basic Info */}
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-lg font-black text-slate-700">
+          <label className="text-lg font-black text-slate-700">
             お名前 <span className="text-pink text-xs align-top ml-1">●必須</span>
           </label>
           <input
@@ -127,7 +119,7 @@ const InnerReservationForm = ({ column }: Props) => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-lg font-black text-slate-700">
+          <label className="text-lg font-black text-slate-700">
             メールアドレス <span className="text-pink text-xs align-top ml-1">●必須</span>
           </label>
           <input
@@ -140,7 +132,7 @@ const InnerReservationForm = ({ column }: Props) => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="text-lg font-black text-slate-700">
+          <label className="text-lg font-black text-slate-700">
             電話番号 <span className="text-pink text-xs align-top ml-1">●必須</span>
           </label>
           <input
@@ -153,7 +145,7 @@ const InnerReservationForm = ({ column }: Props) => {
         </div>
 
         {/* Custom Fields */}
-        {settings.customFields?.map((field: any) => {
+        {slot.customFields?.map((field: any) => {
           if (field.type === 'content') {
             return (
               <div
@@ -173,41 +165,41 @@ const InnerReservationForm = ({ column }: Props) => {
           }
 
           return (
-          <div key={field.id} className="flex flex-col gap-2">
-            <label className="text-lg font-black text-slate-700">{field.label}</label>
-            {field.type === 'text' && (
-              <input
-                name={`custom_${field.id}`}
-                type="text"
-                className="w-full bg-white border-3 border-border rounded-xl p-3 font-bold text-slate-800 focus:outline-none focus:border-pink focus:ring-4 focus:ring-pink/20 transition-all"
-              />
-            )}
-            {field.type === 'textarea' && (
-              <textarea
-                name={`custom_${field.id}`}
-                rows={3}
-                className="w-full bg-white border-3 border-border rounded-xl p-3 font-bold text-slate-800 focus:outline-none focus:border-pink focus:ring-4 focus:ring-pink/20 transition-all resize-y"
-              />
-            )}
-            {field.type === 'radio' && (
-              <div className="flex flex-wrap gap-4 mt-2">
-                {field.options?.map((opt: any) => (
-                  <label
-                    key={opt.id}
-                    className="flex items-center gap-2 cursor-pointer bg-gray-50 px-4 py-2 rounded-lg border-2 border-border hover:bg-pink/10 transition-colors"
-                  >
-                    <input
-                      type="radio"
-                      name={`custom_${field.id}`}
-                      value={opt.value}
-                      className="accent-pink w-5 h-5 cursor-pointer"
-                    />
-                    <span className="font-bold text-slate-700">{opt.value}</span>
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
+            <div key={field.id} className="flex flex-col gap-2">
+              <label className="text-lg font-black text-slate-700">{field.label}</label>
+              {field.type === 'text' && (
+                <input
+                  name={`custom_${field.id}`}
+                  type="text"
+                  className="w-full bg-white border-3 border-border rounded-xl p-3 font-bold text-slate-800 focus:outline-none focus:border-pink focus:ring-4 focus:ring-pink/20 transition-all"
+                />
+              )}
+              {field.type === 'textarea' && (
+                <textarea
+                  name={`custom_${field.id}`}
+                  rows={3}
+                  className="w-full bg-white border-3 border-border rounded-xl p-3 font-bold text-slate-800 focus:outline-none focus:border-pink focus:ring-4 focus:ring-pink/20 transition-all resize-y"
+                />
+              )}
+              {field.type === 'radio' && (
+                <div className="flex flex-wrap gap-4 mt-2">
+                  {field.options?.map((opt: any) => (
+                    <label
+                      key={opt.id}
+                      className="flex items-center gap-2 cursor-pointer bg-gray-50 px-4 py-2 rounded-lg border-2 border-border hover:bg-pink/10 transition-colors"
+                    >
+                      <input
+                        type="radio"
+                        name={`custom_${field.id}`}
+                        value={opt.value}
+                        className="accent-pink w-5 h-5 cursor-pointer"
+                      />
+                      <span className="font-bold text-slate-700">{opt.value}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
           )
         })}
 
@@ -226,13 +218,92 @@ const InnerReservationForm = ({ column }: Props) => {
           )}
         </button>
       </form>
+    </>
+  )
+}
+
+const InnerReservationForm = ({ column }: Props) => {
+  const slots = column.reservationSlots
+  const [openSlotId, setOpenSlotId] = useState<string | null>(null)
+
+  if (!slots || slots.length === 0) return null
+
+  const toggleSlot = (id: string) => {
+    setOpenSlotId((prev) => (prev === id ? null : id))
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="text-center mb-6">
+        <span className="inline-block px-4 py-1 bg-pink text-white font-black text-sm rounded-full shadow-sm border-2 border-border">
+          RESERVATION
+        </span>
+      </div>
+
+      {slots.map((slot) => {
+        const isOpen = openSlotId === slot.id
+        const isDeadlinePassed = slot.deadline && new Date() > new Date(slot.deadline)
+        const isDisabled = !slot.enabled || !!isDeadlinePassed
+
+        return (
+          <div
+            key={slot.id}
+            className={`border-3 rounded-2xl overflow-hidden transition-all ${
+              isDisabled
+                ? 'border-gray-300 opacity-60'
+                : isOpen
+                  ? 'border-pink shadow-hard'
+                  : 'border-border shadow-hard'
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => toggleSlot(slot.id!)}
+              className={`w-full flex justify-between items-center p-5 md:p-6 text-left transition-colors ${
+                isOpen ? 'bg-pink/10' : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <div className="flex items-center gap-3 flex-wrap">
+                <h3 className="text-xl md:text-2xl font-black text-slate-800">{slot.name}</h3>
+                {isDeadlinePassed && (
+                  <span className="text-xs font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
+                    受付終了
+                  </span>
+                )}
+                {!slot.enabled && (
+                  <span className="text-xs font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
+                    停止中
+                  </span>
+                )}
+                {slot.capacity && !isDisabled && (
+                  <span className="text-xs font-bold bg-blue/10 text-blue px-2 py-1 rounded-full border border-blue/30">
+                    定員 {slot.capacity}名
+                  </span>
+                )}
+              </div>
+              <ChevronDown
+                size={24}
+                className={`text-slate-400 transition-transform duration-300 shrink-0 ml-2 ${
+                  isOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {isOpen && (
+              <div className="p-6 md:p-8 border-t-3 border-border bg-white">
+                <SingleSlotForm column={column} slot={slot} />
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
 
 export const ReservationForm = ({ column }: Props) => {
   return (
-    <GoogleReCaptchaProvider 
+    <GoogleReCaptchaProvider
       reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
     >
       <InnerReservationForm column={column} />

@@ -9,6 +9,8 @@ type Reservation = {
   email: string
   phone: string
   createdAt: string
+  reservationSlotId?: string
+  reservationSlotName?: string
   responses?: {
     question: string
     answer: string
@@ -16,14 +18,18 @@ type Reservation = {
   column?: string | { id: string }
 }
 
+type ReservationSlot = {
+  id: string
+  name: string
+  customFields?: {
+    label: string
+    type: 'text' | 'textarea' | 'radio' | 'content'
+    options?: { value: string }[]
+  }[]
+}
+
 type ColumnSettings = {
-  reservationSettings?: {
-    customFields?: {
-      label: string
-      type: 'text' | 'textarea' | 'radio'
-      options?: { value: string }[]
-    }[]
-  }
+  reservationSlots?: ReservationSlot[]
 }
 
 interface ReservationListProps {
@@ -39,15 +45,14 @@ export default function ReservationList({ columnId }: ReservationListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingReservation, setEditingReservation] = useState<Reservation | null>(null)
   const [formData, setFormData] = useState<Partial<Reservation>>({})
+  const [selectedSlotId, setSelectedSlotId] = useState<string>('')
 
-  // Fetch Reservations & Column Settings
   useEffect(() => {
     if (!columnId) return
 
     const fetchData = async () => {
       setLoading(true)
       try {
-        // Fetch Reservations
         const resReservations = await fetch(
           `/api/reservations?where[column][equals]=${columnId}&limit=100&sort=-createdAt`,
         )
@@ -56,7 +61,6 @@ export default function ReservationList({ columnId }: ReservationListProps) {
           setReservations(dataReservations.docs)
         }
 
-        // Fetch Column Settings (for custom fields)
         const resColumn = await fetch(`/api/column/${columnId}`)
         const dataColumn = await resColumn.json()
         setColumnSettings(dataColumn)
@@ -94,9 +98,16 @@ export default function ReservationList({ columnId }: ReservationListProps) {
     }
   }
 
+  const getSlotCustomFields = (slotId?: string) => {
+    if (!slotId || !columnSettings?.reservationSlots) return []
+    const slot = columnSettings.reservationSlots.find((s) => s.id === slotId)
+    return slot?.customFields?.filter((f) => f.type !== 'content') || []
+  }
+
   const openModal = (reservation?: Reservation) => {
     if (reservation) {
       setEditingReservation(reservation)
+      setSelectedSlotId(reservation.reservationSlotId || '')
       setFormData({
         name: reservation.name,
         email: reservation.email,
@@ -105,15 +116,14 @@ export default function ReservationList({ columnId }: ReservationListProps) {
       })
     } else {
       setEditingReservation(null)
+      const firstSlotId = columnSettings?.reservationSlots?.[0]?.id || ''
+      setSelectedSlotId(firstSlotId)
+      const fields = getSlotCustomFields(firstSlotId)
       setFormData({
         name: '',
         email: '',
         phone: '',
-        responses:
-          columnSettings?.reservationSettings?.customFields?.map((f) => ({
-            question: f.label,
-            answer: '',
-          })) || [],
+        responses: fields.map((f) => ({ question: f.label, answer: '' })),
       })
     }
     setIsModalOpen(true)
@@ -123,6 +133,16 @@ export default function ReservationList({ columnId }: ReservationListProps) {
     setIsModalOpen(false)
     setEditingReservation(null)
     setFormData({})
+    setSelectedSlotId('')
+  }
+
+  const handleSlotChange = (newSlotId: string) => {
+    setSelectedSlotId(newSlotId)
+    const fields = getSlotCustomFields(newSlotId)
+    setFormData((prev) => ({
+      ...prev,
+      responses: fields.map((f) => ({ question: f.label, answer: '' })),
+    }))
   }
 
   const handleInputChange = (field: keyof Reservation, value: string) => {
@@ -151,22 +171,24 @@ export default function ReservationList({ columnId }: ReservationListProps) {
 
     if (!columnId) return
 
+    const slot = columnSettings?.reservationSlots?.find((s) => s.id === selectedSlotId)
+
     try {
       const payload = {
         ...formData,
-        column: columnId, // Ensure linked to current column
+        column: columnId,
+        reservationSlotId: selectedSlotId || undefined,
+        reservationSlotName: slot?.name || undefined,
       }
 
       let res
       if (editingReservation) {
-        // Update
         res = await fetch(`/api/reservations/${editingReservation.id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         })
       } else {
-        // Create
         res = await fetch(`/api/reservations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -176,7 +198,7 @@ export default function ReservationList({ columnId }: ReservationListProps) {
 
       if (res.ok) {
         const savedDoc = await res.json()
-        const savedReservation = savedDoc.doc || savedDoc // Payload response structure check
+        const savedReservation = savedDoc.doc || savedDoc
 
         setReservations((prev) => {
           if (editingReservation) {
@@ -199,6 +221,9 @@ export default function ReservationList({ columnId }: ReservationListProps) {
   }
 
   if (!columnId) return null
+
+  const hasMultipleSlots =
+    columnSettings?.reservationSlots && columnSettings.reservationSlots.length > 1
 
   return (
     <>
@@ -242,6 +267,11 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                   <th className="p-3 border-r border-gray-400 w-[100px] text-center text-black font-normal">
                     操作
                   </th>
+                  {hasMultipleSlots && (
+                    <th className="p-3 border-r border-gray-400 min-w-[120px] text-black font-normal">
+                      予約枠
+                    </th>
+                  )}
                   <th className="p-3 border-r border-gray-400 min-w-[120px] text-black font-normal">
                     名前
                   </th>
@@ -283,6 +313,11 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                         </button>
                       </div>
                     </td>
+                    {hasMultipleSlots && (
+                      <td className="p-3 border-r border-gray-400 text-black">
+                        {res.reservationSlotName || '-'}
+                      </td>
+                    )}
                     <td className="p-3 border-r border-gray-400 text-black">{res.name}</td>
                     <td className="p-3 border-r border-gray-400 text-black">{res.email}</td>
                     <td className="p-3 border-r border-gray-400 text-black">{res.phone}</td>
@@ -327,6 +362,33 @@ export default function ReservationList({ columnId }: ReservationListProps) {
               </button>
             </div>
             <form onSubmit={handleSave} className="custom-modal-form">
+              {/* Slot selector for new reservations */}
+              {!editingReservation &&
+                columnSettings?.reservationSlots &&
+                columnSettings.reservationSlots.length > 1 && (
+                  <div className="custom-form-field">
+                    <label>予約枠 *</label>
+                    <select
+                      value={selectedSlotId}
+                      onChange={(e) => handleSlotChange(e.target.value)}
+                      required
+                    >
+                      {columnSettings.reservationSlots.map((slot) => (
+                        <option key={slot.id} value={slot.id}>
+                          {slot.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+              {editingReservation?.reservationSlotName && (
+                <div className="custom-form-field">
+                  <label>予約枠</label>
+                  <input type="text" value={editingReservation.reservationSlotName} disabled />
+                </div>
+              )}
+
               <div className="custom-form-field">
                 <label>お名前 *</label>
                 <input
@@ -358,49 +420,51 @@ export default function ReservationList({ columnId }: ReservationListProps) {
                 />
               </div>
 
-              {/* Custom Fields */}
-              {columnSettings?.reservationSettings?.customFields?.map((field, idx) => (
-                <div key={idx} className="custom-form-field">
-                  <label>{field.label}</label>
-                  {field.type === 'textarea' ? (
-                    <textarea
-                      value={
-                        formData.responses?.find((r) => r.question === field.label)?.answer || ''
-                      }
-                      onChange={(e) => handleResponseChange(field.label, e.target.value)}
-                      placeholder="こちらに入力してください"
-                      className="custom-field-input"
-                    />
-                  ) : field.type === 'radio' && field.options ? (
-                    <div className="flex gap-4">
-                      {field.options.map((opt, optIdx) => (
-                        <label key={optIdx} className="custom-radio-label">
-                          <input
-                            type="radio"
-                            name={`radio-${idx}`}
-                            value={opt.value}
-                            checked={
-                              formData.responses?.find((r) => r.question === field.label)
-                                ?.answer === opt.value
-                            }
-                            onChange={(e) => handleResponseChange(field.label, e.target.value)}
-                          />
-                          {opt.value}
-                        </label>
-                      ))}
-                    </div>
-                  ) : (
-                    <input
-                      type="text"
-                      value={
-                        formData.responses?.find((r) => r.question === field.label)?.answer || ''
-                      }
-                      onChange={(e) => handleResponseChange(field.label, e.target.value)}
-                      placeholder="こちらに入力してください"
-                    />
-                  )}
-                </div>
-              ))}
+              {/* Custom Fields from selected slot */}
+              {getSlotCustomFields(selectedSlotId || editingReservation?.reservationSlotId).map(
+                (field, idx) => (
+                  <div key={idx} className="custom-form-field">
+                    <label>{field.label}</label>
+                    {field.type === 'textarea' ? (
+                      <textarea
+                        value={
+                          formData.responses?.find((r) => r.question === field.label)?.answer || ''
+                        }
+                        onChange={(e) => handleResponseChange(field.label, e.target.value)}
+                        placeholder="こちらに入力してください"
+                        className="custom-field-input"
+                      />
+                    ) : field.type === 'radio' && field.options ? (
+                      <div className="flex gap-4">
+                        {field.options.map((opt, optIdx) => (
+                          <label key={optIdx} className="custom-radio-label">
+                            <input
+                              type="radio"
+                              name={`radio-${idx}`}
+                              value={opt.value}
+                              checked={
+                                formData.responses?.find((r) => r.question === field.label)
+                                  ?.answer === opt.value
+                              }
+                              onChange={(e) => handleResponseChange(field.label, e.target.value)}
+                            />
+                            {opt.value}
+                          </label>
+                        ))}
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        value={
+                          formData.responses?.find((r) => r.question === field.label)?.answer || ''
+                        }
+                        onChange={(e) => handleResponseChange(field.label, e.target.value)}
+                        placeholder="こちらに入力してください"
+                      />
+                    )}
+                  </div>
+                ),
+              )}
 
               <div className="custom-modal-actions">
                 <button type="button" onClick={closeModal} className="custom-btn-cancel">

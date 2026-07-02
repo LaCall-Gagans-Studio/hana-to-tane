@@ -130,7 +130,7 @@ export const ColumnClient = ({ initialData }: { initialData: any }) => {
             )}
           </article>
 
-          {column.reservationSettings?.enabled && (
+          {column.reservationSlots && column.reservationSlots.length > 0 && (
             <div className="mt-12">
               <ReservationForm column={column} />
             </div>

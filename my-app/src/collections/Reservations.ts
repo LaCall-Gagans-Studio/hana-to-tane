@@ -28,6 +28,19 @@ export const Reservations: CollectionConfig = {
       index: true,
     },
     {
+      name: 'reservationSlotId',
+      label: '予約枠ID',
+      type: 'text',
+      index: true,
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'reservationSlotName',
+      label: '予約枠名',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+    {
       name: 'name',
       label: 'お名前',
       type: 'text',
@@ -98,18 +111,22 @@ export const Reservations: CollectionConfig = {
                     .join('\n\n')
                 : 'なし'
 
+            const slotLine = doc.reservationSlotName
+              ? `\n【予約枠】: ${doc.reservationSlotName}`
+              : ''
+
             const userMailOptions = {
               from: `"NPO法人はなとたね" <${process.env.SMTP_USER}>`,
               to: doc.email,
               subject: '【NPO法人はなとたね】イベントのご予約を受け付けました',
-              text: `${doc.name} 様\n\nこの度はイベントにご予約いただき、誠にありがとうございます。\n以下の内容でご予約を受け付けました。\n\n【ご予約イベント】: ${columnName}\n【お名前】: ${doc.name}\n【メールアドレス】: ${doc.email}\n【電話番号】: ${doc.phone}\n【ご質問等（ある場合）】:\n${responsesText}\n\n後ほど担当者より詳細をご連絡させていただきます。\n今しばらくお待ちくださいますようお願い申し上げます。\n\n--------------------------------------------------\nこのメールは送信専用アドレスから自動送信されています。`,
+              text: `${doc.name} 様\n\nこの度はイベントにご予約いただき、誠にありがとうございます。\n以下の内容でご予約を受け付けました。\n\n【ご予約イベント】: ${columnName}${slotLine}\n【お名前】: ${doc.name}\n【メールアドレス】: ${doc.email}\n【電話番号】: ${doc.phone}\n【ご質問等（ある場合）】:\n${responsesText}\n\n後ほど担当者より詳細をご連絡させていただきます。\n今しばらくお待ちくださいますようお願い申し上げます。\n\n--------------------------------------------------\nこのメールは送信専用アドレスから自動送信されています。`,
             }
 
             const adminMailOptions = {
               from: `"${doc.name}様より" <${process.env.SMTP_USER}>`,
               to: process.env.CONTACT_EMAIL_TO,
               subject: `【イベント予約】新規のご予約がありました`,
-              text: `イベントの新規ご予約フォームから送信がありました。\n\n【ご予約イベント】: ${columnName}\n【お名前】: ${doc.name}\n【メールアドレス】: ${doc.email}\n【電話番号】: ${doc.phone}\n【ご質問等】：\n${responsesText}`,
+              text: `イベントの新規ご予約フォームから送信がありました。\n\n【ご予約イベント】: ${columnName}${slotLine}\n【お名前】: ${doc.name}\n【メールアドレス】: ${doc.email}\n【電話番号】: ${doc.phone}\n【ご質問等】：\n${responsesText}`,
             }
 
             console.log(`[Email] Sending confirmation to ${doc.email} for reservation ${doc.id}`)

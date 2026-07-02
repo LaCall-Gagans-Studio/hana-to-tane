@@ -203,9 +203,6 @@ export interface Column {
       | {
           label: string;
           type?: ('text' | 'textarea' | 'radio' | 'content') | null;
-          /**
-           * 詳細説明や送信前の同意文など、フォームに表示する文章を入力してください。
-           */
           content?: string | null;
           options?:
             | {
@@ -217,6 +214,32 @@ export interface Column {
         }[]
       | null;
   };
+  reservationSlots?:
+    | {
+        name: string;
+        enabled?: boolean | null;
+        capacity?: number | null;
+        deadline?: string | null;
+        customFields?:
+          | {
+              label: string;
+              type?: ('text' | 'textarea' | 'radio' | 'content') | null;
+              /**
+               * 詳細説明や送信前の同意文など、フォームに表示する文章を入力してください。
+               */
+              content?: string | null;
+              options?:
+                | {
+                    value?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -394,6 +417,8 @@ export interface News {
 export interface Reservation {
   id: number;
   column: number | Column;
+  reservationSlotId?: string | null;
+  reservationSlotName?: string | null;
   name: string;
   email: string;
   phone: string;
@@ -570,6 +595,29 @@ export interface ColumnSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  reservationSlots?:
+    | T
+    | {
+        name?: T;
+        enabled?: T;
+        capacity?: T;
+        deadline?: T;
+        customFields?:
+          | T
+          | {
+              label?: T;
+              type?: T;
+              content?: T;
+              options?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -713,6 +761,8 @@ export interface NewsSelect<T extends boolean = true> {
  */
 export interface ReservationsSelect<T extends boolean = true> {
   column?: T;
+  reservationSlotId?: T;
+  reservationSlotName?: T;
   name?: T;
   email?: T;
   phone?: T;
