@@ -23,6 +23,11 @@ export const Column: CollectionConfig = {
       url: ({ data }) => {
         return `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/column/${data?.slug || ''}?preview=true`;
       },
+      breakpoints: [
+        { name: 'mobile', label: 'モバイル', width: 375, height: 667 },
+        { name: 'tablet', label: 'タブレット', width: 768, height: 1024 },
+        { name: 'desktop', label: 'デスクトップ', width: 1280, height: 800 },
+      ],
     },
   },
   access: {

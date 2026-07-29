@@ -6,6 +6,17 @@ export const Table: Block = {
     singular: 'カスタムテーブル',
     plural: 'カスタムテーブル',
   },
+  admin: {
+    group: 'レイアウト',
+    components: {
+      Block: '@/components/admin/blocks/TablePreview#TableBlockComponent',
+      Label: '@/components/admin/blocks/TablePreview#TableBlockLabel',
+    },
+    images: {
+      icon: { url: '/admin/block-icons/table.svg', alt: 'カスタムテーブル' },
+      thumbnail: { url: '/admin/block-icons/table-thumb.svg', alt: 'カスタムテーブル' },
+    },
+  },
   fields: [
     {
       name: 'rows',

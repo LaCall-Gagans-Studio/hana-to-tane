@@ -85,9 +85,19 @@ export const FlexibleColumnsComponent = ({ fields }: { fields: any }) => {
   const currentGridClass = gridClasses[colCount] || 'grid-cols-1 md:grid-cols-2';
 
   return (
-    <div className={`my-8 grid ${currentGridClass} gap-8`}>
+    <div className={`my-8 grid ${currentGridClass} gap-6 md:gap-8 not-prose`}>
       {fields.columns?.map((col: any, index: number) => (
-        <div key={index} className="flex flex-col gap-4">
+        <div
+          key={index}
+          className="
+            flex flex-col gap-3 p-4 md:p-5 bg-white border-3 border-border rounded-2xl shadow-hard
+            [&_h3]:text-lg [&_h3]:font-black [&_h3]:m-0 [&_h3]:border-0 [&_h3]:pl-0 [&_h3]:leading-snug
+            [&_p]:m-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-gray-700
+            [&_img]:my-0 [&_img]:rounded-xl [&_img]:border-2 [&_img]:border-border [&_img]:shadow-none
+            [&_img]:w-full [&_img]:aspect-[4/3] [&_img]:object-cover
+            [&_figure]:m-0
+          "
+        >
           <RichText data={col.content} />
         </div>
       ))}

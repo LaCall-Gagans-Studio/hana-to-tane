@@ -1,0 +1,2356 @@
+{
+  "title": "第3回桃フェス 出店案内",
+  "slug": "momofes2026",
+  "publishedDate": "2026-07-29T07:24:58.762Z",
+  "category": "event",
+  "tags": [
+    {
+      "id": "6a6a149cf3dc418d14fcf3ce",
+      "tag": "桃フェス"
+    },
+    {
+      "id": "6a6a149cf3dc418d14fcf3cf",
+      "tag": "出店"
+    }
+  ],
+  "image": {
+    "id": 158,
+    "alt": "第3回桃フェス 出店場所マップ",
+    "updatedAt": "2026-07-29T14:56:27.411Z",
+    "createdAt": "2026-07-29T14:56:25.794Z",
+    "url": "/api/media/file/momofes2026-map.webp",
+    "thumbnailURL": null,
+    "filename": "momofes2026-map.webp",
+    "mimeType": "image/webp",
+    "filesize": 212386,
+    "width": 1489,
+    "height": 2106,
+    "focalX": 50,
+    "focalY": 50
+  },
+  "content": {
+    "root": {
+      "type": "root",
+      "format": "",
+      "indent": 0,
+      "version": 1,
+      "children": [
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "第3回桃フェス 出店案内",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "チラシより出店場所マップと各ブース情報を掲載しています。各ブースの写真は準備でき次第追加予定です。",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "出店場所マップ",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "id": "09f4bd5823227ac193a99185",
+          "type": "upload",
+          "value": {
+            "id": 158,
+            "alt": "第3回桃フェス 出店場所マップ",
+            "updatedAt": "2026-07-29T14:56:27.411Z",
+            "createdAt": "2026-07-29T14:56:25.794Z",
+            "url": "/api/media/file/momofes2026-map.webp",
+            "thumbnailURL": null,
+            "filename": "momofes2026-map.webp",
+            "mimeType": "image/webp",
+            "filesize": 212386,
+            "width": 1489,
+            "height": 2106,
+            "focalX": 50,
+            "focalY": 50
+          },
+          "fields": null,
+          "format": "",
+          "version": 3,
+          "relationTo": "media"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "FOOD 〜校庭〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "182688bf032ce65afa6ce7c5",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "829e0d126a257022d550dc0e",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "①よしくん🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "飲食　ひるぜん焼きそば、スパイラルポテト、牛串、パリパリ鶏皮串、フルーツ飴",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "040167e87a947f00161d6ca5",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "②ナナナミルク🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "バナナジュース、旬のフルーツジュース、ソフトクリーム等",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "23ec24b5f93b888c96d645c9",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "③モリノコカフェ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "キッチンカーにてスイーツ、軽食等の販売。桃とカスタードホイップのクレープ、桃のふわふわかき氷、桃の豆花、他スイーツ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "0f60b5a504048dbfed12ad7e",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "b7d5f4e597c44845f1669a83",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "④やまと家🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "たこ焼き串、ロングフランクフルト、焼き鳥、桃ジュース🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "ce6585805df991782fea3652",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑤をこめ屋とニアマイ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "冷たいドリンク、ベーグル、ベーグルサンド、米粉たい焼き、桃シロップドリンク",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "5094052066efcde4e470cf32",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑥M-STYLE研究所（焼いも まこちゃん）🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "冷やし焼いも、かき氷、のむもん、焼いもスイーツ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "faf70b102392254672b147bc",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "f4619526c322ee2b89984cdc",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑦小谷屋",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "肉巻きフランク、焼き鳥",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "bc78cda18cf62d085668cf17",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑧⑨かずや",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "フライドポテト、フルーツ飴",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "b55ad08c9fc82a66bbfa9233",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑩⑪多幸福🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "たこやき、かき氷、ソフトドリンク、チョコバナナ、冷凍パイン、冷凍ピーチ、フランクフルト、チキン串、肉巻きおにぎり、うどん",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "0faa4bb6991896a9b6514b3c",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "6e6173c64f0a91084eb72b62",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑫まるた🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "ロングポテト、チーズスティック、レインボーチーズドッグ、アイス、コットンキャンディー、マシュマロ、かき氷、ドリンク類",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "ef5ae479a6c536c62bca45dd",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑬だんだんカフェ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "桃パフェ、ソフトクリーム、揚げパン、ドーナツ、炭酸ドリンク、チュロス、アイスパフェ、アイスチュロス、アイスチャイ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "ede216dbb018b87a804786ad",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑭⑮ボブズ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "りんご飴・桃飴・金魚鉢サイダー",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "4d0c53970439a51dc5b9a86a",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "4457b71d613114ba896f977c",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑯こここめキッチン🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "生どらやき、どらパフェ、ドリンク",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "5d614ae0b49e845686323b20",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑰⑱ラパン・ブラン🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "焼きそば・唐揚げ・ハンバーガー・スムージー・メロンパン",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "6c3bca3227fe3f20ee08fa63",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑲焼きそば",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "鳥取で一番美味い焼きそば！！",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "FOOD 〜体育館前〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "425e0ea066b087f2f95ca97d",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "e6e86c4e17aeac9479f63534",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "⑳ゆるりと。🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "桃のかき氷、たこ焼き、ベーコン串",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "bf4e0395ea03d81a13e37322",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "A. 発酵Cafe桜堂🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "日本の国菌「糀」を使った料理、スイーツ、ドリンクを展開。発酵事業コンサルタントとして、企業とコラボ商品企画、カフェのメニュー開発をしております。",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "0c7a0ce67c4f91077f2fef59",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "B. マンマミーア🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "ジェラート、ドリンク",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "FOOD 〜1F〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "230c2a0bb6e9a5ff337df14a",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "900e5226518ede47436b9418",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉑クラーク記念国際高等学校 鳥取キャンパス🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "クラーク高校のカフェ部が、桃を使ったデザートを販売します！",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "2676e14e0d095c2dd728999d",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉒コージーズキッチン",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "子供も食べれるキーマカレー",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "0de6a093dfeef8432ce9ada6",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉓ファーマーズ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "（詳細は当日会場にてご確認ください）",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "5ce690acfc0d75bed4920b03",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "89324f752d83d78c0d3fe2b4",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉔よっちゃん🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "キラキラすくい、かき氷、ジュース、フランクフルト、桃フルーツカット、冷やしうどん、くじ、スーパーボール、ヨーヨー、ペットボトルジュース、お茶",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "d1dab26aece718b4e955848a",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉕アジアンキッチンとりどり🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "神戸桃と桃ゼリーのかき氷パフェとガパオライス",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "ACTIVITY 〜2F〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "891d27166e9520aa627b5c5d",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "90b200333a9e15c7b25bd1b8",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉖川村屋🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "くじ引きと桃サイダー",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "76bd23e75fcae9beb071532e",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉗虫の展示",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "（詳細は当日会場にてご確認ください）",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "59d2ce4a86472f996824ed8f",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉘かごのお店",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "雑貨、ハギレのブレスレットのワークショップ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "b78191781aacd1136a6692dd",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "5bcc08e051a9247fb0e30240",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉚こども店長プロジェクト",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "（詳細は当日会場にてご確認ください）",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "ACTIVITY 〜3F〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "7e94f54626547faa5ee26abf",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "37ac221c1b16af9540b64b5a",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㉛〜㉞いろことり（ちびっこセンター）",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "ちぎって、貼って、ペタペタして、桃星人うちわをつくろう！",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "72b1fd7e21d04e20e535ce9b",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊵かけルリTOMORUと遊ぼう！",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "いろんな先生と来店の方と🍑をかけあわせるとどんな遊びができるかな？お楽しみに♡",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "e1d25f1295d26ab74df936d8",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊶トリセフ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "（詳細は当日会場にてご確認ください）",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "8c62e6c13a31efb35574bcd4",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "d6d83bb7bc111c3a15661ffe",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊷大阪海さくら",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "海洋プラスチックを使って体験ブース",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "mode": "normal",
+              "text": "ACTIVITY 〜体育館〜",
+              "type": "text",
+              "style": "",
+              "detail": 0,
+              "format": 0,
+              "version": 1
+            }
+          ],
+          "direction": null
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "7204bfb699ca80771a45189d",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "8dc57b3afced837e1e863d95",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊺桃の木フリマ",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "フリーマーケットおよびビッグコリントゲーム",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "2fef4f740cdffc7b120ea33b",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊻河上屋",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "射的",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              },
+              {
+                "id": "b93b739d32eb08642b86aa56",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊼レインボーD 沢山の景品🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "くじ引き、射的、おもちゃ販売",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "block",
+          "fields": {
+            "id": "2c3de59b6096956f83525b11",
+            "layout": "1/3_1/3_1/3",
+            "columns": [
+              {
+                "id": "ca7eeb3de2fedd736993816f",
+                "content": {
+                  "root": {
+                    "type": "root",
+                    "format": "",
+                    "indent": 0,
+                    "version": 1,
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "type": "heading",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "㊽フランクいっぽ🍑",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null
+                      },
+                      {
+                        "type": "paragraph",
+                        "format": "",
+                        "indent": 0,
+                        "version": 1,
+                        "children": [
+                          {
+                            "mode": "normal",
+                            "text": "フランクフルト＆桃コーラー＆Tシャツとレジン＆プラバン＆毛糸雑貨",
+                            "type": "text",
+                            "style": "",
+                            "detail": 0,
+                            "format": 0,
+                            "version": 1
+                          }
+                        ],
+                        "direction": null,
+                        "textStyle": "",
+                        "textFormat": 0
+                      }
+                    ],
+                    "direction": null
+                  }
+                }
+              }
+            ],
+            "blockName": "",
+            "blockType": "flexibleColumns"
+          },
+          "format": "",
+          "version": 2
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [],
+          "direction": null,
+          "textStyle": "",
+          "textFormat": 0
+        }
+      ],
+      "direction": null
+    }
+  },
+  "targetEvent": null,
+  "reservationSettings": {
+    "enabled": false,
+    "capacity": null,
+    "deadline": null,
+    "customFields": []
+  },
+  "reservationSlots": [],
+  "updatedAt": "2026-07-29T14:56:28.141Z",
+  "createdAt": "2026-07-29T07:25:23.211Z",
+  "_status": "draft",
+  "id": 12
+}

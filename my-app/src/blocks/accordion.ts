@@ -6,6 +6,17 @@ export const Accordion: Block = {
     singular: 'アコーディオン (FAQ)',
     plural: 'アコーディオン (FAQ)',
   },
+  admin: {
+    group: 'コンテンツ',
+    components: {
+      Block: '@/components/admin/blocks/AccordionPreview#AccordionBlockComponent',
+      Label: '@/components/admin/blocks/AccordionPreview#AccordionBlockLabel',
+    },
+    images: {
+      icon: { url: '/admin/block-icons/accordion.svg', alt: 'アコーディオン' },
+      thumbnail: { url: '/admin/block-icons/accordion-thumb.svg', alt: 'アコーディオン' },
+    },
+  },
   fields: [
     {
       name: 'items',

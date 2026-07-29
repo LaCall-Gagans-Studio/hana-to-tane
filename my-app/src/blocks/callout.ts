@@ -6,6 +6,17 @@ export const Callout: Block = {
     singular: 'コールアウト',
     plural: 'コールアウト',
   },
+  admin: {
+    group: 'コンテンツ',
+    components: {
+      Block: '@/components/admin/blocks/CalloutPreview#CalloutBlockComponent',
+      Label: '@/components/admin/blocks/CalloutPreview#CalloutBlockLabel',
+    },
+    images: {
+      icon: { url: '/admin/block-icons/callout.svg', alt: 'コールアウト' },
+      thumbnail: { url: '/admin/block-icons/callout-thumb.svg', alt: 'コールアウト' },
+    },
+  },
   fields: [
     {
       name: 'type',

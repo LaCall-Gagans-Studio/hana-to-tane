@@ -1,6 +1,71 @@
 /* PayloadCMS管理画面専用のカスタムスタイル */
 /* フロントエンド用のスタイルはインポートしない */
 
+/* コラム Lexical カスタムブロックのインラインプレビュー */
+.column-block-preview {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+  overflow: hidden;
+  margin: 4px 0;
+}
+
+.column-block-preview__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.column-block-preview__hint {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #6b7280;
+  text-transform: none;
+}
+
+.column-block-preview__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.column-block-preview__body {
+  padding: 14px;
+  background:
+    radial-gradient(#a349a3 1px, transparent 1px);
+  background-size: 18px 18px;
+  background-color: #ffffff;
+}
+
+.column-block-preview__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 72px;
+  padding: 16px;
+  border: 2px dashed #9ca3af;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #111827;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+
+  span {
+    font-weight: 500;
+    font-size: 12px;
+    color: #6b7280;
+  }
+}
+
 /* 予約管理画面専用のスタイル */
 .reservation-list-custom {
   /* テーブルスタイル */

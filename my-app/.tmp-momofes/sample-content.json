@@ -1,0 +1,826 @@
+{
+  "root": {
+    "type": "root",
+    "format": "",
+    "indent": 0,
+    "version": 1,
+    "children": [
+      {
+        "tag": "h1",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "2026夏休み特別企画　たねラボ サマースクール",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "tag": "h2",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "この夏、子どもたちの「やってみたい！」を応援します。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "NPO法人はなとたねでは、夏休み限定の体験型プログラム「2026たねラボ サマースクール」を開催します。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "自然の中で思いきり遊び、本物の仕事やものづくりを体験し、仲間と協力しながら過ごす特別な夏休み。学校ではなかなかできない体験を通して、子どもたちの「挑戦する心」「考える力」「人と関わる力」を育みます。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "毎日異なるプログラムをご用意しているため、何度参加しても新しい発見があります。イベント以外の時間には体育館や校庭、裏山などで自由に遊び、子どもたち一人ひとりの「やりたい」を大切にした時間を過ごします。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "tag": "h1",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "締め切り７月１５日→２０日に変更！",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "id": "6a4713194731c26764ed3fca",
+        "type": "upload",
+        "value": 156,
+        "fields": null,
+        "format": "",
+        "version": 3,
+        "relationTo": "media"
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "tag": "h3",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "プログラム内容",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "・7/28（火）スクールドッグ命とのふれあい体験",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・7/29（水）くぼた動物病院で獣医師体験",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・7/30（木）神戸の川で遊ぼう",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・8/4(火）竹で流しラーメン＆オリジナルちょうちんづくり",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・8/5（水）自由研究に桃アイスはいかが？",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・8/6(木）ドローンプログラミング体験",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・8/18（火）謎解き宝探し",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "※天候によって変更するイベントもあります。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "tag": "h2",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "開催概要",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "開催期間",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "2026年夏休み期間中",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "時間",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "10:00～15:00",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "対象",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "小学1年生～中学3年生",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "定員",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "各日20名程度",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "※獣医師体験は定員が12名になります。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "会場",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "トリノス神戸（旧神戸小学校）",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "鳥取市中砂見936",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "参加費",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 1,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "1日 3,000円（昼食付き）",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 1
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "※兄弟姉妹割引・全日参加割引があります。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "tag": "h2",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "安心してご参加いただくために",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "活動中は経験豊富なスタッフをはじめ、大学生・高校生ボランティアが子どもたちを見守ります。一人ひとりの気持ちを大切にしながら、安全に配慮した環境で活動を行います。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "tag": "h2",
+        "type": "heading",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "こんなお子さまにおすすめです",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "・夏休みに思い出に残る体験をしたい",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・自然の中で思いきり遊びたい",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・新しいことに挑戦してみたい",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・工作やものづくりが好き",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・動物や生き物が好き",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "・友達を作りたい",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "id": "6a4719a54731c26764ed3fcc",
+        "type": "upload",
+        "value": 92,
+        "fields": null,
+        "format": "",
+        "version": 3,
+        "relationTo": "media"
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "夏休みだからこそできる特別な体験を通して、「できた！」「楽しい！」という成功体験を積み重ね、子どもたち一人ひとりの成長を応援します。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "皆さまのご参加を心よりお待ちしております。",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "mode": "normal",
+            "text": "お申し込みはこちらから",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          },
+          {
+            "type": "linebreak",
+            "version": 1
+          },
+          {
+            "mode": "normal",
+            "text": "↓",
+            "type": "text",
+            "style": "",
+            "detail": 0,
+            "format": 0,
+            "version": 1
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      },
+      {
+        "type": "paragraph",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "autolink",
+            "fields": {
+              "url": "https://forms.gle/gHnFTCgymTTNRVWcA",
+              "linkType": "custom"
+            },
+            "format": "",
+            "indent": 0,
+            "version": 2,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "https://forms.gle/gHnFTCgymTTNRVWcA",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": null
+          }
+        ],
+        "direction": null,
+        "textStyle": "",
+        "textFormat": 0
+      }
+    ],
+    "direction": null
+  }
+}

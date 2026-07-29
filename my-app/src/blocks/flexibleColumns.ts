@@ -6,6 +6,17 @@ export const FlexibleColumns: Block = {
     singular: '柔軟な段組み',
     plural: '柔軟な段組み',
   },
+  admin: {
+    group: 'レイアウト',
+    components: {
+      Block: '@/components/admin/blocks/FlexibleColumnsPreview#FlexibleColumnsBlockComponent',
+      Label: '@/components/admin/blocks/FlexibleColumnsPreview#FlexibleColumnsBlockLabel',
+    },
+    images: {
+      icon: { url: '/admin/block-icons/columns.svg', alt: '柔軟な段組み' },
+      thumbnail: { url: '/admin/block-icons/columns-thumb.svg', alt: '柔軟な段組み' },
+    },
+  },
   fields: [
     {
       name: 'layout',

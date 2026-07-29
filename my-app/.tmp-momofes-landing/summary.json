@@ -1,0 +1,29 @@
+[
+  {
+    "page": 1,
+    "textLength": 824,
+    "images": 0,
+    "size": [
+      893,
+      1263
+    ]
+  },
+  {
+    "page": 2,
+    "textLength": 0,
+    "images": 220,
+    "size": [
+      1004,
+      1374
+    ]
+  },
+  {
+    "page": 3,
+    "textLength": 810,
+    "images": 138,
+    "size": [
+      1004,
+      1374
+    ]
+  }
+]

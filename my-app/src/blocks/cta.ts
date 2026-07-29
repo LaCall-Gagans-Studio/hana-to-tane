@@ -6,6 +6,17 @@ export const CTA: Block = {
     singular: 'CTAボタン',
     plural: 'CTAボタン',
   },
+  admin: {
+    group: 'コンテンツ',
+    components: {
+      Block: '@/components/admin/blocks/CtaPreview#CtaBlockComponent',
+      Label: '@/components/admin/blocks/CtaPreview#CtaBlockLabel',
+    },
+    images: {
+      icon: { url: '/admin/block-icons/cta.svg', alt: 'CTAボタン' },
+      thumbnail: { url: '/admin/block-icons/cta-thumb.svg', alt: 'CTAボタン' },
+    },
+  },
   fields: [
     {
       name: 'label',
