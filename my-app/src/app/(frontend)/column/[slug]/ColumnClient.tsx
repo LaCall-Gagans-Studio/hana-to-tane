@@ -89,12 +89,22 @@ export const ColumnClient = ({
               typeof column.image === 'object' &&
               'url' in column.image &&
               column.image.url && (
-                <div className="relative w-full h-[300px] md:h-[500px] mb-12 rounded-2xl overflow-hidden border-3 border-border shadow-hard">
+                <div className="w-full mb-12 rounded-2xl overflow-hidden border-3 border-border shadow-hard bg-gray-50">
                   <Image
                     src={column.image.url}
                     alt={column.image.alt || (column.title as string)}
-                    fill
-                    className="object-cover"
+                    width={
+                      typeof column.image.width === 'number' && column.image.width > 0
+                        ? column.image.width
+                        : 1200
+                    }
+                    height={
+                      typeof column.image.height === 'number' && column.image.height > 0
+                        ? column.image.height
+                        : 800
+                    }
+                    sizes="(max-width: 768px) 100vw, 1100px"
+                    className="block w-full h-auto object-contain"
                     priority
                   />
                 </div>
