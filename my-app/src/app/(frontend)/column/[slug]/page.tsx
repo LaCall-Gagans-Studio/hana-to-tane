@@ -1,20 +1,10 @@
 import React from 'react'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { RichText } from '@payloadcms/richtext-lexical/react'
-import Link from 'next/link'
-import { ReservationForm } from '../../components/ReservationForm'
-import {
-  CtaComponent,
-  AccordionComponent,
-  CustomTableComponent,
-} from '@/components/Blocks/RichTextBlocks'
-
 import type { Metadata } from 'next'
+import { ColumnClient } from './ColumnClient'
+import { getColumnBySlug, isColumnPreviewParam } from '@/lib/column'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>
@@ -23,36 +13,9 @@ export async function generateMetadata(props: {
   const { slug: rawSlug } = await props.params
   const slug = decodeURIComponent(rawSlug)
   const searchParams = await props.searchParams
-  const isPreview = searchParams.preview === 'true'
+  const isPreview = isColumnPreviewParam(searchParams.preview)
 
-  const payload = await getPayload({ config: configPromise })
-
-  const whereConditions: any[] = [
-    {
-      slug: {
-        equals: slug,
-      },
-    },
-  ]
-
-  if (!isPreview) {
-    whereConditions.push({
-      _status: {
-        equals: 'published',
-      },
-    })
-  }
-
-  const columns = await payload.find({
-    collection: 'column',
-    where: {
-      and: whereConditions,
-    },
-    limit: 1,
-    draft: isPreview,
-  })
-
-  const column = columns.docs[0]
+  const column = await getColumnBySlug(slug, isPreview)
 
   if (!column) {
     return {
@@ -62,10 +25,12 @@ export async function generateMetadata(props: {
 
   const title = column.title
   const description = `はなとたねのコラム「${title}」の記事詳細です。`
+  const robots = isPreview || column._status === 'draft' ? { index: false, follow: false } : undefined
 
   return {
-    title,
+    title: isPreview ? `【プレビュー】${title}` : title,
     description,
+    robots,
     openGraph: {
       title,
       description,
@@ -80,8 +45,6 @@ export async function generateMetadata(props: {
   }
 }
 
-import { ColumnClient } from './ColumnClient'
-
 export default async function ColumnDetailPage(props: {
   params: Promise<{ slug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -89,40 +52,13 @@ export default async function ColumnDetailPage(props: {
   const { slug: rawSlug } = await props.params
   const slug = decodeURIComponent(rawSlug)
   const searchParams = await props.searchParams
-  const isPreview = searchParams.preview === 'true'
+  const isPreview = isColumnPreviewParam(searchParams.preview)
 
-  const payload = await getPayload({ config: configPromise })
-
-  const whereConditions: any[] = [
-    {
-      slug: {
-        equals: slug,
-      },
-    },
-  ]
-
-  if (!isPreview) {
-    whereConditions.push({
-      _status: {
-        equals: 'published',
-      },
-    })
-  }
-
-  const columns = await payload.find({
-    collection: 'column',
-    where: {
-      and: whereConditions,
-    },
-    limit: 1,
-    draft: isPreview,
-  })
-
-  const column = columns.docs[0]
+  const column = await getColumnBySlug(slug, isPreview)
 
   if (!column) {
     notFound()
   }
 
-  return <ColumnClient initialData={column} />
+  return <ColumnClient initialData={column} isPreview={isPreview} />
 }

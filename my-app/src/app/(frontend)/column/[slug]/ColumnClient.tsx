@@ -16,7 +16,13 @@ import {
   QuoteComponent,
 } from '@/components/Blocks/RichTextBlocks';
 
-export const ColumnClient = ({ initialData }: { initialData: any }) => {
+export const ColumnClient = ({
+  initialData,
+  isPreview = false,
+}: {
+  initialData: any
+  isPreview?: boolean
+}) => {
   const { data: column } = useLivePreview({
     initialData,
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -29,9 +35,26 @@ export const ColumnClient = ({ initialData }: { initialData: any }) => {
     other: 'その他',
   };
 
+  const isDraft = column._status === 'draft' || isPreview;
+
   return (
     <div className="bg-surface min-h-screen relative overflow-hidden pb-32">
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#b3e41d_2px,transparent_2px)] bg-size-[24px_24px] pointer-events-none"></div>
+
+      {isDraft && (
+        <div className="sticky top-0 z-50 bg-yellow border-b-3 border-border text-text">
+          <div className="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-sm font-bold">
+            <span>
+              下書きプレビュー中です。このURL（
+              <code className="mx-1 px-1 bg-white/70 rounded">?preview=true</code>
+              ）を共有すると、公開前の記事を確認できます。
+            </span>
+            <span className="px-3 py-1 bg-white border-2 border-border rounded-full text-xs font-black">
+              DRAFT
+            </span>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-24 max-w-6l relative z-10">
         <div className="mb-12">

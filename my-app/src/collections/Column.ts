@@ -7,6 +7,7 @@ import { FlexibleColumns } from '../blocks/flexibleColumns'
 import { VideoEmbed } from '../blocks/videoEmbed'
 import { Callout } from '../blocks/callout'
 import { Quote } from '../blocks/quote'
+import { getColumnPreviewUrl } from '../lib/column'
 
 export const Column: CollectionConfig = {
   slug: 'column',
@@ -19,9 +20,16 @@ export const Column: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedDate', 'updatedAt'],
     group: '更新コンテンツ',
+    preview: (doc) => {
+      const slug = typeof doc?.slug === 'string' ? doc.slug : ''
+      if (!slug) return null
+      return getColumnPreviewUrl(slug)
+    },
     livePreview: {
       url: ({ data }) => {
-        return `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/column/${data?.slug || ''}?preview=true`;
+        const slug = typeof data?.slug === 'string' ? data.slug : ''
+        if (!slug) return `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/column`
+        return getColumnPreviewUrl(slug)
       },
       breakpoints: [
         { name: 'mobile', label: 'モバイル', width: 375, height: 667 },
@@ -48,6 +56,17 @@ export const Column: CollectionConfig = {
       unique: true,
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'previewShareLink',
+      type: 'ui',
+      label: '共有用プレビューURL',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '@/components/admin/ColumnPreviewShareLink',
+        },
       },
     },
     {
