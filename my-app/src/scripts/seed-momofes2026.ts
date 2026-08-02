@@ -87,8 +87,13 @@ function vendorColumn(vendor: Vendor) {
   }
 }
 
+function layoutForCount(count: number): '1' | '1/2_1/2' | '1/3_1/3_1/3' {
+  if (count <= 1) return '1'
+  if (count === 2) return '1/2_1/2'
+  return '1/3_1/3_1/3'
+}
+
 function flexibleColumnsBlock(vendors: Vendor[]) {
-  // pad to multiples of 3 for consistent 3-column rows when leftover
   return {
     type: 'block' as const,
     version: 2,
@@ -97,7 +102,7 @@ function flexibleColumnsBlock(vendors: Vendor[]) {
       id: uid(),
       blockName: '',
       blockType: 'flexibleColumns',
-      layout: '1/3_1/3_1/3',
+      layout: layoutForCount(vendors.length),
       columns: vendors.map(vendorColumn),
     },
   }

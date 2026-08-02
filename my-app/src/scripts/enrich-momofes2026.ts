@@ -76,6 +76,8 @@ function column(title: string, description: string) {
 }
 
 function columns(items: Array<[string, string]>, blockName = '') {
+  const count = items.length
+  const layout = count <= 1 ? '1' : count === 2 ? '1/2_1/2' : count === 4 ? '1/4_1/4_1/4_1/4' : '1/3_1/3_1/3'
   return {
     type: 'block',
     version: 2,
@@ -84,7 +86,7 @@ function columns(items: Array<[string, string]>, blockName = '') {
       id: uid(),
       blockName,
       blockType: 'flexibleColumns',
-      layout: '1/3_1/3_1/3',
+      layout,
       columns: items.map(([title, description]) => column(title, description)),
     },
   }

@@ -12,6 +12,7 @@ import {
 } from './shared'
 
 const layoutLabels: Record<string, string> = {
+  '1': '1カラム',
   '1/2_1/2': '2カラム',
   '1/3_1/3_1/3': '3カラム',
   '1/4_1/4_1/4_1/4': '4カラム',
@@ -30,7 +31,10 @@ export const FlexibleColumnsBlockComponent: React.FC = () => {
     }
   })
 
-  const colCount = Math.max(columns.length, layout.startsWith('1/4') ? 4 : layout.startsWith('1/3') ? 3 : 2)
+  const colCount = Math.max(
+    columns.length,
+    layout === '1' ? 1 : layout.startsWith('1/4') ? 4 : layout.startsWith('1/3') ? 3 : 2,
+  )
 
   return (
     <BlockPreviewFrame hint={`柔軟な段組み · ${layoutLabels[layout] || layout}`}>

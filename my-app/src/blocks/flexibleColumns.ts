@@ -23,6 +23,7 @@ export const FlexibleColumns: Block = {
       type: 'select',
       label: 'レイアウトタイプ',
       options: [
+        { label: '1カラム', value: '1' },
         { label: '2カラム (1:1)', value: '1/2_1/2' },
         { label: '3カラム (1:1:1)', value: '1/3_1/3_1/3' },
         { label: '4カラム (1:1:1:1)', value: '1/4_1/4_1/4_1/4' },
@@ -34,7 +35,8 @@ export const FlexibleColumns: Block = {
       name: 'columns',
       type: 'array',
       label: 'カラム内容',
-      minRows: 2,
+      // Allow a single leftover column (e.g. vendor lists chunked by 3)
+      minRows: 1,
       maxRows: 4,
       fields: [
         {
