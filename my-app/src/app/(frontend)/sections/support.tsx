@@ -39,7 +39,7 @@ export const Support = () => {
               </p>
 
               <Link
-                href="/support"
+                href="/contact#support"
                 className="inline-block w-full text-center px-8 py-4 bg-purple text-white border-3 border-border rounded-xl font-black text-lg shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
               >
                 支援について詳しく見る
@@ -66,7 +66,7 @@ export const Support = () => {
               </p>
 
               <Link
-                href="/recruit"
+                href="/contact#recruit"
                 className="inline-block w-full text-center px-8 py-4 bg-yellow text-text border-3 border-border rounded-xl font-black text-lg shadow-hard hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
               >
                 採用情報を見る

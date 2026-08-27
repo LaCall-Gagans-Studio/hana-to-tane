@@ -119,11 +119,14 @@ export default function ContactPage() {
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-700 text-white px-6 py-1 rounded-full font-bold border-2 border-gray-700 shadow-sm">
                   お振込先
                 </div>
-                <div className="mt-4 font-mono text-center space-y-2 text-slate-700 font-bold">
-                  <p>山陰合同銀行</p>
-                  <p>千代水支店</p>
-                  <p>普通：4530689</p>
-                  <p>NPO法人はなとたね（エヌピーオーホウジンハナトタネ）</p>
+                <div className="mt-4 text-center space-y-4 text-slate-700 font-bold">
+                  <p>詳細はお問い合わせよりご連絡ください</p>
+                  <a
+                    href="#form"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue text-white border-3 border-border rounded-xl font-black shadow-hard hover:-translate-y-1 hover:shadow-hard-lg transition-all"
+                  >
+                    <Mail size={18} /> お問い合わせへ
+                  </a>
                 </div>
               </div>
 
