@@ -7,10 +7,10 @@ export const Plants: CollectionConfig = {
     plural: 'はなたねシステム',
   },
   access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => false, // Only admin via DB really
+    read: ({ req: { user } }) => Boolean(user),
+    create: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: () => false,
   },
   admin: {
     useAsTitle: 'dna',

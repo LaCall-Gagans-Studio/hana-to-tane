@@ -3,7 +3,15 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { Droplets, Ruler, ArrowRightLeft, X, Save, Check, RefreshCw } from 'lucide-react'
-import { getOrCreatePlant, updatePlant, getPlantStats } from './plant-actions'
+import {
+  getOrCreatePlant,
+  waterPlant,
+  claimPlant,
+  resetPlant,
+  recordMaxHeight,
+  getPlantStats,
+} from './plant-actions'
+import type { Plant } from '@/payload-types'
 
 // --- Types ---
 type FloatingTextData = {
@@ -54,6 +62,28 @@ type PlantData = {
   maxHeight: number // Max height reached (for scaling)
   lastWatered: string | null // ISO date string
   waterCount: number
+}
+
+const toPlantData = (data: Plant): PlantData => ({
+  id: String(data.id),
+  transferId: data.transferId,
+  dna: data.dna,
+  type: data.type,
+  state: data.state as GameState,
+  growthProgress: data.growthProgress || 0,
+  streak: data.streak || 0,
+  hueShift: data.hueShift || 0,
+  maxHeight: data.maxHeight || 0,
+  lastWatered: data.lastWatered || null,
+  waterCount: data.waterCount || 0,
+})
+
+const STATE_LABELS: Record<string, string> = {
+  seed: 'たね',
+  sprout: 'め',
+  growing: 'くき',
+  bud: 'つぼみ',
+  flower: 'はな',
 }
 
 // --- L-System Presets ---
@@ -672,21 +702,7 @@ export const HeroFlower = () => {
       const savedId = localStorage.getItem('hana_transfer_id') || undefined
       try {
         const data = await getOrCreatePlant(savedId)
-        // Transform Payload Data to PlantData if necessary (assuming matching fields for now)
-        // Ensure type cast or mapping
-        const mappedData: PlantData = {
-          id: String(data.id),
-          transferId: data.transferId as string,
-          dna: data.dna,
-          type: data.type,
-          state: data.state as GameState,
-          growthProgress: data.growthProgress || 0,
-          streak: data.streak || 0,
-          hueShift: data.hueShift || 0,
-          maxHeight: data.maxHeight || 0,
-          lastWatered: data.lastWatered || null,
-          waterCount: data.waterCount || 0,
-        }
+        const mappedData = toPlantData(data)
         setPlant(mappedData)
         if (data.transferId) {
           localStorage.setItem('hana_transfer_id', data.transferId as string)
@@ -746,78 +762,33 @@ export const HeroFlower = () => {
     }
     setFloatingTexts((prev) => [...prev, newText])
 
-    // Delay for animation
     setTimeout(async () => {
-      let growthAmount = 0.1 + Math.random() * 0.1
-      if (plant.state === 'seed') {
-        growthAmount = 1.0
-      }
-
-      let newGrowthProgress = plant.growthProgress + growthAmount
-      let newState = plant.state
-      const newWaterCount = plant.waterCount + 1
-
-      let newStreak = plant.streak
-      if (lastWateredDate) {
-        const yesterday = new Date()
-        yesterday.setDate(yesterday.getDate() - 1)
-        const yesterdayStr = getLocalYYYYMMDD(yesterday)
-        if (lastWateredDate === yesterdayStr) {
-          newStreak += 1
-        } else if (lastWateredDate !== today) {
-          newStreak = 1
-        }
-      } else {
-        newStreak = 1
-      }
-
-      // State transition logic (Generation up)
-      if (newGrowthProgress >= 1.0) {
-        let nextState: GameState | null = null
-        if (newState === 'seed') nextState = 'sprout'
-        else if (newState === 'sprout') nextState = 'growing'
-        else if (newState === 'growing') nextState = 'bud'
-        else if (newState === 'bud') nextState = 'flower'
-
-        if (nextState) {
-          newGrowthProgress -= 1.0
-          newState = nextState
-          const stateLabels: { [key: string]: string } = {
-            seed: 'たね',
-            sprout: 'め',
-            growing: 'くき',
-            bud: 'つぼみ',
-            flower: 'はな',
-          }
-          const label = stateLabels[newState] || newState
-          addMessage(`おや...？ たねの ようすが...！ -> ${label} になった！`)
-        } else {
-          addMessage('はな は さらに おおきく なった！')
-        }
-      } else {
-        addMessage('ぐんぐん のびている！')
-      }
-
-      const updatedData = {
-        growthProgress: newGrowthProgress,
-        streak: newStreak,
-        lastWatered: new Date().toISOString(),
-        waterCount: newWaterCount,
-        state: newState,
-        maxHeight: plant.maxHeight, // Keep existing max for now, visual update will trigger save later
-      }
-
-      // Optimistic update
-      const updatedPlant = { ...plant, ...updatedData }
-      setPlant(updatedPlant)
-      setIsWatering(false)
-
-      // Sync with server
       try {
-        await updatePlant(plant.id, updatedData)
+        const result = await waterPlant(plant.id)
+        if (!result.ok) {
+          if (result.reason === 'already_watered') {
+            addMessage('きょうは もう みずを あげたよ！')
+          } else {
+            addMessage('データのほぞんに しっぱいしました...')
+          }
+          return
+        }
+
+        setPlant(toPlantData(result.plant))
+
+        if (result.evolved) {
+          const label = STATE_LABELS[result.plant.state] || result.plant.state
+          addMessage(`おや...？ たねの ようすが...！ -> ${label} になった！`)
+        } else if (result.plant.state === 'flower') {
+          addMessage('はな は さらに おおきく なった！')
+        } else {
+          addMessage('ぐんぐん のびている！')
+        }
       } catch (error) {
         console.error('Failed to sync water update:', error)
         addMessage('データのほぞんに しっぱいしました...')
+      } finally {
+        setIsWatering(false)
       }
     }, 800)
   }
@@ -825,10 +796,10 @@ export const HeroFlower = () => {
   // Update Max Height on Server when visual height changes significantly
   const updateMaxHeightRef = useCallback(
     async (h: number) => {
-      if (h > plant.maxHeight) {
+      if (h > plant.maxHeight && plant.id !== 'init') {
         try {
-          await updatePlant(plant.id, { maxHeight: h })
-          setPlant((prev) => ({ ...prev, maxHeight: h })) // Sync local
+          const updated = await recordMaxHeight(plant.id, h)
+          if (updated) setPlant((prev) => ({ ...prev, maxHeight: updated.maxHeight || h }))
         } catch (error) {
           console.error('Failed to update max height:', error)
         }
@@ -863,24 +834,13 @@ export const HeroFlower = () => {
 
     addMessage('さがしています...')
     try {
-      const data = await getOrCreatePlant(transferIdInput)
-      const mappedData: PlantData = {
-        id: String(data.id),
-        transferId: data.transferId as string,
-        dna: data.dna,
-        type: data.type,
-        state: data.state as GameState,
-        growthProgress: data.growthProgress || 0,
-        streak: data.streak || 0,
-        hueShift: data.hueShift || 0,
-        maxHeight: data.maxHeight || 0,
-        lastWatered: data.lastWatered || null,
-        waterCount: data.waterCount || 0,
+      const data = await claimPlant(transferIdInput)
+      if (!data) {
+        addMessage('データが みつかりませんでした。')
+        return
       }
-      setPlant(mappedData)
-      if (data.transferId) {
-        localStorage.setItem('hana_transfer_id', data.transferId as string) // Update local storage
-      }
+      setPlant(toPlantData(data))
+      localStorage.setItem('hana_transfer_id', data.transferId)
       addMessage('データを ひきつぎました！')
       setShowTransferModal(false)
       setTransferIdInput('')
@@ -895,32 +855,14 @@ export const HeroFlower = () => {
 
     addMessage('たねを かえています...')
     try {
-      const rng = seededRandom(Date.now())
-      const newDna = Math.floor(rng() * 1000000)
-      const newType = randomPick(rng, Object.keys(PRESETS))
-
-      const resetData = {
-        dna: newDna,
-        type: newType,
-        state: 'seed',
-        growthProgress: 0,
-        streak: 0,
-        hueShift: Math.floor(rng() * 60) - 30,
-        maxHeight: 0,
-        lastWatered: null,
-        waterCount: 0,
+      const data = await resetPlant(plant.id)
+      if (!data) {
+        addMessage('エラーが はっせいしました。')
+        return
       }
 
-      await updatePlant(plant.id, resetData)
-
-      // Update local
-      setPlant((prev) => ({
-        ...prev,
-        ...resetData,
-        state: 'seed' as GameState,
-      }))
+      setPlant(toPlantData(data))
       addMessage('あたらしい たね に なりました！')
-      // Close modal if open (reuse transfer modal logic? or separate?)
       setShowTransferModal(false)
     } catch (error) {
       console.error('Change seed failed', error)
