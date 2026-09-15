@@ -14,6 +14,8 @@ import { Support } from './sections/support'
 
 import { Reports } from './sections/reports'
 import { ConsultationForm } from './sections/consultation-form'
+import { Voices } from './sections/voices'
+import { ProgressResults } from './sections/progress'
 
 import type { Metadata } from 'next'
 
@@ -76,6 +78,8 @@ export default async function FreeSchoolPage() {
       <Flow data={freeschoolData.flow} />
       <AboutStaff members={membersData.docs} />
       <Message data={freeschoolData.message} />
+      <ProgressResults data={freeschoolData.progress} />
+      <Voices data={freeschoolData.voices} />
 
       {/* Reports Section with Wave Separator */}
       <div className="w-full leading-none rotate-180 text-green/10 bg-white">

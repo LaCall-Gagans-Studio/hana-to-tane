@@ -6,17 +6,41 @@ import Link from 'next/link'
 
 type ActivityDay = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat'
 
+type SpecialClosure = {
+  label?: string | null
+  startDate: string
+  endDate: string
+}
+
 type CalendarProps = {
   events: Event[]
   freeschoolActivityDays?: ActivityDay[] | null
+  freeschoolSpecialClosures?: SpecialClosure[] | null
 }
 
 const DAYS = ['日', '月', '火', '水', '木', '金', '土']
 const DAY_VALUES: ActivityDay[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
-export const Calendar = ({ events, freeschoolActivityDays }: CalendarProps) => {
+export const Calendar = ({
+  events,
+  freeschoolActivityDays,
+  freeschoolSpecialClosures,
+}: CalendarProps) => {
   const isFreeschoolDay = (dayIndex: number) =>
     freeschoolActivityDays?.includes(DAY_VALUES[dayIndex]) ?? false
+
+  const isSpecialClosureDay = (date: Date) => {
+    if (!freeschoolSpecialClosures || freeschoolSpecialClosures.length === 0) return false
+    const target = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+    return freeschoolSpecialClosures.some((closure) => {
+      if (!closure.startDate || !closure.endDate) return false
+      const start = new Date(closure.startDate)
+      const end = new Date(closure.endDate)
+      const startTime = new Date(start.getFullYear(), start.getMonth(), start.getDate()).getTime()
+      const endTime = new Date(end.getFullYear(), end.getMonth(), end.getDate()).getTime()
+      return target >= startTime && target <= endTime
+    })
+  }
   const [currentDate, setCurrentDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedEvents, setSelectedEvents] = useState<any[]>([])
@@ -194,17 +218,12 @@ export const Calendar = ({ events, freeschoolActivityDays }: CalendarProps) => {
               {Array.from({ length: days }).map((_, i) => {
                 const day = i + 1
                 const dayEvents = getEventsForDay(day)
-                const dayOfWeekIndex = new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  day,
-                ).getDay()
+                const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+                const dayOfWeekIndex = targetDate.getDay()
 
-                const isToday = isSameDay(
-                  new Date(),
-                  new Date(currentDate.getFullYear(), currentDate.getMonth(), day),
-                )
-                const showFreeschoolTint = isFreeschoolDay(dayOfWeekIndex) && !isToday
+                const isToday = isSameDay(new Date(), targetDate)
+                const showFreeschoolTint =
+                  isFreeschoolDay(dayOfWeekIndex) && !isToday && !isSpecialClosureDay(targetDate)
 
                 return (
                   <div

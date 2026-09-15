@@ -10,6 +10,7 @@ type OverviewProps = {
     representative?: string | null
     board_members?: string | null
     establishment_date?: string | null
+    history?: { date: string; event: string; id?: string | null }[] | null
   } | null
 }
 
@@ -51,6 +52,25 @@ export const Overview = ({ data }: OverviewProps) => {
             </tbody>
           </table>
         </div>
+
+        {data.history && data.history.length > 0 && (
+          <div className="max-w-4xl mx-auto mt-8 md:mt-12">
+            <h3 className="text-xl md:text-2xl font-black text-text mb-6 text-center">沿革</h3>
+            <div className="bg-white rounded-3xl border-3 border-border shadow-hard p-6 md:p-12">
+              <ol className="relative border-l-3 border-yellow ml-3">
+                {data.history.map((item, i) => (
+                  <li key={item.id || i} className="mb-8 last:mb-0 ml-6">
+                    <span className="absolute -left-[9px] w-4 h-4 bg-yellow rounded-full border-2 border-border"></span>
+                    <p className="text-sm font-black text-gray-500 mb-1">{item.date}</p>
+                    <p className="font-bold text-text leading-relaxed whitespace-pre-wrap">
+                      {item.event}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

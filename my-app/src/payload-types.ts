@@ -899,6 +899,16 @@ export interface About {
     representative?: string | null;
     board_members?: string | null;
     establishment_date?: string | null;
+    /**
+     * 1件も登録しない場合、団体概要ページに沿革は表示されません。
+     */
+    history?:
+      | {
+          date: string;
+          event: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1084,6 +1094,17 @@ export interface Freeschool {
       [k: string]: unknown;
     } | null;
     activityDays?: ('sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat')[] | null;
+    /**
+     * 設定した期間中は、カレンダー上で活動曜日の背景色を表示しません。
+     */
+    specialClosures?:
+      | {
+          label?: string | null;
+          startDate: string;
+          endDate: string;
+          id?: string | null;
+        }[]
+      | null;
     scheduleItems?:
       | {
           time?: string | null;
@@ -1127,6 +1148,38 @@ export interface Freeschool {
       };
       [k: string]: unknown;
     } | null;
+  };
+  /**
+   * 声を1件も登録しない場合、このセクションはサイト上に表示されません。
+   */
+  voices?: {
+    title?: string | null;
+    subtitle?: string | null;
+    items?:
+      | {
+          category?: ('graduate' | 'parent') | null;
+          name?: string | null;
+          attribute?: string | null;
+          body?: string | null;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * 実績を1件も登録しない場合、このセクションはサイト上に表示されません。
+   */
+  progress?: {
+    title?: string | null;
+    description?: string | null;
+    items?:
+      | {
+          year?: string | null;
+          destination?: string | null;
+          note?: string | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1228,6 +1281,13 @@ export interface AboutSelect<T extends boolean = true> {
         representative?: T;
         board_members?: T;
         establishment_date?: T;
+        history?:
+          | T
+          | {
+              date?: T;
+              event?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1343,6 +1403,14 @@ export interface FreeschoolSelect<T extends boolean = true> {
         image?: T;
         body?: T;
         activityDays?: T;
+        specialClosures?:
+          | T
+          | {
+              label?: T;
+              startDate?: T;
+              endDate?: T;
+              id?: T;
+            };
         scheduleItems?:
           | T
           | {
@@ -1374,6 +1442,36 @@ export interface FreeschoolSelect<T extends boolean = true> {
               id?: T;
             };
         annotation?: T;
+      };
+  voices?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              category?: T;
+              name?: T;
+              attribute?: T;
+              body?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  progress?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              year?: T;
+              destination?: T;
+              note?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

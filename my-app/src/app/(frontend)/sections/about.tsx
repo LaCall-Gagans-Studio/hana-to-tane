@@ -150,15 +150,10 @@ export const About = ({ aboutData, freeschoolData, members, sponsors }: AboutPro
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
-            {sponsors.map((sponsor) => (
-              <a
-                key={sponsor.id}
-                href={sponsor.url || '#'}
-                target={sponsor.url ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                className={`w-64 h-24 ${(sponsor as any).backgroundColor || 'bg-white'} border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer overflow-hidden relative`}
-              >
-                {sponsor.logo && typeof sponsor.logo === 'object' && sponsor.logo.url ? (
+            {sponsors.map((sponsor) => {
+              const cardClassName = `w-64 h-24 ${(sponsor as any).backgroundColor || 'bg-white'} border-2 border-border rounded-xl flex items-center justify-center group hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md overflow-hidden relative`
+              const content =
+                sponsor.logo && typeof sponsor.logo === 'object' && sponsor.logo.url ? (
                   <Image
                     src={sponsor.logo.url}
                     alt={sponsor.name}
@@ -169,9 +164,28 @@ export const About = ({ aboutData, freeschoolData, members, sponsors }: AboutPro
                   <span className="font-black text-gray-300 text-sm p-2 text-center group-hover:text-gray-800 transition-colors">
                     {sponsor.name}
                   </span>
-                )}
-              </a>
-            ))}
+                )
+
+              if (!sponsor.url) {
+                return (
+                  <div key={sponsor.id} className={cardClassName}>
+                    {content}
+                  </div>
+                )
+              }
+
+              return (
+                <a
+                  key={sponsor.id}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${cardClassName} cursor-pointer`}
+                >
+                  {content}
+                </a>
+              )
+            })}
           </div>
         </div>
       </div>

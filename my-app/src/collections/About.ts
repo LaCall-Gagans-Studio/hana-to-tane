@@ -168,6 +168,29 @@ export const About: GlobalConfig = {
                   label: '設立年月',
                   type: 'text',
                 },
+                {
+                  name: 'history',
+                  label: '沿革',
+                  type: 'array',
+                  admin: {
+                    description:
+                      '1件も登録しない場合、団体概要ページに沿革は表示されません。',
+                  },
+                  fields: [
+                    {
+                      name: 'date',
+                      label: '年月 (例: 2015年4月)',
+                      type: 'text',
+                      required: true,
+                    },
+                    {
+                      name: 'event',
+                      label: '出来事',
+                      type: 'text',
+                      required: true,
+                    },
+                  ],
+                },
               ],
             },
           ],

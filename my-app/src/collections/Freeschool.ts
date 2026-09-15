@@ -298,6 +298,44 @@ export const Freeschool: GlobalConfig = {
                   ],
                 },
                 {
+                  name: 'specialClosures',
+                  label: '臨時休業期間 (夏休みなど)',
+                  admin: {
+                    description:
+                      '設定した期間中は、カレンダー上で活動曜日の背景色を表示しません。',
+                  },
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'label',
+                      label: '名称 (例: 夏休み)',
+                      type: 'text',
+                    },
+                    {
+                      name: 'startDate',
+                      label: '開始日',
+                      type: 'date',
+                      required: true,
+                      admin: {
+                        date: {
+                          pickerAppearance: 'dayOnly',
+                        },
+                      },
+                    },
+                    {
+                      name: 'endDate',
+                      label: '終了日',
+                      type: 'date',
+                      required: true,
+                      admin: {
+                        date: {
+                          pickerAppearance: 'dayOnly',
+                        },
+                      },
+                    },
+                  ],
+                },
+                {
                   name: 'scheduleItems',
                   label: 'スケジュール詳細 (黒板アイテム)',
                   type: 'array',
@@ -366,6 +404,119 @@ export const Freeschool: GlobalConfig = {
                   name: 'annotation',
                   label: '注釈テキスト',
                   type: 'richText',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '卒業生・保護者の声',
+          fields: [
+            {
+              name: 'voices',
+              label: 'Voices Section (卒業生・保護者の声)',
+              type: 'group',
+              admin: {
+                description: '声を1件も登録しない場合、このセクションはサイト上に表示されません。',
+              },
+              fields: [
+                {
+                  name: 'title',
+                  label: 'タイトル',
+                  type: 'text',
+                  defaultValue: '卒業生・保護者の声',
+                },
+                {
+                  name: 'subtitle',
+                  label: 'サブタイトル',
+                  type: 'text',
+                },
+                {
+                  name: 'items',
+                  label: '声一覧',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'category',
+                      label: '区分',
+                      type: 'select',
+                      options: [
+                        { label: '卒業生', value: 'graduate' },
+                        { label: '保護者', value: 'parent' },
+                      ],
+                      defaultValue: 'graduate',
+                    },
+                    {
+                      name: 'name',
+                      label: 'お名前 (匿名可)',
+                      type: 'text',
+                    },
+                    {
+                      name: 'attribute',
+                      label: '属性 (例: 卒業生 / 中学2年生の保護者)',
+                      type: 'text',
+                    },
+                    {
+                      name: 'body',
+                      label: '内容',
+                      type: 'textarea',
+                    },
+                    {
+                      name: 'image',
+                      label: '写真 (任意)',
+                      type: 'upload',
+                      relationTo: 'media',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '進学実績',
+          fields: [
+            {
+              name: 'progress',
+              label: 'Progress Section (進学実績)',
+              type: 'group',
+              admin: {
+                description:
+                  '実績を1件も登録しない場合、このセクションはサイト上に表示されません。',
+              },
+              fields: [
+                {
+                  name: 'title',
+                  label: 'タイトル',
+                  type: 'text',
+                  defaultValue: '進学実績',
+                },
+                {
+                  name: 'description',
+                  label: '説明文',
+                  type: 'textarea',
+                },
+                {
+                  name: 'items',
+                  label: '進学実績リスト',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'year',
+                      label: '年度 (例: 2024年度)',
+                      type: 'text',
+                    },
+                    {
+                      name: 'destination',
+                      label: '進学先',
+                      type: 'text',
+                    },
+                    {
+                      name: 'note',
+                      label: '備考',
+                      type: 'text',
+                    },
+                  ],
                 },
               ],
             },

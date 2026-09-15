@@ -51,6 +51,7 @@ export default async function Page() {
       <Calendar
         events={events.docs}
         freeschoolActivityDays={freeschoolData.schedule?.activityDays}
+        freeschoolSpecialClosures={freeschoolData.schedule?.specialClosures}
       />
       <About
         aboutData={aboutData}
