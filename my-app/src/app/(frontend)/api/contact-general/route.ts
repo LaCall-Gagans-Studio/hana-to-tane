@@ -1,10 +1,31 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { checkContact, verifyRecaptcha } from '@/lib/contactSpam'
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json()
-    const { name, email, type, message } = data
+    const data = await request.json().catch(() => null)
+
+    const checked = checkContact(data)
+    if (checked.kind === 'drop') {
+      // ボットには成功に見せて、メールは送らない
+      console.warn('[General Contact API] スパムとして破棄:', checked.reason)
+      return NextResponse.json({ success: true })
+    }
+    if (checked.kind === 'invalid') {
+      return NextResponse.json({ error: checked.error }, { status: 400 })
+    }
+
+    const captcha = await verifyRecaptcha((data as Record<string, unknown>).recaptchaToken)
+    if (!captcha.ok) {
+      console.warn('[General Contact API] reCAPTCHA で拒否:', captcha.reason)
+      return NextResponse.json(
+        { error: 'スパム検証に失敗しました。画面を再読み込みしてもう一度お試しください。' },
+        { status: 400 },
+      )
+    }
+
+    const { name, email, type, message } = checked.input
 
     // Nodemailerトランスポーターの作成
     const transporter = nodemailer.createTransport({

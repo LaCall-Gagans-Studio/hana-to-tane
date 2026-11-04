@@ -1,11 +1,26 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Send, CheckCircle } from 'lucide-react'
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { HONEYPOT_FIELD, RECAPTCHA_ACTION } from '@/lib/contactSpam'
 
-export const ContactForm = () => {
+export const ContactForm = () => (
+  <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}>
+    <InnerContactForm />
+  </GoogleReCaptchaProvider>
+)
+
+const InnerContactForm = () => {
   const [submitted, setSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [startedAt, setStartedAt] = useState(0)
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
+  // 表示から送信までの時間を測る（速すぎる送信はボットとして扱う）
+  useEffect(() => {
+    if (!submitted) setStartedAt(Date.now())
+  }, [submitted])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -13,7 +28,16 @@ export const ContactForm = () => {
 
     try {
       const formData = new FormData(e.currentTarget)
-      const data = Object.fromEntries(formData.entries())
+      const data: Record<string, unknown> = Object.fromEntries(formData.entries())
+      data.startedAt = startedAt
+
+      if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+        if (!executeRecaptcha) {
+          alert('スパム検証の読み込み中です。少し待ってからもう一度お試しください。')
+          return
+        }
+        data.recaptchaToken = await executeRecaptcha(RECAPTCHA_ACTION)
+      }
 
       const response = await fetch('/api/contact-general', {
         method: 'POST',
@@ -24,7 +48,9 @@ export const ContactForm = () => {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        const body = await response.json().catch(() => null)
+        alert(body?.error || 'メールの送信に失敗しました。後ほど再度お試しください。')
+        return
       }
 
       setSubmitted(true)
@@ -60,6 +86,12 @@ export const ContactForm = () => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-6 bg-white border-3 border-border rounded-xl p-6 md:p-8 shadow-hard"
     >
+      {/* ハニーポット: 人には見えない欄。入力があればボットとして扱う */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
+        <label htmlFor={HONEYPOT_FIELD}>Website</label>
+        <input id={HONEYPOT_FIELD} name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
+
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="text-lg font-black text-slate-700">
           お名前 <span className="text-pink text-sm ml-1">*必須</span>
