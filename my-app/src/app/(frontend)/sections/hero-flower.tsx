@@ -720,7 +720,7 @@ export const HeroFlower = () => {
     initPlant()
   }, [])
 
-  // Poll Global Stats
+  // Global Stats（表示時に1回だけ取得。ポーリングすると Neon の compute が起きっぱなしになる）
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -731,8 +731,6 @@ export const HeroFlower = () => {
       }
     }
     fetchStats()
-    const interval = setInterval(fetchStats, 60000) // 1 min
-    return () => clearInterval(interval)
   }, [])
 
   const addMessage = (msg: string) => {

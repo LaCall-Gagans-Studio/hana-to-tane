@@ -9,7 +9,7 @@ import { Events } from './sections/events'
 import { Overview } from './sections/overview'
 import { AboutStaff } from '../sections/staff'
 
-export const revalidate = 60
+export const revalidate = 300
 
 export default async function AboutPage() {
   const payload = await getPayload({ config: configPromise })
