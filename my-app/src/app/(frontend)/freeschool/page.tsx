@@ -19,7 +19,7 @@ import { ProgressResults } from './sections/progress'
 
 import type { Metadata } from 'next'
 
-export const revalidate = 60
+export const revalidate = 300
 
 export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayload({ config: configPromise })

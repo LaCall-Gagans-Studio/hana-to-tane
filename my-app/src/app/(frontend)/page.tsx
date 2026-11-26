@@ -8,7 +8,7 @@ import { About } from './sections/about'
 import { Support } from './sections/support'
 import { Column } from './sections/column'
 
-export const revalidate = 60
+export const revalidate = 300
 
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })

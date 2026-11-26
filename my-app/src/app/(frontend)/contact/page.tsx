@@ -2,7 +2,7 @@ import React from 'react'
 import { ContactForm } from '@/components/ContactForm'
 import { Heart, Users, Mail, CheckCircle, Briefcase, Star } from 'lucide-react'
 
-export const revalidate = 60
+export const revalidate = 300
 
 export default function ContactPage() {
   return (

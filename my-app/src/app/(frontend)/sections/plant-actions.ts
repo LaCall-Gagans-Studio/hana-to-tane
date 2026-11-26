@@ -3,6 +3,7 @@
 import { getPayload } from 'payload'
 import type { Payload } from 'payload'
 import configPromise from '@payload-config'
+import { unstable_cache } from 'next/cache'
 import { Plant } from '@/payload-types'
 
 const LOCAL = { overrideAccess: true as const }
@@ -344,7 +345,7 @@ export async function recordMaxHeight(id: string, height: number): Promise<Plant
   })
 }
 
-export async function getPlantStats() {
+async function fetchPlantStats() {
   const payload = await getPayload({ config: configPromise })
 
   const maxRecordQuery = await payload.find({
@@ -358,7 +359,7 @@ export async function getPlantStats() {
 
   const allPlants = await payload.find({
     collection: 'plants',
-    limit: 1000,
+    pagination: false,
     select: {
       maxHeight: true,
     },
@@ -371,4 +372,11 @@ export async function getPlantStats() {
     totalHeight,
     maxUserHeight,
   }
+}
+
+// 全訪問者の合計・最大値は 5 分キャッシュする（Neon の compute を起こし続けないため）
+const getCachedPlantStats = unstable_cache(fetchPlantStats, ['plant-stats'], { revalidate: 300 })
+
+export async function getPlantStats() {
+  return getCachedPlantStats()
 }
